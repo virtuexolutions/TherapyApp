@@ -121,12 +121,12 @@ const Header = props => {
                 />
               </TouchableOpacity>
             ) : (
-              <View style={{
-                height : windowHeight *0.05,
-                width  : windowHeight *0.05,
-                // borderRadius :  windowHeight *0.05/2 ,
-
-              }}>
+              <View
+                style={{
+                  height: windowHeight * 0.05,
+                  width: windowHeight * 0.05,
+                  // borderRadius :  windowHeight *0.05/2 ,
+                }}>
                 <CustomImage
                   style={{
                     height: '100%',

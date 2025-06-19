@@ -2,10 +2,11 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import CustomText from './CustomText';
+import { windowWidth } from '../Utillity/utils';
 
-const AppointmentCard = ({title, description, image}) => (
+const AppointmentCard = ({item}) => (
   <View style={styles.container}>
-    <Image source={{uri: image}} style={styles.image} />
+    <Image source={item?.image} style={styles.image} />
     <View style={styles.content}>
       <CustomText style={styles.title}>{title}</CustomText>
       <CustomText style={styles.desc}>{description}</CustomText>
@@ -24,6 +25,7 @@ const AppointmentCard = ({title, description, image}) => (
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    width: windowWidth *0.9,
     backgroundColor: '#dfe9dc',
     borderRadius: moderateScale(12),
     marginVertical: moderateScale(6),
