@@ -7,7 +7,7 @@ import CustomText from './CustomText';
 import CustomImage from './CustomImage';
 import {moderateScale} from 'react-native-size-matters';
 
-const BookingConfrimModel = ({isVisible = true, setIsVisible}) => {
+const BookingConfrimModel = ({isVisible, setIsVisible}) => {
   return (
     <Modal
       hasBackdrop={true}
@@ -19,23 +19,31 @@ const BookingConfrimModel = ({isVisible = true, setIsVisible}) => {
       onBackdropPress={() => {
         setIsVisible(false);
       }}>
-      <View style={styles.main_con}>
+        <View
+        style={{  zIndex:1,
+            // backgroundColor:"red",
+            position:"aboslute",}}
+        >
         <View
           style={{
-            height: windowHeight * 0.2,
+            height: windowHeight * 0.3,
             width: windowWidth * 0.4,
-            marginTop: moderateScale(-20, 0.6),
+            // marginTop: moderateScale(-20, 0.6),
+          
 
           }}>
           <CustomImage
             style={{
               height: '100%',
               width: '100%',
-              backgroundColor :'red'
+              // backgroundColor :'red'
             }}
             source={require('../Assets/Images/check.png')}
           />
         </View>
+
+        </View>
+      <View style={styles.main_con}>
         <CustomText style={{
             fontSize : moderateScale(10,.6) ,
         }}> success !</CustomText>

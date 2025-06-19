@@ -144,6 +144,9 @@ const TextInputWithTitle = props => {
                 {
                   width: windowWidth * props.inputWidth,
                 },
+                 props.inputColor && {
+                  color: props.inputColor,
+                },
                 Platform.OS === 'android'
                   ? [
                       styles.inputBox,

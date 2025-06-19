@@ -18,16 +18,20 @@ import CustomText from '../Components/CustomText';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import { loginSchema } from '../Constant/schema';
 import { windowHeight, windowWidth } from '../Utillity/utils';
+import { setUserToken } from '../Store/slices/auth';
 
 const LoginScreen = props => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.authReducer.token);
-
+  const role = useSelector(state => state.authReducer.role);
+  console.log("🚀 ~ role:", role,token)
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const [device_token, setDeviceToken] = useState(null);
 
-  const login = async values => {};
+  const login = async values => {
+    dispatch(setUserToken({token:"token123"}))
+  };
 
   return (
     <ImageBackground
@@ -56,7 +60,7 @@ const LoginScreen = props => {
             fontSize: moderateScale(20, 0.6),
             color: Color.white,
           }}>
-          login into your account
+          login {role?.toLowerCase() == "provider" ? "providers" : "into your account"}
         </CustomText>
         <CustomText style={styles.txt}>
           Lorem Ipsum is simply dummy text of the printing typesetting
@@ -83,11 +87,12 @@ const LoginScreen = props => {
                   border={1}
                   fontSize={moderateScale(10, 0.6)}
                   borderRadius={30}
+                  inputColor={"white"}
                   backgroundColor={'transparent'}
                   borderColor={Color.themtxtColor}
                   marginTop={moderateScale(10, 0.3)}
                   placeholderColor={Color.darkGray}
-                  titleStlye={{right: 10}}
+                  titleStlye={{right: 10, color:Color.white}}
                 />
                 {touched.email && errors.email && (
                   <CustomText
@@ -105,6 +110,7 @@ const LoginScreen = props => {
                   placeholder={'**********'}
                   setText={handleChange('password')}
                   value={values.password}
+                  inputColor={'white'}
                   viewHeight={0.06}
                   viewWidth={0.85}
                   inputWidth={0.8}

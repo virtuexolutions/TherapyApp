@@ -6,8 +6,13 @@ import CustomButton from '../Components/CustomButton'
 import Color from '../Assets/Utilities/Color'
 import { moderateScale } from 'react-native-size-matters'
 import CustomText from '../Components/CustomText'
+import { useDispatch } from 'react-redux'
+import { SetUserRole } from '../Store/slices/auth'
+import navigationService from '../navigationService'
 
 const SelectRole = () => {
+  const dispatch = useDispatch();
+
   return (
     <ImageBackground
     style={styles.main_con}
@@ -36,7 +41,8 @@ const SelectRole = () => {
                 marginTop={windowHeight * 0.04}
                 elevation={false}
                 onPress={()=>{
-
+                  dispatch(SetUserRole("Provider"))
+                  navigationService.navigate("LoginScreen")
                 }}
               />
     <CustomButton
@@ -56,6 +62,8 @@ const SelectRole = () => {
                 marginTop={windowHeight * 0.04}
                 elevation={false}
                 onPress={()=>{
+                  dispatch(SetUserRole("user"))
+                  navigationService.navigate("LoginScreen")
 
                 }}
               />

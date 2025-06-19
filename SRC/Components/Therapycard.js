@@ -8,9 +8,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import CustomText from './CustomText';
 import Color from '../Assets/Utilities/Color';
+import { useNavigation } from '@react-navigation/core';
 
 const Therapycard = ({item}) => {
   console.log("🚀 ~ Therapycard ~ item:", item?.title)
+  const navigation= useNavigation();
   const selectedItem= {id :1}
   return (
     <View style={[styles.card ,{
@@ -67,7 +69,9 @@ const Therapycard = ({item}) => {
         ))}
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() =>{
+        navigation.navigate("BookingScreen")
+      }}>
         <CustomText style={styles.buttonText}>Book now</CustomText>
       </TouchableOpacity>
     </View>

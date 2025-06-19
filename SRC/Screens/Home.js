@@ -112,7 +112,7 @@ const Home = () => {
       </CustomText>
       <FlatList
       contentContainerStyle={{
-
+backgroundColor:"red",
         paddingBottom : moderateScale(10,.6)
       }}
         showsVerticalScrollIndicator={false}

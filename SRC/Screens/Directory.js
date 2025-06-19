@@ -120,6 +120,9 @@ const Directory = () => {
         renderItem={({item}) => {
           return <Therapycard item={item} />;
         }}
+        ListFooterComponent={() =>(
+          <View style={{height: windowHeight * 0.1}}/>
+        )}
       />
     </SafeAreaView>
   );

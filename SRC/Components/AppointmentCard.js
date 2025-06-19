@@ -30,16 +30,14 @@ const AppointmentCard = ({ title, description, isAvailable = true, btn_text, btn
         }
       </View>
     </View>
-  );
-};
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: windowWidth * 0.9,
-    height: windowHeight * 0.12,
-
-    borderRadius: moderateScale(12, 0.6),
+    backgroundColor: '#dfe9dc',
+    borderRadius: moderateScale(12),
     marginVertical: moderateScale(6),
     overflow: 'hidden',
   },
@@ -49,55 +47,36 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(10, 0.6)
   },
   content: {
-    // flex: 1,
-    paddingTop: moderateScale(10, 0.6),
-    paddingHorizontal: moderateScale(5, 0.6),
+    flex: 1,
+    padding: moderateScale(10),
   },
   title: {
-    fontSize: moderateScale(13, 0.6),
-    color: Color.white,
+    fontSize: moderateScale(14),
+    fontWeight: 'bold',
   },
   desc: {
-    fontSize: moderateScale(10, 0.0),
-    marginVertical: moderateScale(2, 0.6),
-    width: windowWidth * 0.7,
-    color: Color.white,
+    fontSize: moderateScale(11),
+    marginVertical: moderateScale(5),
   },
   actions: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   button: {
     backgroundColor: '#3c5f41',
-    height: windowHeight * 0.03,
-    width: windowWidth * 0.17,
-    borderRadius: moderateScale(30, 0.6),
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: moderateScale(6),
+    borderRadius: moderateScale(6),
   },
   buttonText: {
     color: '#fff',
-    fontSize: moderateScale(9, 0.6),
+    fontSize: moderateScale(10),
   },
   secondary: {
-    height: windowHeight * 0.03,
-    width: windowWidth * 0.2,
-    borderRadius: moderateScale(30, 0.6),
-    alignItems: 'center',
-    marginHorizontal: moderateScale(5, 0.6),
-    justifyContent: 'center',
-    borderWidth: 1,
+    padding: moderateScale(6),
   },
   secondaryText: {
     fontSize: moderateScale(10),
-    color: Color.white,
-  },
-  image_con: {
-    height: windowHeight * 0.11,
-    width: windowWidth * 0.22,
-    borderRadius: moderateScale(10, 0.6),
-    marginVertical: moderateScale(5, 0.6),
-    marginHorizontal: moderateScale(5, 0.6),
-    overflow: 'hidden',
+    color: '#333',
   },
 });
 

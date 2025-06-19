@@ -1,5 +1,5 @@
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {use, useState} from 'react';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import Color from '../Assets/Utilities/Color';
@@ -8,6 +8,11 @@ import CustomText from '../Components/CustomText';
 import CustomButton from '../Components/CustomButton';
 import DropDownSingleSelect from '../Components/DropDownSingleSelect';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
+import navigationService from '../navigationService';
+import { Icon } from 'native-base';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import BookingConfrimModel from '../Components/BookingConfrimModel';
 
 const BookingScreen = () => {
   const [selectedProvider, setSelectedProvider] = useState(null);
@@ -16,6 +21,7 @@ const BookingScreen = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [BookingConfrim, setBookingConfrim] = useState('');
+  const [isVisbile, setIsVisible] = useState(false)
 
   const distances = [
     {title: '5 km', value: '5'},
@@ -44,6 +50,7 @@ const BookingScreen = () => {
     {title: 'Occupational Therapy', value: 'occupational_therapy'},
   ];
   return (
+    <SafeAreaView>
     <ImageBackground
       style={styles.main_con}
       resizeMode="cover"
@@ -52,7 +59,16 @@ const BookingScreen = () => {
         backgroundColor={Color.white}
         barStyle={'dark-content'}
       />
-
+ <Icon
+            name={'arrow-back'}
+            as={Ionicons}
+            size={moderateScale(35, 0.3)}
+            color={Color.primaryColor}
+           
+            onPress={() => {
+              navigationService.goBack();
+            }}
+          />
       <View style={styles.model_Con}>
         <CustomText isBold style={styles.heading}>
           Appointment Booking
@@ -202,9 +218,19 @@ const BookingScreen = () => {
         textTransform={'capitalize'}
         marginTop={moderateScale(-30, 0.6)}
         elevation={true}
-        // onPress={}
+        onPress={() =>{
+// setIsVisible(true)
+navigationService.navigate("MyBookings")
+        }}
       />
-    </ImageBackground>
+      <BookingConfrimModel
+      isVisible={isVisbile}
+      setIsVisible={setIsVisible}
+      
+      />
+    </ImageBackground>  
+    </SafeAreaView>
+    
   );
 };
 

@@ -63,6 +63,8 @@ const MyBookings = () => {
   ];
   const selecteditem = {id: 1};
   return (
+    <SafeAreaView>
+
     <ScrollView
       contentContainerStyle={{
         alignItems: 'center',
@@ -229,6 +231,7 @@ const MyBookings = () => {
       />
       
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

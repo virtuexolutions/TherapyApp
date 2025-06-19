@@ -27,7 +27,6 @@ import { Icon } from 'native-base';
 import CustomText from './Components/CustomText';
 import MemberPerks from './Screens/MemberPerks';
 import Subscription from './Screens/Subscription';
-import Color from './Assets/Utilities/Color';
 import Directory from './Screens/Directory';
 import BookingScreen from './Screens/BookingScreen';
 import MyBookings from './Screens/MyBookings';
@@ -43,6 +42,7 @@ const AppNavigator = () => {
   const walkThrough = useSelector(state => state.authReducer.userWalkThrough);
   const role = useSelector(state => state.authReducer.role);
   const token = useSelector(state => state.authReducer.token);
+  console.log("🚀 ~ AppNavigator ~ token:", token)
 
   const RootNav = createNativeStackNavigator();
 
@@ -51,20 +51,20 @@ const AppNavigator = () => {
       walkThrough == false
         ? 'WalkThroughScreen'
         : token == null
-          ? 'LoginScreen'
-          : 'MyDrawer';
+          ?   'SelectRole' 
+            
+          : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'MemberPerks'}
+          initialRouteName={firstScreen}
           screenOptions={{ headerShown: false }}>
-          <RootNav.Screen name="MyDrawer" component={MyDrawer} />
+          {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
+          {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
           {/* initialRouteName={'MyBookings'}
           screenOptions={{headerShown: false}}> */}
           {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
-          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
-
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
@@ -138,7 +138,7 @@ export const TabNavigation = () => {
             color = focused ? '#8B9781' : Color.veryLightGray;
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
           }
-          else if (route.name === 'Setting') {
+          else if (route.name === 'Directory') {
             iconName = focused ? 'search' : 'search';
             type = Ionicons;
             color = focused ? '#8B9781' : Color.veryLightGray;
@@ -210,7 +210,7 @@ export const TabNavigation = () => {
         ),
       })}>
       <Tabs.Screen name={'Home'} component={Home} />
-      <Tabs.Screen name={'Setting'} component={Setting} />
+      <Tabs.Screen name={'Directory'} component={Directory} />
       <Tabs.Screen name={'BankDetails'} component={BankDetails} />
       <Tabs.Screen name={'Discount'} component={Discount} />
       <Tabs.Screen name={'UploadImages'} component={UploadImages} />
