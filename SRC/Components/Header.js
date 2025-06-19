@@ -57,8 +57,8 @@ const Header = props => {
     {label: 'Change Password', value: 'ChangePassword'},
     {label: 'Terms & Conditions', value: 'TermsAndConditions'},
     {label: 'Financial Breakdown', value: 'FinancialBreakDown'},
-    {label: 'Logout', value: 'Logout'}
-  ]
+    {label: 'Logout', value: 'Logout'},
+  ];
 
   const Confirm = () => {
     Alert.alert('Action required', 'Login to Continue', [
@@ -121,23 +121,37 @@ const Header = props => {
                 />
               </TouchableOpacity>
             ) : (
-              <Icon
-                style={styles.menu}
-                name={'menu'}
-                as={Feather}
-                size={moderateScale(28, 0.3)}
-                color={Color.black}
-                onPress={() => {
-                  console.log('hello mg ');
-                  navigationN.toggleDrawer();
+              <View style={{
+                height : windowHeight *0.05,
+                width  : windowHeight *0.05,
+                // borderRadius :  windowHeight *0.05/2 ,
 
-                  // dispatch(setUserLogOut())
-                  // dispatch(SetUserRole(''));
+              }}>
+                <CustomImage
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                  }}
+                  source={require('../Assets/Images/headerlogo.png')}
+                />
+              </View>
+              // <Icon
+              //   style={styles.menu}
+              //   name={'menu'}
+              //   as={Feather}
+              //   size={moderateScale(28, 0.3)}
+              //   color={Color.black}
+              //   onPress={() => {
+              //     console.log('hello mg ');
+              //     navigationN.toggleDrawer();
 
-                  // navigation.openDrawer()
-                  // navigationN.dispatch(DrawerActions.toggleDrawer());
-                }}
-              />
+              //     // dispatch(setUserLogOut())
+              //     // dispatch(SetUserRole(''));
+
+              //     // navigation.openDrawer()
+              //     // navigationN.dispatch(DrawerActions.toggleDrawer());
+              //   }}
+              // />
             )}
           </>
         )}
@@ -217,24 +231,14 @@ const Header = props => {
               // navigation.navigate('Profile')
               // dispatch(setUserLogoutAuth());
             }}
-            source={require('../Assets/Images/user_Image.png')}
+            source={require('../Assets/Images/filter.png')}
             style={{width: windowHeight * 0.06, height: windowHeight * 0.06}}
           />
-          <View
-            style={{
-              height: windowHeight * 0.018,
-              width: windowHeight * 0.018,
-              borderRadius: (windowHeight * 0.018) / 2,
-              backgroundColor: '#04FF3F',
-              position: 'absolute',
-              top: moderateScale(35, 0.6),
-              right: moderateScale(29, 0.6),
-            }}></View>
         </View>
       )}
     </View>
-  )
-}
+  );
+};
 const styles = ScaledSheet.create({
   header1: {
     width: windowWidth,

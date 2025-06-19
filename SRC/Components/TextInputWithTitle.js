@@ -50,10 +50,10 @@ const TextInputWithTitle = props => {
             // borderColor: Color.veryLightGray,
             backgroundColor: props.backgroundColor,
             borderBottomWidth: props.borderBottomWidth,
-            borderColor: Color.lightGrey,
+            borderColor: Color.themtxtColor,
           },
           props.elevation && {
-            shadowColor: Color.themeColor,
+            shadowColor: Color.darkGray,
             shadowOffset: {
               width: 0,
               height: 4,
@@ -253,7 +253,7 @@ const styles = ScaledSheet.create({
   fieldSet: {
     width: Dimensions.get('window').width * 0.9,
     height: Dimensions.get('window').height * 0.06,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     borderRadius: 8,
     alignItems: 'center',
     // justifyContent: 'center',

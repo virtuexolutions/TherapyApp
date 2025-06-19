@@ -20,6 +20,7 @@ export default Color = {
   darkBlue: '#1877F2',
   boxgrey: '#0000004F',
   purple: '#0D668E',
+  bgColor :'#FFFDF1',
 
   // theme colors
   grey: '#5D5D5D',
@@ -27,8 +28,10 @@ export default Color = {
   themeDarkGray: '#535353',
   themeLightGray: '#8D8D8D',
   themeBlack: '#000000',
-  btn_Color: '#282723',
-  btntextColor: '#2F2F37',
+  btn_Color: '#C0BDAE',
+  btntextColor: '#2A3821',
+  themtxtColor :'#C0BDAE5E',
+
 
   //gradientColors
   btnColor: ['#565657', '#000000'],

@@ -1,15 +1,19 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import { enableScreens } from 'react-native-screens';
-import { moderateScale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
+import {enableScreens} from 'react-native-screens';
+import {moderateScale} from 'react-native-size-matters';
+import {useSelector} from 'react-redux';
 import Drawer from './Drawer/Drawer';
 import navigationService from './navigationService';
 import LoginScreen from './Screens/LoginScreen';
 import Signup from './Screens/Signup';
 import WalkThroughScreen from './Screens/WalkthroughScreen';
+import VerifyNumber from './Screens/VerifyNumber';
+import UploadImages from './Screens/UploadImages';
+import BankDetails from './Screens/BankDetails';
+import Home from './Screens/Home';
 
 enableScreens();
 const AppNavigator = () => {
@@ -30,16 +34,21 @@ const AppNavigator = () => {
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={firstScreen}
+          initialRouteName={'Home'}
           screenOptions={{headerShown: false}}>
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
           />
-    
+
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
           <RootNav.Screen name="Signup" component={Signup} />
+          <RootNav.Screen name="VerifyNumber" component={VerifyNumber} />
+          <RootNav.Screen name="UploadImages" component={UploadImages} />
+          <RootNav.Screen name="BankDetails" component={BankDetails} />
+          <RootNav.Screen name="Home" component={Home} />
+
         </RootNav.Navigator>
       </NavigationContainer>
     );
@@ -166,7 +175,6 @@ export const MyDrawer = () => {
           borderBottomRightRadius: moderateScale(120, 0.6),
         },
       }}>
-    
       {/* <DrawerNavigation.Screen name="Home" component={Home} /> */}
     </DrawerNavigation.Navigator>
   );

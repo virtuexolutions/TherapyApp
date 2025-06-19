@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
+  ImageBackground,
   Platform,
   ScrollView,
   ToastAndroid,
@@ -25,344 +26,288 @@ import TextInputWithTitle from '../Components/TextInputWithTitle';
 import {SignupSchema} from '../Constant/schema';
 import {setUserData} from '../Store/slices/common';
 import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
+import CustomStatusBar from '../Components/CustomStatusBar';
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  const [imagePicker, setImagePicker] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const {user_type} = useSelector(state => state.authReducer);
-
-  const onPressregister = async values => {
-   console.log('heloooooooooooo from registration ========>')
-  };
 
   return (
-    <ScreenBoiler
-      statusBarBackgroundColor={'white'}
-      statusBarContentStyle={'dark-content'}>
-      <ScrollView
-        style={{
-          height: windowHeight,
-          width: windowWidth,
-          backgroundColor: 'white',
-        }}
-        contentContainerStyle={{
-          alignItems: 'center',
-          paddingBottom: moderateScale(90, 0.6),
-        }}
-        showsVerticalScrollIndicator={false}>
-        <View
+    <ImageBackground
+      style={styles.main_con}
+      source={require('../Assets/Images/loginbg.png')}>
+      <CustomStatusBar backgroundColor={Color.white} barStyle={'dark-light'} />
+
+      <View style={styles.image_con}>
+        <CustomImage
+          resizeMode="contain"
+          source={require('../Assets/Images/logo.png')}
           style={{
-            height: windowHeight * 0.15,
-            width: windowHeight * 0.25,
-            marginTop: windowHeight * 0.04,
+            width: '100%',
+            height: '100%',
+          }}
+        />
+      </View>
+
+      <View style={styles.input_container}>
+        <CustomText
+          isBold
+          style={{
+            fontSize: moderateScale(20, 0.6),
+            color: Color.white,
           }}>
-          <CustomImage
-            resizeMode="contain"
-            // source={require('../Assets/Images/logo.png')}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
+          login into your account
+        </CustomText>
+        <CustomText style={styles.txt}>
+          Lorem Ipsum is simply dummy text of the printing typesetting
+          industry.printing and typesetting
+        </CustomText>
+        <View style={styles.row}>
+          <TextInputWithTitle
+            titleText={'Username'}
+            placeholder={'Enter Name'}
+            // setText={handleChange('email')}
+            // value={values.email}
+            viewHeight={0.05}
+            viewWidth={0.43}
+            inputWidth={0.4}
+            border={1}
+            fontSize={moderateScale(9, 0.6)}
+            borderRadius={30}
+            backgroundColor={'transparent'}
+            borderColor={Color.themtxtColor}
+            marginTop={moderateScale(10, 0.3)}
+            placeholderColor={Color.darkGray}
+            titleStlye={{right: 10}}
+          />
+          <TextInputWithTitle
+            titleText={'Username'}
+            placeholder={'Enter Name'}
+            // setText={handleChange('email')}
+            // value={values.email}
+            viewHeight={0.05}
+            viewWidth={0.42}
+            inputWidth={0.4}
+            border={1}
+            fontSize={moderateScale(10, 0.6)}
+            borderRadius={30}
+            backgroundColor={'transparent'}
+            borderColor={Color.themtxtColor}
+            marginTop={moderateScale(10, 0.3)}
+            placeholderColor={Color.darkGray}
+            titleStlye={{right: 10}}
           />
         </View>
-        <CustomText isBold style={styles.text}>
-          Sign up
-        </CustomText>
-        <Formik
-          initialValues={{
-            name: '',
-            email: '',
-            contact: 0,
-            password: '',
-            termsAccepted: false,
-          }}
-          validationSchema={SignupSchema}
-          onSubmit={onPressregister}>
-          {({
-            values,
-            handleChange,
-            handleSubmit,
-            errors,
-            touched,
-            setFieldValue,
-          }) => {
-            return (
-              <View style={[styles.input_container]}>
-                <TextInputWithTitle
-                  title={'name *'}
-                  placeholder={'James W. Brown'}
-                  setText={handleChange('name')}
-                  value={values.name}
-                  viewHeight={0.06}
-                  viewWidth={0.85}
-                  inputWidth={0.8}
-                  border={1}
-                  borderRadius={30}
-                  backgroundColor={'transparent'}
-                  borderColor={Color.lightGrey}
-                  marginTop={moderateScale(8, 0.3)}
-                  placeholderColor={Color.mediumGray}
-                  titleStlye={{right: 10}}
-                />
-                {touched.name && errors.name && (
-                  <CustomText style={styles.schemaText}>
-                    {errors.name}
-                  </CustomText>
-                )}
-                <TextInputWithTitle
-                  title={'email Id *'}
-                  titleText={'Username'}
-                  placeholder={'Email '}
-                  setText={handleChange('email')}
-                  value={values.email}
-                  viewHeight={0.06}
-                  viewWidth={0.85}
-                  inputWidth={0.8}
-                  border={1}
-                  borderRadius={30}
-                  backgroundColor={'transparent'}
-                  borderColor={Color.lightGrey}
-                  marginTop={moderateScale(8, 0.3)}
-                  placeholderColor={Color.mediumGray}
-                  titleStlye={{right: 10}}
-                />
-                {touched.email && errors.email && (
-                  <CustomText
-                    textAlign={'left'}
-                    style={{
-                      fontSize: moderateScale(10, 0.6),
-                      color: Color.red,
-                      alignSelf: 'flex-start',
-                    }}>
-                    {errors.email}
-                  </CustomText>
-                )}
-                <TextInputWithTitle
-                  title={'contact * '}
-                  titleText={'Username'}
-                  placeholder={'phone number'}
-                  setText={handleChange('contact')}
-                  value={values.contact}
-                  viewHeight={0.06}
-                  viewWidth={0.85}
-                  inputWidth={0.8}
-                  border={1}
-                  borderRadius={30}
-                  backgroundColor={'transparent'}
-                  borderColor={Color.lightGrey}
-                  marginTop={moderateScale(8, 0.3)}
-                  placeholderColor={Color.mediumGray}
-                  titleStlye={{right: 10}}
-                />
-                {touched.contact && errors.contact && (
-                  <CustomText style={styles.schemaText}>
-                    {errors.contact}
-                  </CustomText>
-                )}
-                <TextInputWithTitle
-                  showPassword
-                  title={'password *'}
-                  placeholder={'password'}
-                  setText={handleChange('password')}
-                  value={values.password}
-                  viewHeight={0.06}
-                  viewWidth={0.85}
-                  inputWidth={0.8}
-                  border={1}
-                  secureText={true}
-                  borderRadius={30}
-                  backgroundColor={'transparent'}
-                  borderColor={Color.lightGrey}
-                  marginTop={moderateScale(8, 0.3)}
-                  // color={Color.white}
-                  placeholderColor={Color.mediumGray}
-                  titleStlye={{right: 10}}
-                />
-                {touched.password && errors.password && (
-                  <CustomText style={styles.schemaText}>
-                    {errors.password}
-                  </CustomText>
-                )}
-                <TextInputWithTitle
-                  showPassword
-                  title={'confirm Password *'}
-                  placeholder={'Confirm Password'}
-                  setText={handleChange('confirmPassword')}
-                  value={values.confirmPassword}
-                  viewHeight={0.06}
-                  viewWidth={0.85}
-                  inputWidth={0.8}
-                  border={1}
-                  secureText={true}
-                  borderRadius={30}
-                  backgroundColor={'transparent'}
-                  borderColor={Color.lightGrey}
-                  marginTop={moderateScale(8, 0.3)}
-                  // color={Color.white}
-                  placeholderColor={Color.mediumGray}
-                  titleStlye={{right: 10}}
-                />
-                {touched.password && errors.password && (
-                  <CustomText style={styles.schemaText}>
-                    {errors.password}
-                  </CustomText>
-                )}
-                <View style={styles.row}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setFieldValue('termsAccepted', !values.termsAccepted);
-                    }}
-                    style={styles.check_box}>
-                    {values.termsAccepted && (
-                      <Icon
-                        as={Feather}
-                        size={moderateScale(15, 0.6)}
-                        color={Color.themeBlack}
-                        name="check"
-                      />
-                    )}
-                  </TouchableOpacity>
-                  <CustomText style={styles.term_text}>
-                    By Click You Agree To Our
-                    <CustomText
-                      style={{fontSize: moderateScale(11, 0.6), color: 'red'}}>
-                      {' '}
-                      terms & conditions{' '}
-                    </CustomText>{' '}
-                    As Well As Our
-                    <CustomText
-                      style={{fontSize: moderateScale(11, 0.6), color: 'red'}}>
-                      {' '}
-                      Privacy Policy.
-                    </CustomText>
-                  </CustomText>
-                </View>
-                {touched.termsAccepted && errors.termsAccepted && (
-                  <CustomText style={styles.schemaText}>
-                    {errors.termsAccepted}
-                  </CustomText>
-                )}
-                <CustomButton
-                  onPress={handleSubmit}
-                  text={
-                    isLoading ? (
-                      <ActivityIndicator color={Color.white} size={'small'} />
-                    ) : (
-                      'sign in '
-                    )
-                  }
-                  fontSize={moderateScale(14, 0.3)}
-                  textColor={Color.white}
-                  borderWidth={1.5}
-                  borderColor={Color.white}
-                  borderRadius={moderateScale(30, 0.3)}
-                  width={windowWidth * 0.8}
-                  marginTop={moderateScale(10, 0.3)}
-                  height={windowHeight * 0.075}
-                  bgColor={Color.btn_Color}
-                  textTransform={'capitalize'}
-                  elevation
-                  // isBold
-                />
-              </View>
-            );
-          }}
-        </Formik>
-        <CustomText style={styles.do_text}>
-          Already have an account?
-          <CustomText
-            onPress={() => {
-              navigation.navigate('LoginScreen');
-            }}
-            isBold
-            style={styles.Sign_text}>
-            {' '}
-            Sign in
-          </CustomText>
-        </CustomText>
-
-        <ImagePickerModal
-          show={imagePicker}
-          setShow={setImagePicker}
-          setFileObject={setImage}
+        <TextInputWithTitle
+          secureText={true}
+          placeholder={'Password'}
+          // setText={handleChange('password')}
+          // value={values.password}
+          viewHeight={0.06}
+          viewWidth={0.85}
+          inputWidth={0.8}
+          border={1}
+          borderRadius={30}
+          backgroundColor={'transparent'}
+          borderColor={Color.themtxtColor}
+          marginTop={moderateScale(10, 0.3)}
+          placeholderColor={Color.darkGray}
+          titleStlye={{right: 10}}
         />
-      </ScrollView>
-    </ScreenBoiler>
+        <View style={styles.row}>
+          <TextInputWithTitle
+            // fontSize={moderateScale(10,.6)}
+            placeholder={'Select Health Interests'}
+            // setText={handleChange('email')}
+            // value={values.email}
+            viewHeight={0.05}
+            viewWidth={0.43}
+            inputWidth={0.8}
+            border={1}
+            fontSize={moderateScale(10, 0.6)}
+            borderRadius={30}
+            backgroundColor={'Choose Membership Plan'}
+            borderColor={Color.themtxtColor}
+            marginTop={moderateScale(10, 0.3)}
+            placeholderColor={Color.darkGray}
+            titleStlye={{right: 10}}
+          />
+          <TextInputWithTitle
+            placeholder={'Monthly'}
+            // setText={handleChange('email')}
+            // value={values.email}
+            viewHeight={0.05}
+            viewWidth={0.42}
+            inputWidth={0.4}
+            border={1}
+            fontSize={moderateScale(10, 0.6)}
+            borderRadius={30}
+            backgroundColor={'transparent'}
+            borderColor={Color.themtxtColor}
+            marginTop={moderateScale(10, 0.3)}
+            placeholderColor={Color.darkGray}
+            titleStlye={{right: 10}}
+          />
+        </View>
+        <View style={styles.row}>
+          <TextInputWithTitle
+            placeholder={'Annual'}
+            // setText={handleChange('email')}
+            // value={values.email}
+            viewHeight={0.05}
+            viewWidth={0.43}
+            inputWidth={0.4}
+            border={1}
+            fontSize={moderateScale(10, 0.6)}
+            borderRadius={30}
+            backgroundColor={'transparent'}
+            borderColor={Color.themtxtColor}
+            marginTop={moderateScale(10, 0.3)}
+            placeholderColor={Color.darkGray}
+            titleStlye={{right: 10}}
+          />
+          <TextInputWithTitle
+            titleText={'Username'}
+            placeholder={'Enter Name'}
+            // setText={handleChange('email')}
+            // value={values.email}
+            viewHeight={0.05}
+            viewWidth={0.42}
+            inputWidth={0.4}
+            border={1}
+            fontSize={moderateScale(10, 0.6)}
+            borderRadius={30}
+            backgroundColor={'transparent'}
+            borderColor={Color.themtxtColor}
+            marginTop={moderateScale(10, 0.3)}
+            placeholderColor={Color.darkGray}
+            titleStlye={{right: 10}}
+          />
+        </View>
+      </View>
+      <CustomButton
+        isBold
+        text={
+          // isLoading ? (
+          //   <ActivityIndicator size={'small'} color={Color.white} />
+          // ) : (
+          'sign up '
+          // )
+        }
+        fontSize={moderateScale(15, 0.3)}
+        textColor={Color.btntextColor}
+        borderWidth={1.5}
+        borderColor={Color.themtxtColor}
+        borderRadius={moderateScale(30, 0.3)}
+        width={windowWidth * 0.9}
+        height={windowHeight * 0.065}
+        bgColor={Color.btn_Color}
+        textTransform={'capitalize'}
+        marginTop={windowHeight * 0.02}
+        elevation={false}
+        // onPress={handleSubmit}
+      />
+      <View style={styles.button_container}>
+        <View style={styles.line}></View>
+        <CustomText style={styles.soc_text}>you can connect with</CustomText>
+        <View style={styles.line}></View>
+      </View>
+      <View style={styles.btn_con}>
+        <TouchableOpacity style={styles.btn_icon}>
+          <CustomImage
+            style={{
+              height: '100%',
+              width: '100%',
+            }}
+            source={require('../Assets/Images/google.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn_icon}>
+          <CustomImage
+            style={{
+              height: '100%',
+              width: '100%',
+            }}
+            source={require('../Assets/Images/mac.png')}
+          />
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = ScaledSheet.create({
-  container: {
+  main_con: {
+    height: windowHeight,
+    width: windowWidth,
     backgroundColor: 'white',
+    paddingTop: windowHeight * 0.15,
     alignItems: 'center',
   },
-  text: {
-    fontSize: moderateScale(22, 0.6),
-    color: Color.themeBlack,
-    paddingVertical: moderateScale(10, 0.6),
-  },
-  fields_box: {
-    borderWidth: 0.3,
-    borderColor: '#28272369',
-    borderRadius: 20,
-    paddingVertical: moderateScale(10, 0.6),
-    width: windowWidth * 0.9,
-    alignItems: 'center',
-    paddingTop: moderateScale(15, 0.6),
-    backgroundColor: Color.white,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    paddingHorizontal: moderateScale(20, 0.6),
-    elevation: 8,
-  },
+
   input_container: {
     borderWidth: 1,
-    borderColor: Color.mediumGray,
+    borderColor: Color.white,
     borderRadius: 20,
-    paddingVertical: moderateScale(10, 0.6),
-    width: windowWidth * 0.9,
+    height: windowHeight * 0.4,
+    width: windowWidth * 0.92,
     alignItems: 'center',
     paddingTop: moderateScale(15, 0.6),
-    paddingHorizontal: moderateScale(20, 0.6),
+    paddingHorizontal: moderateScale(10, 0.6),
+    backgroundColor: 'rgba(127,138,115,255)',
+  },
+  image_con: {
+    height: windowHeight * 0.15,
+    width: windowHeight * 0.21,
+    marginTop: moderateScale(-8, 0.3),
+    marginVertical: windowHeight * 0.02,
   },
   row: {
     flexDirection: 'row',
-    paddingVertical: moderateScale(15, 0.6),
-    width: '85%',
+    width: '100%',
+    justifyContent: 'space-between',
   },
-  check_box: {
-    height: windowHeight * 0.02,
-    width: windowWidth * 0.04,
-    borderWidth: 1,
-    borderColor: Color.black,
-    borderRadius: 2,
-    marginTop: moderateScale(2, 0.3),
+  txt: {
+    fontSize: moderateScale(9, 0.6),
+    textAlign: 'center',
+    paddingVertical: moderateScale(5, 0.6),
+    color: Color.white,
   },
-  do_text: {
-    paddingVertical: moderateScale(35, 0.6),
-    textTransform: 'none',
-    letterSpacing: 1,
+  button_container: {
+    paddingTop: moderateScale(15, 0.6),
+    paddingBottom: moderateScale(5, 0.6),
+    flexDirection: 'row',
   },
-  Sign_text: {
-    color: Color.themeBlack,
-    paddingRight: moderateScale(5, 0.6),
+  soc_text: {
+    fontSize: moderateScale(6, 6),
+    paddingHorizontal: moderateScale(8, 0.6),
+    textAlign: 'center',
+    letterSpacing: 0.7,
+    color: Color.white,
   },
-  term_text: {
-    paddingHorizontal: moderateScale(5, 0.6),
-    fontSize: moderateScale(11, 0.6),
+  line: {
+    width: windowWidth * 0.2,
+    height: windowHeight * 0.001,
+    borderWidth: 0.3,
+    marginTop: moderateScale(8, 0.6),
+    borderColor: Color.white,
   },
-  schemaText: {
-    fontSize: moderateScale(10, 0.6),
-    color: 'red',
-    alignSelf: 'flex-start',
+  image_con: {
+    height: windowHeight * 0.15,
+    width: windowHeight * 0.21,
+    marginTop: moderateScale(-8, 0.3),
+    marginVertical: windowHeight * 0.02,
+  },
+
+  btn_icon: {
+    width: windowWidth * 0.08,
+    height: windowWidth * 0.08,
+    borderRadius: (windowWidth * 0.08) / 2,
+    backgroundColor: 'red',
+    marginHorizontal: moderateScale(3, 0.6),
+  },
+  btn_con: {
+    flexDirection: 'row',
+    // paddingVertical : moderateScale(5,.6)
   },
 });
 
