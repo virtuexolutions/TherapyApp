@@ -227,7 +227,6 @@ const MyBookings = () => {
         elevation={false}
         //   onPress={}
       />
-      
     </ScrollView>
   );
 };
