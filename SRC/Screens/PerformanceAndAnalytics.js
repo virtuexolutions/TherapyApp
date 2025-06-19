@@ -80,6 +80,7 @@ const PerformanceAndAnalytics = () => {
           </View>
           ))}
         </View>
+        <View style={{height: windowHeight * 0.1}}/>
       </ScrollView>
 
     </SafeAreaView>

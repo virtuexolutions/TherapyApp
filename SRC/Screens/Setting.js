@@ -10,9 +10,12 @@ import { windowHeight, windowWidth } from '../Utillity/utils';
 import MembershipCard from '../Components/MembershipCard';
 import AppointmentCard from '../Components/AppointmentCard';
 import CustomButton from '../Components/CustomButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLogoutAuth } from '../Store/slices/auth';
 
 const Setting = () => {
-
+const dispatch = useDispatch();
+  const role = useSelector(state => state.authReducer.role);
     return (
         <ImageBackground source={require('../Assets/Images/background_image.jpg')} imageStyle={{ width: '100%', height: '100%' }} style={styles.main_con}>
             <CustomStatusBar
@@ -24,11 +27,11 @@ const Setting = () => {
                 textstyle={{
                     right: 25,
                 }}
-                title={'Referral Setting'}
+                title={ role?.toLowerCase() == "user" ? 'Referral Setting' : "Account Settings"}
                 headerColor={Color.bgColor}
             />
             <View style={styles.box_view}>
-                <CustomText isBold style={styles.h1}>Sarah R. James</CustomText>
+{role?.toLowerCase() == "user"  &&                <CustomText isBold style={styles.h1}>Sarah R. James</CustomText>}
                 <View style={{
                     width: windowWidth * 0.9,
                     height: 1,
@@ -51,7 +54,9 @@ const Setting = () => {
                 <TouchableOpacity>
                     <CustomText style={[styles.txt]}>Refer A Friend</CustomText>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity  onPress={()=>{
+                    dispatch(setUserLogoutAuth())
+                }}>
                     <CustomText style={[styles.txt]}>Logout</CustomText>
                 </TouchableOpacity>
             </View>

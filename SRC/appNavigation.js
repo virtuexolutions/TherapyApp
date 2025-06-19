@@ -106,8 +106,8 @@ const AppNavigator = () => {
 
 export const TabNavigation = () => {
   const Tabs = createBottomTabNavigator();
-  // const role = useSelector(state => state.authReducer.role);
-  const role = 'user';
+  const role = useSelector(state => state.authReducer.role);
+  // const role = 'user';
 
   return (
     <Tabs.Navigator

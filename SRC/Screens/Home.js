@@ -104,17 +104,16 @@ const Home = () => {
         style={[
           styles.sub_txt,
           {
-            paddingHorizontal: moderateScale(20, 0.6),
+            marginLeft: moderateScale(20, 0.6),
           },
         ]}>
         Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu
         Pulvinar Metus, Fringilla Semper Enim.
       </CustomText>
       <FlatList
-      contentContainerStyle={{
-backgroundColor:"red",
-        paddingBottom : moderateScale(10,.6)
-      }}
+        contentContainerStyle={{
+          paddingBottom: moderateScale(10, 0.6),
+        }}
         showsVerticalScrollIndicator={false}
         data={appointments}
         keyExtractor={item => item.id}
@@ -189,6 +188,9 @@ const styles = StyleSheet.create({
   sub_txt: {
     fontSize: moderateScale(11, 0.6),
     color: Color.btntextColor,
+    width: windowWidth * 0.75,
+    textAlign:"left",
+    alignSelf:"flex-start"
   },
 
   sectionTitle: {

@@ -53,7 +53,7 @@ const AppointmentManagement = () => {
           width={windowWidth * 0.9}
           placeHolderColor={Color.white}
           // placeholder={'Ápproval for Admittance'}
-          placeholder={'Provider+'}
+          placeholder={'Provider'}
           dropdownStyle={{
             borderBottomWidth: 0,
             width: windowWidth * 0.9,
