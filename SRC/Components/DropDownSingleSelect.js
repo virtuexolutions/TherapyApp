@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {Dimensions, View} from 'react-native';
-import {scale, moderateScale, ScaledSheet} from 'react-native-size-matters';
+import React, { useState, useEffect } from 'react';
+import { Dimensions, View } from 'react-native';
+import { scale, moderateScale, ScaledSheet } from 'react-native-size-matters';
 import SelectDropdown from 'react-native-select-dropdown';
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Color from '../Assets/Utilities/Color';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import { useSelector } from 'react-redux';
 import CustomText from './CustomText';
 
@@ -37,19 +37,19 @@ const DropDownSingleSelect = ({
   placeHolder,
   btnStyle
 }) => {
-  const [data , setData] = useState([])
+  const [data, setData] = useState([])
   const themeColor = useSelector(state => state.authReducer.ThemeColor);
 
   useEffect(() => {
     setData([])
-    array?.map((x , index)=>{
-      return(
-        typeof(array[0]) == 'object' ? setData((prev)=>[...prev , x?.name]) :setData(prev=>[...prev , x])
+    array?.map((x, index) => {
+      return (
+        typeof (array[0]) == 'object' ? setData((prev) => [...prev, x?.name]) : setData(prev => [...prev, x])
       )
     })
-    
+
   }, [])
-  
+
 
   return (
     // <View
@@ -116,11 +116,11 @@ const DropDownSingleSelect = ({
     //       }),
     //       ...(!iconName && {
     //         width: width,
-          
-          
-          
-          
-          
+
+
+
+
+
     //       }),
     //     }}
     //     buttonTextStyle={{
@@ -135,7 +135,7 @@ const DropDownSingleSelect = ({
     //       // height : 120,
     //       borderRadius: moderateScale(10, 0.3),
     //       marginTop: -height * 0.06,
-        
+
 
     //       ...(iconName && {
     //         position: 'absolute',
@@ -177,7 +177,7 @@ const DropDownSingleSelect = ({
     //     renderButton={(selectedItem, isOpened)=>{
     //       return (
     //         <View style={[styles.dropdownButtonStyle, width && { width: width}]}>
-         
+
     //       <CustomText style={[styles.dropdownButtonTxtStyle,  {
     //         color: "black"
     //       }]}>
@@ -197,47 +197,47 @@ const DropDownSingleSelect = ({
     //   />
     // </View>
     <SelectDropdown
-    data={data}
-    
-    onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
-      setItem(selectedItem);
-    }}
-    
-    renderButton={(selectedItem, isOpened) => {
-      return (
-        <View style={[styles.dropdownButtonStyle, 
+      data={data}
+
+      onSelect={(selectedItem, index) => {
+        console.log(selectedItem, index);
+        setItem(selectedItem);
+      }}
+
+      renderButton={(selectedItem, isOpened) => {
+        return (
+          <View style={[styles.dropdownButtonStyle,
           btnStyle && btnStyle,
-        width && { width: width}]}>
-         
-          <CustomText style={[styles.dropdownButtonTxtStyle, placeHolderColor && {
-            color:  placeHolderColor 
-          }]}>
-            {(selectedItem  && typeof selectedItem == 'object'? selectedItem.title : selectedItem) || placeholder}
-          </CustomText>
-          <Icon 
-          color={Color.btn_Color}
-          size={moderateScale(27,0.2)}
-          as={Entypo}
-          name={isOpened ? 'chevron-small-up' : 'chevron-small-down'} style={styles.dropdownButtonArrowStyle} />
-        </View>
-      );
-    }}
-    renderItem={(item, index, isSelected) => {
-      return (
-        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: Color.primary})}}>
-          {/* <Icon name={item.icon} style={styles.dropdownItemIconStyle} /> */}
-          <CustomText style={styles.dropdownItemTxtStyle}>{typeof  item == "object" ? item.title : item?.trim()}</CustomText>
-        </View>
-      );
-    }}
-    // disa
-    showsVerticalScrollIndicator={false}
-    dropdownStyle={styles.dropdownMenuStyle}
+          width && { width: width }]}>
 
-  />
+            <CustomText style={[styles.dropdownButtonTxtStyle, placeHolderColor && {
+              color: placeHolderColor
+            }]}>
+              {(selectedItem && typeof selectedItem == 'object' ? selectedItem.title : selectedItem) || placeholder}
+            </CustomText>
+            <Icon
+              color={Color.white}
+              size={moderateScale(27, 0.2)}
+              as={Entypo}
+              name={isOpened ? 'chevron-small-up' : 'chevron-small-down'} style={styles.dropdownButtonArrowStyle} />
+          </View>
+        );
+      }}
+      renderItem={(item, index, isSelected) => {
+        return (
+          <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: Color.primary }) }}>
+            {/* <Icon name={item.icon} style={styles.dropdownItemIconStyle} /> */}
+            <CustomText style={styles.dropdownItemTxtStyle}>{typeof item == "object" ? item.title : item?.trim()}</CustomText>
+          </View>
+        );
+      }}
+      // disa
+      showsVerticalScrollIndicator={false}
+      dropdownStyle={styles.dropdownMenuStyle}
 
-  
+    />
+
+
   );
 };
 const styles = ScaledSheet.create({
@@ -281,7 +281,7 @@ const styles = ScaledSheet.create({
   },
   icon: {
     marginTop: 3,
-    
+
   },
   icon2: {
     // color: themeColor[1],
@@ -289,43 +289,47 @@ const styles = ScaledSheet.create({
     left: moderateScale(10, 0.3),
     top: moderateScale(12, 0.3),
   },
-  dropdownButtonStyle:{
+  dropdownItemTxtStyle: {
+    color: Color.lightGrey
+  },
+  dropdownButtonStyle: {
     width: windowWidth * 0.9,
-    height:windowHeight * 0.045,
+    height: windowHeight * 0.045,
     // paddingVertical:moderateScale(11,0.3),
-    alignItems:"center",
-    paddingHorizontal:moderateScale(5,0.2),
-    borderWidth:1,
-    marginTop:moderateScale(10,0.2),
-    padding:moderateScale(10,0.3),
-    backgroundColor:Color.white,
-    justifyContent:"space-between",
-    flexDirection:"row",
-    borderColor:Color.mediumGray,
-    borderRadius: moderateScale(25,0.3),
-},
-dropdownItemStyle:{
-  width: '100%',
-  // height: windowHeight * 0.03,
-  paddingHorizontal:moderateScale(20,0.2),
-  paddingVertical:moderateScale(10,0.2),
-  alignItems:"flex-start"
-},
-dropdownButtonTxtStyle:{
+    alignItems: "center",
+    paddingHorizontal: moderateScale(5, 0.2),
+    borderWidth: 1,
+    marginTop: moderateScale(10, 0.2),
+    padding: moderateScale(10, 0.3),
+    backgroundColor: Color.white,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    borderColor: Color.mediumGray,
+    borderRadius: moderateScale(25, 0.3),
+  },
+  dropdownItemStyle: {
+    width: '100%',
+    // height: windowHeight * 0.03,
+    paddingHorizontal: moderateScale(20, 0.2),
+    paddingVertical: moderateScale(10, 0.2),
+    alignItems: "flex-start"
+  },
+  dropdownButtonTxtStyle: {
     color: Color.mediumGray,
-    paddingHorizontal:moderateScale(11,0.2)
-},
-dropdownMenuStyle:{
+    paddingHorizontal: moderateScale(11, 0.2)
+  },
+  dropdownMenuStyle: {
     // backgroundColor:Color.red,
+    backgroundColor: Color.secondaryColor,
     // borderColor:Color.mediumGray,
     width: "90%",
-    borderWidth:1,
-    marginTop:moderateScale(-35,0.2),
+    borderWidth: 1,
+    marginTop: moderateScale(-35, 0.2),
     // 
     // position:"absolute",
     // top:-10,
-    borderRadius:moderateScale(15,0.2)
-}
+    borderRadius: moderateScale(15, 0.2)
+  }
 });
 
 export default DropDownSingleSelect;

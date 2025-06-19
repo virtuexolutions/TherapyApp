@@ -31,6 +31,12 @@ import Color from './Assets/Utilities/Color';
 import Directory from './Screens/Directory';
 import BookingScreen from './Screens/BookingScreen';
 import MyBookings from './Screens/MyBookings';
+import Dashboard from './Screens/Dashboard';
+import ServicesManagement from './Screens/ServicesManagement';
+import AppointmentManagement from './Screens/AppointmentManagement';
+import PerformanceAndAnalytics from './Screens/PerformanceAndAnalytics';
+import SelectRole from './Screens/SelectRole';
+
 
 enableScreens();
 const AppNavigator = () => {
@@ -77,6 +83,13 @@ const AppNavigator = () => {
           <RootNav.Screen name="Directory" component={Directory} />
           <RootNav.Screen name="BookingScreen" component={BookingScreen} />
           <RootNav.Screen name="MyBookings" component={MyBookings} />
+          <RootNav.Screen name="Dashboard" component={Dashboard} />
+          <RootNav.Screen name="ServicesManagement" component={ServicesManagement} />
+          <RootNav.Screen name="AppointmentManagement" component={AppointmentManagement} />
+          <RootNav.Screen name="PerformanceAndAnalytics" component={PerformanceAndAnalytics} />
+          <RootNav.Screen name="SelectRole" component={SelectRole} />
+          {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
+
 
         </RootNav.Navigator>
       </NavigationContainer>

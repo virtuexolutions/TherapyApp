@@ -47,6 +47,7 @@ const Header = props => {
     navigation,
     textstyle,
     isFilledButton,
+    notificationIcon,
   } = props;
 
   const [searchText, setSearchText] = useState('');
@@ -157,7 +158,7 @@ const Header = props => {
         )}
       </View>
       {title ? (
-        <CustomText style={[styles.text, textstyle]}>{title}</CustomText>
+        <CustomText  style={[styles.text, textstyle]}>{title}</CustomText>
       ) : (
         <CustomImage
           resizeMode={'contain'}
@@ -231,7 +232,7 @@ const Header = props => {
               // navigation.navigate('Profile')
               // dispatch(setUserLogoutAuth());
             }}
-            source={require('../Assets/Images/filter.png')}
+            source={notificationIcon ? require('../Assets/Images/bell.png') : require('../Assets/Images/filter.png')}
             style={{width: windowHeight * 0.06, height: windowHeight * 0.06}}
           />
         </View>
