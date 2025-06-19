@@ -14,6 +14,12 @@ import VerifyNumber from './Screens/VerifyNumber';
 import UploadImages from './Screens/UploadImages';
 import BankDetails from './Screens/BankDetails';
 import Home from './Screens/Home';
+import Dashboard from './Screens/Dashboard';
+import ServicesManagement from './Screens/ServicesManagement';
+import AppointmentManagement from './Screens/AppointmentManagement';
+import PerformanceAndAnalytics from './Screens/PerformanceAndAnalytics';
+import SelectRole from './Screens/SelectRole';
+
 
 enableScreens();
 const AppNavigator = () => {
@@ -34,7 +40,7 @@ const AppNavigator = () => {
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'Home'}
+          initialRouteName={'SelectRole'}
           screenOptions={{headerShown: false}}>
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
           <RootNav.Screen
@@ -48,6 +54,13 @@ const AppNavigator = () => {
           <RootNav.Screen name="UploadImages" component={UploadImages} />
           <RootNav.Screen name="BankDetails" component={BankDetails} />
           <RootNav.Screen name="Home" component={Home} />
+          <RootNav.Screen name="Dashboard" component={Dashboard} />
+          <RootNav.Screen name="ServicesManagement" component={ServicesManagement} />
+          <RootNav.Screen name="AppointmentManagement" component={AppointmentManagement} />
+          <RootNav.Screen name="PerformanceAndAnalytics" component={PerformanceAndAnalytics} />
+          <RootNav.Screen name="SelectRole" component={SelectRole} />
+          {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
+
 
         </RootNav.Navigator>
       </NavigationContainer>

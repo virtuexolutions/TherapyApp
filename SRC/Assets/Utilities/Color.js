@@ -28,9 +28,13 @@ export default Color = {
   themeDarkGray: '#535353',
   themeLightGray: '#8D8D8D',
   themeBlack: '#000000',
-  btn_Color: '#C0BDAE',
+  btn_Color: '#C0BDAE', 
   btntextColor: '#2A3821',
   themtxtColor :'#C0BDAE5E',
+
+  primaryColor:"#2A3821",
+  secondaryColor:"#8B9781",
+ 
 
 
   //gradientColors
