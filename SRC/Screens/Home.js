@@ -38,22 +38,22 @@ const Home = () => {
       id: '1',
       title: 'IV Therapy',
       description:
-        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Tempor Lacus Eros, At Scelerisque Arcu Feugiat Ut. Praesent Tempus Ipsum Leo, A Gravida Metus Luctus Et.',
-    //   image: require('../Assets/Images/ivtherapy.png'),
+        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Tempor Lacus Er A Gravida Metus Luctus Et.',
+      image: require('../Assets/Images/ivtherapy.png'),
     },
     {
       id: '2',
       title: 'Regenerative Therapies',
       description:
-        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Tempor Lacus Eros, At Scelerisque Arcu Feugiat Ut. Praesent Tempus Ipsum Leo, A Gravida Metus Luctus Et.',
-    //   image: require('../Assets/Images/therapy.png'),
+        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Ipsum Leo, A Gravida Metus Luctus Et.',
+      image: require('../Assets/Images/therapy.png'),
     },
     {
       id: '3',
       title: 'Light & Oxygen Therapies',
       description:
-        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Tempor Lacus Eros, At Scelerisque Arcu Feugiat Ut. Praesent Tempus Ipsum Leo, A Gravida Metus Luctus Et.',
-    //   image: require('../Assets/Images/lighttherapy.png'),
+        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecen pus Ipsum Leo, A Gravida Metus Luctus Et.',
+      image: require('../Assets/Images/lighttherapy.png'),
     },
   ];
   return (
@@ -111,14 +111,14 @@ const Home = () => {
         Pulvinar Metus, Fringilla Semper Enim.
       </CustomText>
       <FlatList
+      contentContainerStyle={{
+
+        paddingBottom : moderateScale(10,.6)
+      }}
+        showsVerticalScrollIndicator={false}
         data={appointments}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <AppointmentCard
-            item={item}
-          
-          />
-        )}
+        renderItem={({item}) => <AppointmentCard item={item} />}
       />
     </SafeAreaView>
   );

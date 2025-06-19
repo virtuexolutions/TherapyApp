@@ -25,7 +25,7 @@ const SearchContainer = ({
   inputStyle,
   placeHolder,
   rightIcon,
-  height
+  height,
 }) => {
   return (
     <GestureHandlerRootView>
@@ -80,14 +80,6 @@ const SearchContainer = ({
 
           {input && (
             <>
-              <Icon
-                name={'search'}
-                as={FontAwesome}
-                size={moderateScale(17, 0.3)}
-                color={'#E7DFDC'}
-                // style={{backgroundColor : 'red'}}
-              />
-
               <TextInput
                 placeholder={placeHolder ? placeHolder : 'Search here'}
                 placeholderTextColor={'#E7DFDC'}
@@ -98,16 +90,23 @@ const SearchContainer = ({
                 }}
                 style={[
                   {
-                    marginLeft: moderateScale(10, 0.3),
-                    width: windowWidth * 0.61,
+                    // marginLeft: moderateScale(10, 0.3),
+                    width: windowWidth * 0.7,
                     // backgroundColor:'black',
-                    // height : windowHeight * 0.05,
+                    height : windowHeight * 0.05,
                     // fontSize: moderateScale(15, 0.3),
                     color: Color.black,
                     // backgroundColor : 'red'
                   },
                   inputStyle && inputStyle,
                 ]}
+              />
+              <Icon
+                name={'search'}
+                as={FontAwesome}
+                size={moderateScale(17, 0.3)}
+                color={'#E7DFDC'}
+                // style={{backgroundColor : 'red'}}
               />
               {/* <Icon
               name={'filter'}

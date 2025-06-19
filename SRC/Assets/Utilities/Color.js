@@ -23,7 +23,7 @@ export default Color = {
   bgColor :'#FFFDF1',
 
   // theme colors
-  grey: '#5D5D5D',
+  grey: '#5D5D5D', 
   circleblue: '#404552',
   themeDarkGray: '#535353',
   themeLightGray: '#8D8D8D',

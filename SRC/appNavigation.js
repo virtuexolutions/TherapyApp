@@ -14,6 +14,11 @@ import VerifyNumber from './Screens/VerifyNumber';
 import UploadImages from './Screens/UploadImages';
 import BankDetails from './Screens/BankDetails';
 import Home from './Screens/Home';
+import Subscription from './Screens/Subscription';
+import Color from './Assets/Utilities/Color';
+import Directory from './Screens/Directory';
+import BookingScreen from './Screens/BookingScreen';
+import MyBookings from './Screens/MyBookings';
 
 enableScreens();
 const AppNavigator = () => {
@@ -29,14 +34,16 @@ const AppNavigator = () => {
         ? 'WalkThroughScreen'
         : token == null
         ? 'LoginScreen'
-        : 'MyDrawer';
+        : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'Home'}
+          initialRouteName={'MyBookings'}
           screenOptions={{headerShown: false}}>
-          <RootNav.Screen name="MyDrawer" component={MyDrawer} />
+          {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
+          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
+
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
@@ -48,6 +55,10 @@ const AppNavigator = () => {
           <RootNav.Screen name="UploadImages" component={UploadImages} />
           <RootNav.Screen name="BankDetails" component={BankDetails} />
           <RootNav.Screen name="Home" component={Home} />
+          <RootNav.Screen name="Subscription" component={Subscription} />
+          <RootNav.Screen name="Directory" component={Directory} />
+          <RootNav.Screen name="BookingScreen" component={BookingScreen} />
+          <RootNav.Screen name="MyBookings" component={MyBookings} />
 
         </RootNav.Navigator>
       </NavigationContainer>
@@ -150,12 +161,14 @@ export const TabNavigation = () => {
           </View>
         ),
       })}>
-      {/* <Tabs.Screen name={'HomeScreen'} component={HomeScreen} /> */}
+      <Tabs.Screen name={'Home'} component={Home} />
       {/* <Tabs.Screen name={'Donation'} component={Donation} />
       <Tabs.Screen name={'Campaigns'} component={Campaigns} />
       {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
       {/* <Tabs.Screen name={'StoreScreen'} component={StoreScreen} /> */}
-      <Tabs.Screen name={'Settings'} component={Settings} />
+      {/* <RootNav.Screen name="Subscription" component={Subscription} /> */}
+
+      <Tabs.Screen name={'Subscription'} component={Subscription} />
     </Tabs.Navigator>
   );
 };

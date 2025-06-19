@@ -145,18 +145,18 @@ const BankDetails = () => {
 export default BankDetails;
 
 const styles = StyleSheet.create({
-  main_con: {
-    height: windowHeight,
-    width: windowWidth,
-    backgroundColor: Color.bgColor,
-    alignItems: 'center',
-    paddingHorizontal: moderateScale(10, 0.6),
-    paddingTop: windowHeight * 0.02,
-  },
-  heading: {
-    fontSize: moderateScale(18, 0.6),
-    color: Color.btntextColor,
-  },
+    main_con: {
+        height: windowHeight,
+        width: windowWidth,
+        backgroundColor: Color.bgColor,
+        alignItems: 'center',
+        paddingHorizontal: moderateScale(10, 0.6),
+        paddingTop: windowHeight * 0.02,
+    },
+    heading: {
+        fontSize: moderateScale(18, 0.6),
+        color: Color.btntextColor,
+    },
   image_con: {
     height: windowHeight * 0.28,
     width: windowWidth * 0.9,
