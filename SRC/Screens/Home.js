@@ -118,7 +118,19 @@ backgroundColor:"red",
         showsVerticalScrollIndicator={false}
         data={appointments}
         keyExtractor={item => item.id}
-        renderItem={({item}) => <AppointmentCard item={item} />}
+        renderItem={({item}) => (
+          <AppointmentCard
+            isAvailable
+            title={item.title}
+            description={item.description}
+            image={item.image}
+            style={{
+              backgroundColor: Color.primary,
+              width: windowWidth * 0.9,
+            }}
+            item={item}
+          />
+        )}
       />
     </SafeAreaView>
   );

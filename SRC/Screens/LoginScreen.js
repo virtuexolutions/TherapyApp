@@ -1,15 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
-import { Formik } from 'formik';
-import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
+import React, {useState} from 'react';
 import {
   ActivityIndicator,
   ImageBackground,
   StyleSheet,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { moderateScale } from 'react-native-size-matters';
-import { useDispatch, useSelector } from 'react-redux';
+import {moderateScale} from 'react-native-size-matters';
+import {useDispatch, useSelector} from 'react-redux';
 import Color from '../Assets/Utilities/Color';
 import CustomButton from '../Components/CustomButton';
 import CustomImage from '../Components/CustomImage';
@@ -37,10 +37,7 @@ const LoginScreen = props => {
     <ImageBackground
       style={styles.main_con}
       source={require('../Assets/Images/loginbg.png')}>
-      <CustomStatusBar
-        backgroundColor={Color.white}
-        barStyle={'dark-light'}
-      />
+      <CustomStatusBar backgroundColor={Color.white} barStyle={'dark-light'} />
 
       <View style={styles.image_con}>
         <CustomImage
@@ -233,7 +230,7 @@ const styles = StyleSheet.create({
   },
   button_container: {
     paddingTop: windowHeight * 0.11,
-    paddingBottom  : moderateScale(5,.6),
+    paddingBottom: moderateScale(5, 0.6),
     flexDirection: 'row',
   },
   soc_text: {
@@ -278,12 +275,12 @@ const styles = StyleSheet.create({
     height: windowWidth * 0.08,
     borderRadius: (windowWidth * 0.08) / 2,
     backgroundColor: 'red',
-    marginHorizontal : moderateScale(3,.6)
+    marginHorizontal: moderateScale(3, 0.6),
   },
   btn_con: {
-    flexDirection :'row' ,
+    flexDirection: 'row',
     // paddingVertical : moderateScale(5,.6)
-  }
+  },
 });
 
 export default LoginScreen;

@@ -48,7 +48,6 @@ const BookingConfrimModel = ({isVisible, setIsVisible}) => {
             fontSize : moderateScale(10,.6) ,
         }}> success !</CustomText>
         <CustomText>
-       
           Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque
           Eu Pulvinar Metus, Fringilla Semper Enim.
         </CustomText>
@@ -67,6 +66,6 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.3,
     backgroundColor: Color.btntextColor,
     width: windowWidth * 0.9,
-    alignItems :'center'
+    alignItems: 'center',
   },
 });

@@ -1,10 +1,10 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import { enableScreens } from 'react-native-screens';
-import { moderateScale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
+import {enableScreens} from 'react-native-screens';
+import {moderateScale} from 'react-native-size-matters';
+import {useSelector} from 'react-redux';
 import Drawer from './Drawer/Drawer';
 import navigationService from './navigationService';
 import LoginScreen from './Screens/LoginScreen';
@@ -16,14 +16,13 @@ import BankDetails from './Screens/BankDetails';
 import Home from './Screens/Home';
 import Discount from './Screens/Discount';
 import Setting from './Screens/Setting';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View } from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { windowHeight, windowWidth } from './Utillity/utils';
-import Color from './Assets/Utilities/Color';
+import {windowHeight, windowWidth} from './Utillity/utils';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // 💡
-import Feather from 'react-native-vector-icons/Feather'
-import { Icon } from 'native-base';
+import Feather from 'react-native-vector-icons/Feather';
+import {Icon} from 'native-base';
 import CustomText from './Components/CustomText';
 import MemberPerks from './Screens/MemberPerks';
 import Subscription from './Screens/Subscription';
@@ -35,7 +34,6 @@ import ServicesManagement from './Screens/ServicesManagement';
 import AppointmentManagement from './Screens/AppointmentManagement';
 import PerformanceAndAnalytics from './Screens/PerformanceAndAnalytics';
 import SelectRole from './Screens/SelectRole';
-
 
 enableScreens();
 const AppNavigator = () => {
@@ -84,13 +82,20 @@ const AppNavigator = () => {
           <RootNav.Screen name="BookingScreen" component={BookingScreen} />
           <RootNav.Screen name="MyBookings" component={MyBookings} />
           <RootNav.Screen name="Dashboard" component={Dashboard} />
-          <RootNav.Screen name="ServicesManagement" component={ServicesManagement} />
-          <RootNav.Screen name="AppointmentManagement" component={AppointmentManagement} />
-          <RootNav.Screen name="PerformanceAndAnalytics" component={PerformanceAndAnalytics} />
+          <RootNav.Screen
+            name="ServicesManagement"
+            component={ServicesManagement}
+          />
+          <RootNav.Screen
+            name="AppointmentManagement"
+            component={AppointmentManagement}
+          />
+          <RootNav.Screen
+            name="PerformanceAndAnalytics"
+            component={PerformanceAndAnalytics}
+          />
           <RootNav.Screen name="SelectRole" component={SelectRole} />
           {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
-
-
         </RootNav.Navigator>
       </NavigationContainer>
     );
@@ -101,6 +106,9 @@ const AppNavigator = () => {
 
 export const TabNavigation = () => {
   const Tabs = createBottomTabNavigator();
+  // const role = useSelector(state => state.authReducer.role);
+  const role = 'user';
+
   return (
     <Tabs.Navigator
       // tabBar={(props) => {
@@ -112,13 +120,13 @@ export const TabNavigation = () => {
       //       end={[0, 0]}
       //     >
       //       <BottomTabBar
-      //         {...props}       
+      //         {...props}
       //         style={{ backgroundColor: 'transparent' }}
       //       />
       //     </LinearGradient>
       //   );
       // }}
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -127,8 +135,9 @@ export const TabNavigation = () => {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           // paddingVertical:5
+          height: windowHeight * 0.08,
         },
-        tabBarIcon: ({ focused }) => {
+        tabBarIcon: ({focused}) => {
           let iconName;
           letcolor = focused ? '#8B9781' : Color.veryLightGray;
           let size = moderateScale(20, 0.3);
@@ -137,20 +146,17 @@ export const TabNavigation = () => {
             iconName = focused ? 'home' : 'home-outline';
             color = focused ? '#8B9781' : Color.veryLightGray;
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
-          }
-          else if (route.name === 'Directory') {
+          } else if (route.name === 'Search') {
             iconName = focused ? 'search' : 'search';
             type = Ionicons;
             color = focused ? '#8B9781' : Color.veryLightGray;
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
-          }
-          else if (route.name === 'Discount') {
+          } else if (route.name === 'Inbox') {
             iconName = focused ? 'message-circle' : 'message-circle';
             color = focused ? '#8B9781' : Color.veryLightGray;
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
             type = Feather;
-          }
-          else if (route?.name == 'UploadImages') {
+          } else if (route?.name == 'Profile') {
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
             iconName = focused ? 'person-outline' : 'person-outline';
             color = focused ? '#8B9781' : Color.veryLightGray;
@@ -161,7 +167,7 @@ export const TabNavigation = () => {
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
             type = Ionicons;
           }
-          return route.name == 'BankDetails' ? (
+          return route.name == 'MemberPerks' ? (
             <View
               style={{
                 height: moderateScale(60, 0.3),
@@ -179,41 +185,59 @@ export const TabNavigation = () => {
               />
             </View>
           ) : (
-            <View style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              // backgroundColor: 'green',
-              width: moderateScale(55, 0.6),
-              height: moderateScale(40, 0.6),
-              marginTop: moderateScale(20, 0.6)
-            }}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                // backgroundColor: 'green',
+                width: moderateScale(55, 0.6),
+                height: moderateScale(40, 0.6),
+                marginTop: moderateScale(20, 0.6),
+              }}>
               <Icon name={iconName} as={type} color={color} size={size} />
-              <CustomText style={{
-                // backgroundColor: 'red',
-                fontSize: moderateScale(10, 0.6),
-                width: windowWidth * 0.18,
-                textAlign: 'center',
-                color: Color.btn_Color
-              }}>{route?.name}</CustomText>
+              <CustomText
+                style={{
+                  // backgroundColor: 'red',
+                  fontSize: moderateScale(10, 0.6),
+                  width: windowWidth * 0.18,
+                  textAlign: 'center',
+                  color: Color.btn_Color,
+                }}>
+                {route?.name}
+              </CustomText>
             </View>
           );
         },
         tabBarShowLabel: false,
         tabBarBackground: () => (
-          <View style={{ flex: 1 }}>
-            <View style={{
-              height: windowHeight * 0.3,
-              backgroundColor: Color.white,
-              borderRadius: moderateScale(15, 0.6)
-            }} />
+          <View style={{flex: 1}}>
+            <View
+              style={{
+                height: windowHeight * 0.4,
+                backgroundColor: Color.white,
+                borderRadius: moderateScale(15, 0.6),
+              }}
+            />
           </View>
         ),
       })}>
-      <Tabs.Screen name={'Home'} component={Home} />
-      <Tabs.Screen name={'Directory'} component={Directory} />
-      <Tabs.Screen name={'BankDetails'} component={BankDetails} />
-      <Tabs.Screen name={'Discount'} component={Discount} />
-      <Tabs.Screen name={'UploadImages'} component={UploadImages} />
+      <Tabs.Screen
+        name={'Home'}
+        component={role === 'user' ? Home : Dashboard}
+      />
+      <Tabs.Screen
+        name={'Inbox'}
+        component={role === 'user' ? MyBookings : AppointmentManagement}
+      />
+      <Tabs.Screen
+        name={'MemberPerks'}
+        component={role === 'user' ? MemberPerks : PerformanceAndAnalytics}
+      />
+      <Tabs.Screen name={'Profile'} component={Setting} />
+      <Tabs.Screen
+        name={'Search'}
+        component={role === 'user' ? Directory : ServicesManagement}
+      />
     </Tabs.Navigator>
   );
 };
