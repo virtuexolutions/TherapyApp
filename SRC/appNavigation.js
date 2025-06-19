@@ -1,10 +1,10 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {enableScreens} from 'react-native-screens';
-import {moderateScale} from 'react-native-size-matters';
-import {useSelector} from 'react-redux';
+import { enableScreens } from 'react-native-screens';
+import { moderateScale } from 'react-native-size-matters';
+import { useSelector } from 'react-redux';
 import Drawer from './Drawer/Drawer';
 import navigationService from './navigationService';
 import LoginScreen from './Screens/LoginScreen';
@@ -14,6 +14,18 @@ import VerifyNumber from './Screens/VerifyNumber';
 import UploadImages from './Screens/UploadImages';
 import BankDetails from './Screens/BankDetails';
 import Home from './Screens/Home';
+import Discount from './Screens/Discount';
+import Setting from './Screens/Setting';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { windowHeight, windowWidth } from './Utillity/utils';
+import Color from './Assets/Utilities/Color';
+import Ionicons from 'react-native-vector-icons/Ionicons'; // 💡
+import Feather from 'react-native-vector-icons/Feather'
+import { Icon } from 'native-base';
+import CustomText from './Components/CustomText';
+import MemberPerks from './Screens/MemberPerks';
 
 enableScreens();
 const AppNavigator = () => {
@@ -28,27 +40,29 @@ const AppNavigator = () => {
       walkThrough == false
         ? 'WalkThroughScreen'
         : token == null
-        ? 'LoginScreen'
-        : 'MyDrawer';
+          ? 'LoginScreen'
+          : 'MyDrawer';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'Home'}
-          screenOptions={{headerShown: false}}>
+          initialRouteName={'MemberPerks'}
+          screenOptions={{ headerShown: false }}>
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
           />
-
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="VerifyNumber" component={VerifyNumber} />
           <RootNav.Screen name="UploadImages" component={UploadImages} />
           <RootNav.Screen name="BankDetails" component={BankDetails} />
           <RootNav.Screen name="Home" component={Home} />
-
+          <RootNav.Screen name="Discount" component={Discount} />
+          <RootNav.Screen name="Setting" component={Setting} />
+          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
+          <RootNav.Screen name="MemberPerks" component={MemberPerks} />
         </RootNav.Navigator>
       </NavigationContainer>
     );
@@ -70,92 +84,108 @@ export const TabNavigation = () => {
       //       end={[0, 0]}
       //     >
       //       <BottomTabBar
-      //         {...props}
+      //         {...props}       
       //         style={{ backgroundColor: 'transparent' }}
       //       />
       //     </LinearGradient>
       //   );
       // }}
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          // backgroundColor:'pink',
+          backgroundColor: Color.white,
           // backgroundColor: Color.red,
-          // borderTopLeftRadius:15,
-          // borderTopRightRadius:15,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
           // paddingVertical:5
         },
-        tabBarIcon: ({focused}) => {
+        tabBarIcon: ({ focused }) => {
           let iconName;
-          let color = Color.theme2;
+          letcolor = focused ? '#8B9781' : Color.veryLightGray;
           let size = moderateScale(20, 0.3);
           let type = Ionicons;
-
-          // if (route.name === 'HomeScreen') {
-          //   iconName = focused ? 'home' : 'home-outline';
-
-          //   color = focused ? Color.theme2 : Color.white;
-          //   size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          // } else
-          if (route.name === 'Donation') {
-            iconName = focused ? 'donate' : 'donate';
-            type = FontAwesome5;
-            color = focused ? Color.theme2 : Color.white;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          } else if (route.name === 'StoreScreen') {
-            iconName = focused ? 'cart' : 'cart';
-            color = focused ? Color.theme2 : Color.white;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          } else if (route?.name == 'Campaigns') {
-            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          } else {
-            iconName = focused ? 'settings-sharp' : 'settings-outline';
-            color = focused ? Color.theme2 : Color.white;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+            color = focused ? '#8B9781' : Color.veryLightGray;
+            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
           }
-          return route.name == 'Campaigns' ? (
+          else if (route.name === 'Setting') {
+            iconName = focused ? 'search' : 'search';
+            type = Ionicons;
+            color = focused ? '#8B9781' : Color.veryLightGray;
+            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+          }
+          else if (route.name === 'Discount') {
+            iconName = focused ? 'message-circle' : 'message-circle';
+            color = focused ? '#8B9781' : Color.veryLightGray;
+            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+            type = Feather;
+          }
+          else if (route?.name == 'UploadImages') {
+            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+            iconName = focused ? 'person-outline' : 'person-outline';
+            color = focused ? '#8B9781' : Color.veryLightGray;
+            type = Ionicons;
+          } else {
+            iconName = focused ? 'person-outline' : 'person-outline';
+            color = focused ? '#8B9781' : Color.veryLightGray;
+            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+            type = Ionicons;
+          }
+          return route.name == 'BankDetails' ? (
             <View
               style={{
-                borderWidth: 5,
-                borderColor: Color.lightGrey,
                 height: moderateScale(60, 0.3),
-                width: moderateScale(60, 0.3),
+                width: moderateScale(80, 0.3),
                 borderRadius: moderateScale(30, 0.3),
-                backgroundColor: Color.theme2,
+                backgroundColor: '#8B9781',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginTop: moderateScale(-30, 0.3),
               }}>
               <Icon
-                name={'search'}
+                name={'plus'}
                 as={Feather}
                 color={Color.white}
-                size={size}
+                size={moderateScale(35, 0.6)}
               />
             </View>
           ) : (
-            <Icon name={iconName} as={type} color={color} size={size} />
+            <View style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              // backgroundColor: 'green',
+              width: moderateScale(55, 0.6),
+              height: moderateScale(40, 0.6),
+              marginTop: moderateScale(20, 0.6)
+            }}>
+              <Icon name={iconName} as={type} color={color} size={size} />
+              <CustomText style={{
+                // backgroundColor: 'red',
+                fontSize: moderateScale(10, 0.6),
+                width: windowWidth * 0.18,
+                textAlign: 'center',
+                color: Color.btn_Color
+              }}>{route?.name}</CustomText>
+            </View>
           );
         },
         tabBarShowLabel: false,
         tabBarBackground: () => (
-          <View style={{flex: 1}}>
-            <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 0, y: 1}}
-              colors={Color.tabBarGradient}
-              style={{height: windowHeight * 0.1}}
-            />
+          <View style={{ flex: 1 }}>
+            <View style={{
+              height: windowHeight * 0.3,
+              backgroundColor: Color.white,
+              borderRadius: moderateScale(15, 0.6)
+            }} />
           </View>
         ),
       })}>
-      {/* <Tabs.Screen name={'HomeScreen'} component={HomeScreen} /> */}
-      {/* <Tabs.Screen name={'Donation'} component={Donation} />
-      <Tabs.Screen name={'Campaigns'} component={Campaigns} />
-      {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
-      {/* <Tabs.Screen name={'StoreScreen'} component={StoreScreen} /> */}
-      <Tabs.Screen name={'Settings'} component={Settings} />
+      <Tabs.Screen name={'Home'} component={Home} />
+      <Tabs.Screen name={'Setting'} component={Setting} />
+      <Tabs.Screen name={'BankDetails'} component={BankDetails} />
+      <Tabs.Screen name={'Discount'} component={Discount} />
+      <Tabs.Screen name={'UploadImages'} component={UploadImages} />
     </Tabs.Navigator>
   );
 };

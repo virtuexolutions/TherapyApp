@@ -1,21 +1,33 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
 import CustomText from './CustomText';
+import CustomImage from './CustomImage';
 
-const AppointmentCard = ({title, description, image}) => (
-  <View style={styles.container}>
-    <Image source={{uri: image}} style={styles.image} />
+const AppointmentCard = ({ title, description, isAvailable = true, btn_text, btn_style, image, style, textstyles }) => (
+  <View style={[styles.container, style]}>
+    <View style={{
+      width: moderateScale(80),
+      height: moderateScale(80),
+      alignSelf: 'center',
+      marginLeft: moderateScale(4, 0.6),
+      borderRadius: moderateScale(10, 0.6)
+    }}>
+      <CustomImage source={image} style={styles.image} />
+    </View>
     <View style={styles.content}>
-      <CustomText style={styles.title}>{title}</CustomText>
-      <CustomText style={styles.desc}>{description}</CustomText>
-      <View style={styles.actions}>
-        <TouchableOpacity style={styles.button}>
-          <CustomText style={styles.buttonText}>Book Now</CustomText>
+      <CustomText style={[styles.title, textstyles]}>{title}</CustomText>
+      <CustomText numberOfLines={2} style={[styles.desc, textstyles]}>{description}</CustomText>
+      <View style={[styles.actions, textstyles]}>
+        <TouchableOpacity style={[styles.button, btn_style]}>
+          <CustomText style={styles.buttonText}>{btn_text ? btn_text : 'Book Now'}</CustomText>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.secondary}>
-          <CustomText style={styles.secondaryText}>Available Now</CustomText>
-        </TouchableOpacity>
+        {
+          isAvailable &&
+          <TouchableOpacity style={styles.secondary}>
+            <CustomText style={styles.secondaryText}>Available Now</CustomText>
+          </TouchableOpacity>
+        }
       </View>
     </View>
   </View>
@@ -30,8 +42,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   image: {
-    width: moderateScale(80),
-    height: moderateScale(80),
+    width: '100%',
+    height: '100%',
+    borderRadius: moderateScale(10, 0.6)
   },
   content: {
     flex: 1,
