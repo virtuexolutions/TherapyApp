@@ -26,6 +26,11 @@ import Feather from 'react-native-vector-icons/Feather'
 import { Icon } from 'native-base';
 import CustomText from './Components/CustomText';
 import MemberPerks from './Screens/MemberPerks';
+import Subscription from './Screens/Subscription';
+import Color from './Assets/Utilities/Color';
+import Directory from './Screens/Directory';
+import BookingScreen from './Screens/BookingScreen';
+import MyBookings from './Screens/MyBookings';
 
 enableScreens();
 const AppNavigator = () => {
@@ -49,6 +54,11 @@ const AppNavigator = () => {
           initialRouteName={'MemberPerks'}
           screenOptions={{ headerShown: false }}>
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
+          {/* initialRouteName={'MyBookings'}
+          screenOptions={{headerShown: false}}> */}
+          {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
+          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
+
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
@@ -63,6 +73,11 @@ const AppNavigator = () => {
           <RootNav.Screen name="Setting" component={Setting} />
           <RootNav.Screen name="TabNavigation" component={TabNavigation} />
           <RootNav.Screen name="MemberPerks" component={MemberPerks} />
+          <RootNav.Screen name="Subscription" component={Subscription} />
+          <RootNav.Screen name="Directory" component={Directory} />
+          <RootNav.Screen name="BookingScreen" component={BookingScreen} />
+          <RootNav.Screen name="MyBookings" component={MyBookings} />
+
         </RootNav.Navigator>
       </NavigationContainer>
     );

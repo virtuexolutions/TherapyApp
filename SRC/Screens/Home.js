@@ -37,20 +37,23 @@ const Home = () => {
     {
       id: '1',
       title: 'IV Therapy',
-      description: 'Boost immunity and hydrate fast...',
-      image: 'https://example.com/image1.jpg',
+      description:
+        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Tempor Lacus Er A Gravida Metus Luctus Et.',
+      image: require('../Assets/Images/ivtherapy.png'),
     },
     {
       id: '2',
       title: 'Regenerative Therapies',
-      description: 'Advanced cellular recovery treatments...',
-      image: 'https://example.com/image2.jpg',
+      description:
+        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Ipsum Leo, A Gravida Metus Luctus Et.',
+      image: require('../Assets/Images/therapy.png'),
     },
     {
       id: '3',
       title: 'Light & Oxygen Therapies',
-      description: 'Rejuvenate with red light and O2 sessions...',
-      image: 'https://example.com/image3.jpg',
+      description:
+        'Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecen pus Ipsum Leo, A Gravida Metus Luctus Et.',
+      image: require('../Assets/Images/lighttherapy.png'),
     },
   ];
   return (
@@ -107,17 +110,16 @@ const Home = () => {
         Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu
         Pulvinar Metus, Fringilla Semper Enim.
       </CustomText>
-      {/* <FlatList
+      <FlatList
+      contentContainerStyle={{
+
+        paddingBottom : moderateScale(10,.6)
+      }}
+        showsVerticalScrollIndicator={false}
         data={appointments}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <AppointmentCard
-            title={item.title}
-            description={item.description}
-            image={item.image}
-          />
-        )}
-      />{' '} */}
+        renderItem={({item}) => <AppointmentCard item={item} />}
+      />
     </SafeAreaView>
   );
 };
