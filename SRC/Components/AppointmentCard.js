@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import CustomText from './CustomText';
 import CustomImage from './CustomImage';
+import Color from '../Assets/Utilities/Color';
 
 const AppointmentCard = ({
   title,
@@ -17,8 +18,8 @@ const AppointmentCard = ({
   <View style={[styles.container, style]}>
     <View
       style={{
-        width: moderateScale(80),
-        height: moderateScale(80),
+        width: moderateScale(85,.6),
+        height: moderateScale(90,.6),
         alignSelf: 'center',
         marginLeft: moderateScale(4, 0.6),
         borderRadius: moderateScale(10, 0.6),
@@ -33,17 +34,18 @@ const AppointmentCard = ({
       <View style={[styles.actions, textstyles]}>
         <TouchableOpacity style={[styles.button, btn_style]}>
           <CustomText style={styles.buttonText}>
-            {btn_text ? btn_text : 'Book Now'}
+            {btn_text ? btn_text : 'Book Appointment'}
           </CustomText>
         </TouchableOpacity>
         {isAvailable && (
           <TouchableOpacity style={styles.secondary}>
-            <CustomText style={styles.secondaryText}>Available Now</CustomText>
+            <CustomText style={styles.secondaryText}>Available Providers</CustomText>
           </TouchableOpacity>
         )}
       </View>
     </View>
-  </View>
+  </View>     
+  
 );
 
 const styles = StyleSheet.create({
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(12),
     marginVertical: moderateScale(6),
     overflow: 'hidden',
-  },
+  },     
   image: {
     width: '100%',
     height: '100%',
@@ -73,12 +75,13 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
   button: {
     backgroundColor: '#3c5f41',
     padding: moderateScale(6),
-    borderRadius: moderateScale(6),
+    borderRadius: moderateScale(20,.6),
+    marginRight : moderateScale(5,.6)
   },
   buttonText: {
     color: '#fff',
@@ -86,10 +89,12 @@ const styles = StyleSheet.create({
   },
   secondary: {
     padding: moderateScale(6),
+    borderWidth : 1,
+    borderRadius : moderateScale(20,.6)
   },
   secondaryText: {
     fontSize: moderateScale(10),
-    color: '#333',
+    color: Color.white,
   },
 });
 

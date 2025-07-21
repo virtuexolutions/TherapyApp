@@ -74,10 +74,11 @@ const Signup = () => {
             fontSize={moderateScale(9, 0.6)}
             borderRadius={30}
             backgroundColor={'transparent'}
-            borderColor={Color.themtxtColor}
+            borderColor={Color.white}
             marginTop={moderateScale(10, 0.3)}
-            placeholderColor={Color.darkGray}
+            placeholderColor={Color.btntextColor}
             titleStlye={{right: 10}}
+            inputColor={Color.white}
           />
           <TextInputWithTitle
             titleText={'Username'}
@@ -91,10 +92,11 @@ const Signup = () => {
             fontSize={moderateScale(10, 0.6)}
             borderRadius={30}
             backgroundColor={'transparent'}
-            borderColor={Color.themtxtColor}
+            borderColor={Color.white}
             marginTop={moderateScale(10, 0.3)}
-            placeholderColor={Color.darkGray}
+            placeholderColor={Color.btntextColor}
             titleStlye={{right: 10}}
+            inputColor={Color.white}
           />
         </View>
         <TextInputWithTitle
@@ -108,28 +110,30 @@ const Signup = () => {
           border={1}
           borderRadius={30}
           backgroundColor={'transparent'}
-          borderColor={Color.themtxtColor}
+          borderColor={Color.white}
           marginTop={moderateScale(10, 0.3)}
-          placeholderColor={Color.darkGray}
+          placeholderColor={Color.btntextColor}
           titleStlye={{right: 10}}
+          inputColor={Color.white}
         />
         <View style={styles.row}>
           <TextInputWithTitle
             // fontSize={moderateScale(10,.6)}
-            placeholder={'Select Health Interests'}
+            placeholder={'Health Interests'}
             // setText={handleChange('email')}
             // value={values.email}
             viewHeight={0.05}
             viewWidth={0.43}
             inputWidth={0.8}
             border={1}
-            fontSize={moderateScale(10, 0.6)}
+            fontSize={moderateScale(9, 0.6)}
             borderRadius={30}
             backgroundColor={'Choose Membership Plan'}
-            borderColor={Color.themtxtColor}
+            borderColor={Color.white}
             marginTop={moderateScale(10, 0.3)}
-            placeholderColor={Color.darkGray}
+            placeholderColor={Color.btntextColor}
             titleStlye={{right: 10}}
+            inputColor={Color.white}
           />
           <TextInputWithTitle
             placeholder={'Monthly'}
@@ -142,10 +146,11 @@ const Signup = () => {
             fontSize={moderateScale(10, 0.6)}
             borderRadius={30}
             backgroundColor={'transparent'}
-            borderColor={Color.themtxtColor}
+            borderColor={Color.white}
             marginTop={moderateScale(10, 0.3)}
-            placeholderColor={Color.darkGray}
+            placeholderColor={Color.btntextColor}
             titleStlye={{right: 10}}
+            inputColor={Color.white}
           />
         </View>
         <View style={styles.row}>
@@ -160,10 +165,11 @@ const Signup = () => {
             fontSize={moderateScale(10, 0.6)}
             borderRadius={30}
             backgroundColor={'transparent'}
-            borderColor={Color.themtxtColor}
+            borderColor={Color.white}
             marginTop={moderateScale(10, 0.3)}
-            placeholderColor={Color.darkGray}
+            placeholderColor={Color.btntextColor}
             titleStlye={{right: 10}}
+            inputColor={Color.white}
           />
           <TextInputWithTitle
             titleText={'Username'}
@@ -177,10 +183,11 @@ const Signup = () => {
             fontSize={moderateScale(10, 0.6)}
             borderRadius={30}
             backgroundColor={'transparent'}
-            borderColor={Color.themtxtColor}
+            borderColor={Color.white}
             marginTop={moderateScale(10, 0.3)}
-            placeholderColor={Color.darkGray}
+            placeholderColor={Color.btntextColor}
             titleStlye={{right: 10}}
+            inputColor={Color.white}
           />
         </View>
       </View>
@@ -204,6 +211,7 @@ const Signup = () => {
         textTransform={'capitalize'}
         marginTop={windowHeight * 0.02}
         elevation={false}
+        inputColor={Color.white}
         // onPress={handleSubmit}
       />
       <View style={styles.button_container}>

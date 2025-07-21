@@ -16,21 +16,22 @@ import CustomImage from '../Components/CustomImage';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
-import { loginSchema } from '../Constant/schema';
-import { windowHeight, windowWidth } from '../Utillity/utils';
-import { setUserToken } from '../Store/slices/auth';
+import {loginSchema} from '../Constant/schema';
+import {windowHeight, windowWidth} from '../Utillity/utils';
+import {setUserToken} from '../Store/slices/auth';
+import navigationService from '../navigationService';
 
 const LoginScreen = props => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.authReducer.token);
   const role = useSelector(state => state.authReducer.role);
-  console.log("🚀 ~ role:", role,token)
+  console.log('🚀 ~ role:', role, token);
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const [device_token, setDeviceToken] = useState(null);
 
   const login = async values => {
-    dispatch(setUserToken({token:"token123"}))
+    dispatch(setUserToken({token: 'token123'}));
   };
 
   return (
@@ -57,7 +58,10 @@ const LoginScreen = props => {
             fontSize: moderateScale(20, 0.6),
             color: Color.white,
           }}>
-          login {role?.toLowerCase() == "provider" ? "providers" : "into your account"}
+          login{' '}
+          {role?.toLowerCase() == 'provider'
+            ? 'providers'
+            : 'into your account'}
         </CustomText>
         <CustomText style={styles.txt}>
           Lorem Ipsum is simply dummy text of the printing typesetting
@@ -84,47 +88,50 @@ const LoginScreen = props => {
                   border={1}
                   fontSize={moderateScale(10, 0.6)}
                   borderRadius={30}
-                  inputColor={"white"}
+                  inputColor={'white'}
                   backgroundColor={'transparent'}
-                  borderColor={Color.themtxtColor}
+                  borderColor={Color.white}
                   marginTop={moderateScale(10, 0.3)}
-                  placeholderColor={Color.darkGray}
-                  titleStlye={{right: 10, color:Color.white}}
+                  placeholderColor={Color.btntextColor}
+                  titleStlye={{right: 10, color: Color.white}}
                 />
                 {touched.email && errors.email && (
                   <CustomText
                     textAlign={'left'}
                     style={{
                       fontSize: moderateScale(10, 0.6),
-                      color: Color.red,
+                      color: Color.white,
                       alignSelf: 'flex-start',
                     }}>
                     {errors.email}
                   </CustomText>
                 )}
                 <TextInputWithTitle
+                iconColor={Color.btntextColor}
                   secureText={true}
                   placeholder={'**********'}
                   setText={handleChange('password')}
                   value={values.password}
-                  inputColor={'white'}
+                  // inputColor={Color.white}
                   viewHeight={0.06}
                   viewWidth={0.85}
                   inputWidth={0.8}
                   border={1}
+                  color={Color.white}
                   borderRadius={30}
                   backgroundColor={'transparent'}
-                  borderColor={Color.themtxtColor}
+                  // borderColor={Color.white}
                   marginTop={moderateScale(10, 0.3)}
-                  placeholderColor={Color.darkGray}
+                  placeholderColor={Color.btntextColor}
                   titleStlye={{right: 10}}
+                  // inputColor={Color.white}
                 />
                 {touched.password && errors.password && (
                   <CustomText
                     textAlign={'left'}
                     style={{
                       fontSize: moderateScale(10, 0.6),
-                      color: Color.red,
+                      color: Color.white,
                       alignSelf: 'flex-start',
                     }}>
                     {errors.password}
@@ -150,15 +157,18 @@ const LoginScreen = props => {
                   fontSize={moderateScale(15, 0.3)}
                   textColor={Color.btntextColor}
                   borderWidth={1.5}
-                  borderColor={Color.themtxtColor}
+                  borderColor={Color.btntextColor}
                   borderRadius={moderateScale(30, 0.3)}
                   width={windowWidth * 0.9}
-                  height={windowHeight * 0.065}
+                  height={windowHeight * 0.07 }
                   bgColor={Color.btn_Color}
                   textTransform={'capitalize'}
-                  marginTop={windowHeight * 0.04}
-                  elevation={false}
-                  onPress={handleSubmit}
+                  marginTop={windowHeight * 0.07}
+                  elevation={true}
+                  onPress={() =>{
+                    navigationService.navigate('TabNavigation')
+                  }}
+                  // onPress={handleSubmit}
                 />
               </>
             );
@@ -190,6 +200,17 @@ const LoginScreen = props => {
           />
         </TouchableOpacity>
       </View>
+        <CustomText style={styles.do_text}>
+          Don’t have an account?
+          <CustomText
+            onPress={() => {
+              navigation.navigate('Signup');
+            }}
+            isBold
+            style={styles.Sign_text}>
+            Sign Up
+          </CustomText>
+        </CustomText>
     </ImageBackground>
   );
 };
@@ -225,11 +246,12 @@ const styles = StyleSheet.create({
     color: Color.white,
     textAlign: 'right',
     width: '95%',
-    paddingVertical: moderateScale(4, 0.6),
+    // top: moderateScale(-6  , 0.6),
     fontWeight: '600',
+    letterSpacing : 0.5
   },
   button_container: {
-    paddingTop: windowHeight * 0.11,
+    paddingTop: windowHeight * 0.13,
     paddingBottom: moderateScale(5, 0.6),
     flexDirection: 'row',
   },
@@ -245,9 +267,10 @@ const styles = StyleSheet.create({
     textTransform: 'none',
     letterSpacing: 0.5,
     fontSize: moderateScale(12, 0.6),
+    color: Color.white
   },
   Sign_text: {
-    color: Color.themeBlack,
+    color: Color.white,
     paddingRight: moderateScale(5, 0.6),
     fontSize: moderateScale(12, 0.6),
   },
@@ -259,8 +282,9 @@ const styles = StyleSheet.create({
     borderColor: Color.white,
   },
   image_con: {
-    height: windowHeight * 0.15,
-    width: windowHeight * 0.21,
+    height: windowHeight * 0.155,
+    width: windowHeight * 0.23,
+    // backgroundColor :'red' ,
     marginTop: moderateScale(-8, 0.3),
     marginVertical: windowHeight * 0.02,
   },
@@ -274,7 +298,6 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.08,
     height: windowWidth * 0.08,
     borderRadius: (windowWidth * 0.08) / 2,
-    backgroundColor: 'red',
     marginHorizontal: moderateScale(3, 0.6),
   },
   btn_con: {

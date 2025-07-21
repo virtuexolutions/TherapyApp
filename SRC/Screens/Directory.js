@@ -9,6 +9,8 @@ import SearchContainer from '../Components/SearchContainer';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import CustomImage from '../Components/CustomImage';
 import Therapycard from '../Components/Therapycard';
+import {Icon} from 'native-base';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Directory = () => {
   const therapyServices = [
@@ -105,13 +107,19 @@ const Directory = () => {
           }}
         />
         <TouchableOpacity style={styles.filter}>
-          <CustomImage
+          <Icon
+            name="tune"
+            as={MaterialIcons}
+            size={moderateScale(22, 0.6)}
+            color={Color.btntextColor}
+          />
+          {/* <CustomImage
             style={{
               height: '100%',
               width: '100%',
             }}
             source={require('../Assets/Images/sort.png')}
-          />
+          /> */}
         </TouchableOpacity>
       </View>
       <FlatList
@@ -120,8 +128,8 @@ const Directory = () => {
         renderItem={({item}) => {
           return <Therapycard item={item} />;
         }}
-        ListFooterComponent={() =>(
-          <View style={{height: windowHeight * 0.1}}/>
+        ListFooterComponent={() => (
+          <View style={{height: windowHeight * 0.1}} />
         )}
       />
     </SafeAreaView>
@@ -146,10 +154,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   filter: {
-    width: windowWidth * 0.12,
-    height: windowWidth * 0.12,
-    borderRadius: (windowWidth * 0.12) / 2,
-    borderWidth: 1,
+    width: windowWidth * 0.11,
+    height: windowWidth * 0.11,
+    borderRadius: (windowWidth * 0.11) / 2,
+    borderWidth: 1.5,
     borderColor: Color.btntextColor,
+    overflow: 'hidden',
+    alignItems:'center',
+    justifyContent :'center',
   },
 });

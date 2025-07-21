@@ -50,14 +50,10 @@ const CommonSlice = createSlice({
     setNotification(state, action) {
       state.notification = action.payload;
     },
-    setSelectedRole(state, action) {
-      state.selectedRole = action.payload;
-    },
+ 
 
     AddToCart(state, action) {
       const itemId = action.payload.id;
-      console.log('🚀 ~ AddToCart ~ action.payload:', action.payload);
-
       state.cart.push({date: moment(), ...action.payload});
     },
 

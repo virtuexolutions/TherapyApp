@@ -34,13 +34,16 @@ import ServicesManagement from './Screens/ServicesManagement';
 import AppointmentManagement from './Screens/AppointmentManagement';
 import PerformanceAndAnalytics from './Screens/PerformanceAndAnalytics';
 import SelectRole from './Screens/SelectRole';
+import MessagesScreen from './Screens/MessagesScreen';
+import SearchScreen from './Screens/SearchScreen';
+import VerifyEmail from './Screens/VerifyEmail';
 
 enableScreens();
 const AppNavigator = () => {
   const walkThrough = useSelector(state => state.authReducer.userWalkThrough);
   const role = useSelector(state => state.authReducer.role);
   const token = useSelector(state => state.authReducer.token);
-  console.log("🚀 ~ AppNavigator ~ token:", token)
+  console.log('🚀 ~ AppNavigator ~ token:', token);
 
   const RootNav = createNativeStackNavigator();
 
@@ -49,15 +52,14 @@ const AppNavigator = () => {
       walkThrough == false
         ? 'WalkThroughScreen'
         : token == null
-          ?   'SelectRole' 
-            
-          : 'TabNavigation';
+        ? 'SelectRole'
+        : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
           initialRouteName={firstScreen}
-          screenOptions={{ headerShown: false }}>
+          screenOptions={{headerShown: false}}>
           {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
           {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
           {/* initialRouteName={'MyBookings'}
@@ -82,6 +84,9 @@ const AppNavigator = () => {
           <RootNav.Screen name="BookingScreen" component={BookingScreen} />
           <RootNav.Screen name="MyBookings" component={MyBookings} />
           <RootNav.Screen name="Dashboard" component={Dashboard} />
+          <RootNav.Screen name="VerifyEmail" component={VerifyEmail} />
+          {/* <RootNav.Screen name="VerifyNumber" component={VerifyNumber} /> */}
+
           <RootNav.Screen
             name="ServicesManagement"
             component={ServicesManagement}
@@ -95,6 +100,8 @@ const AppNavigator = () => {
             component={PerformanceAndAnalytics}
           />
           <RootNav.Screen name="SelectRole" component={SelectRole} />
+          <RootNav.Screen name="SearchScreen" component={SearchScreen} />
+
           {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
         </RootNav.Navigator>
       </NavigationContainer>
@@ -158,11 +165,11 @@ export const TabNavigation = () => {
             type = Feather;
           } else if (route?.name == 'Profile') {
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
-            iconName = focused ? 'person-outline' : 'person-outline';
+            iconName = focused ? 'settings-outline' : 'settings';
             color = focused ? '#8B9781' : Color.veryLightGray;
             type = Ionicons;
           } else {
-            iconName = focused ? 'person-outline' : 'person-outline';
+            iconName = focused ? 'settings-outline' : 'settings';
             color = focused ? '#8B9781' : Color.veryLightGray;
             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
             type = Ionicons;
@@ -170,7 +177,11 @@ export const TabNavigation = () => {
           return route.name == 'MemberPerks' ? (
             <View
               style={{
-                height: moderateScale(60, 0.3),
+                top: role == 'user' ? 0 : 15,
+                height:
+                  role == 'user'
+                    ? moderateScale(60, 0.3)
+                    : moderateScale(50, 0.6),
                 width: moderateScale(80, 0.3),
                 borderRadius: moderateScale(30, 0.3),
                 backgroundColor: '#8B9781',
@@ -226,18 +237,15 @@ export const TabNavigation = () => {
         component={role === 'user' ? Home : Dashboard}
       />
       <Tabs.Screen
-        name={'Inbox'}
-        component={role === 'user' ? MyBookings : AppointmentManagement}
+        name={'Search'}
+        component={role === 'user' ? Directory : SearchScreen}
       />
       <Tabs.Screen
         name={'MemberPerks'}
         component={role === 'user' ? MemberPerks : PerformanceAndAnalytics}
       />
-      <Tabs.Screen name={'Profile'} component={Setting} />
-      <Tabs.Screen
-        name={'Search'}
-        component={role === 'user' ? Directory : ServicesManagement}
-      />
+      <Tabs.Screen name={'Inbox'} component={MessagesScreen} />
+      <Tabs.Screen name={'setting'} component={Setting} />
     </Tabs.Navigator>
   );
 };

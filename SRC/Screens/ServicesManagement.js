@@ -20,6 +20,7 @@ const ServicesManagement = () => {
         barStyle={'dark-content'}
       />
        <Header 
+       headerColor={Color.bgColor}
        textstyle={{
         fontWeight:'bold',
         fontSize:moderateScale(14,0.2),
@@ -43,7 +44,8 @@ export default ServicesManagement
 const styles = StyleSheet.create({
     mainScreen:{
         width: windowWidth,
-        height:windowHeight
+        height:windowHeight,
+       backgroundColor:  Color.bgColor,
     },
     
     desc:{

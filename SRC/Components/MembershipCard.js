@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(8, 0.6),
     borderRadius: moderateScale(10, 0.6),
     margin: moderateScale(5, 0.6),
+    borderWidth : 1,
+    borderColor : Color.btntextColor 
   },
   title: {
     fontSize: moderateScale(12, 0.6),

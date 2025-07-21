@@ -43,7 +43,7 @@ const Discount = () => {
                     borderRadius={30}
                     marginTop={moderateScale(30, 0.3)}
                     onPress={() => {
-                        VerifyOTP();
+                      
                     }}
                     bgColor={Color.btn_Color} />
             </View>

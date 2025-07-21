@@ -30,8 +30,8 @@ const styles = ScaledSheet.create({
     alignItems: 'center',
   },
   logo_Container: {
-    height: windowHeight * 0.2,
-    width: windowWidth * 0.41,
+    height: windowHeight * 0.22,
+    width: windowWidth * 0.45,
   },
   logo: {
     height: '100%',

@@ -21,7 +21,7 @@ import {color} from 'native-base/lib/typescript/theme/styled-system';
 
 const MemberPerks = () => {
   const vouchers = [
-    {
+    {   
       id: '1',
       title: 'Membership 01',
       description:
@@ -39,7 +39,7 @@ const MemberPerks = () => {
     {
       id: '3',
       title: 'Membership 02',
-      description:
+      description:            
         'Lorem Ipsum Dolor Sit Amet, Consectetur Adip Iscing Elit. Pellentesque Eu Pulvinar Metu.',
       image: require('../Assets/Images/vocher1.png'),
     },
@@ -75,9 +75,9 @@ const MemberPerks = () => {
         barStyle={'dark-content'}
       />
       <Header
-        textstyle={{
-          right: 25,
-        }}
+        // textstyle={{
+        //   right: 25,
+        // }}
         title={'Member Perks'}
         headerColor={Color.bgColor}
       />
@@ -113,7 +113,7 @@ const MemberPerks = () => {
             renderItem={({item}) => (
               <View
                 style={{
-                  width: windowWidth * 0.6,
+                  width: windowWidth * 0.8,
                   height: windowWidth * 0.4,
                   marginRight: moderateScale(10, 0.6),
                   marginTop: moderateScale(15, 0.6),
@@ -136,6 +136,9 @@ const MemberPerks = () => {
             <CustomText style={styles.text}>View All</CustomText>
           </View>
           <FlatList
+          contentContainerStyle={{
+            paddingBottom : moderateScale(50,.6)
+          }} 
             data={appointments}
             keyExtractor={item => item.id}
             renderItem={({item}) => (

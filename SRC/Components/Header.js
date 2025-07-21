@@ -29,6 +29,13 @@ const Header = props => {
   const dispatch = useDispatch();
   const notification = useSelector(state => state.commonReducer.notification);
   const cartData = useSelector(state => state.commonReducer.cart);
+  
+  const user = useSelector(state => state.commonReducer.userData);
+  const userRole = useSelector(state => state.commonReducer.selectedRole);
+  console.log("🚀 ~ userRole:", userRole)
+  const token = useSelector(state => state.authReducer.token);
+  // const userRole = useSelector(state => state.commonReducer.role);
+
   const navigationN = useNavigation();
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -51,9 +58,6 @@ const Header = props => {
   } = props;
 
   const [searchText, setSearchText] = useState('');
-  const user = useSelector(state => state.commonReducer.userData);
-  const userRole = useSelector(state => state.commonReducer.selectedRole);
-  const token = useSelector(state => state.authReducer.token);
   const statusArray = [
     {label: 'Change Password', value: 'ChangePassword'},
     {label: 'Terms & Conditions', value: 'TermsAndConditions'},
@@ -158,7 +162,7 @@ const Header = props => {
         )}
       </View>
       {title ? (
-        <CustomText  style={[styles.text, textstyle]}>{title}</CustomText>
+        <CustomText style={[styles.text, textstyle]}>{title}</CustomText>
       ) : (
         <CustomImage
           resizeMode={'contain'}
@@ -226,15 +230,23 @@ const Header = props => {
             justifyContent: 'center',
             alignItems: 'center',
             height: windowHeight * 0.055,
+            borderRadius: (windowHeight * 0.055) / 2,
+            backgroundColor: Color.btntextColor,
           }}>
-          <CustomImage
+          <Icon
+            name={'filter'}
+            size={moderateScale(20, 0.6)}
+            color={Color.white}
+            as={Feather}
+          />
+          {/* <CustomImage
             onPress={() => {
               // navigation.navigate('Profile')
               // dispatch(setUserLogoutAuth());
             }}
             source={notificationIcon ? require('../Assets/Images/bell.png') : require('../Assets/Images/filter.png')}
             style={{width: windowHeight * 0.06, height: windowHeight * 0.06}}
-          />
+          /> */}
         </View>
       )}
     </View>

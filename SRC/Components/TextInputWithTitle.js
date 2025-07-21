@@ -60,7 +60,6 @@ const TextInputWithTitle = props => {
             },
             shadowOpacity: 0.32,
             shadowRadius: 5.46,
-
             elevation: 5,
           },
           props.marginBottom && {
@@ -144,7 +143,7 @@ const TextInputWithTitle = props => {
                 {
                   width: windowWidth * props.inputWidth,
                 },
-                 props.inputColor && {
+                props.inputColor && {
                   color: props.inputColor,
                 },
                 Platform.OS === 'android'
@@ -156,6 +155,7 @@ const TextInputWithTitle = props => {
                           ? props?.fontSize
                           : moderateScale(12, 0.6),
                         fontWeight: '400',
+                        color : Color.white
                       },
                     ]
                   : [
@@ -195,7 +195,7 @@ const TextInputWithTitle = props => {
               <Icon
                 name={showPassword ? 'eye' : 'eye-slash'}
                 as={FontAwesome}
-                color={Color.black}
+                color={props?.iconColor ? props?.iconColor : Color.black}
                 size={moderateScale(18, 0.3)}
               />
             </TouchableOpacity>
