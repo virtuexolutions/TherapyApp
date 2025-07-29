@@ -1,13 +1,13 @@
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomButton from '../Components/CustomButton';
 import Color from '../Assets/Utilities/Color';
-import {moderateScale} from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
 import CustomText from '../Components/CustomText';
-import {useDispatch} from 'react-redux';
-import {SetUserRole} from '../Store/slices/auth';
+import { useDispatch } from 'react-redux';
+import { SetUserRole } from '../Store/slices/auth';
 import navigationService from '../navigationService';
 
 const SelectRole = () => {
@@ -35,9 +35,9 @@ const SelectRole = () => {
         }}>
         <CustomText style={styles.txt}>Select Your Role</CustomText>
         <CustomText style={{
-          fontSize : moderateScale(10,.6) ,color : Color.white,
-          textAlign : 'center',
-          width : windowWidth *0.7,
+          fontSize: moderateScale(10, .6), color: Color.white,
+          textAlign: 'center',
+          width: windowWidth * 0.7,
         }}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</CustomText>
         <CustomButton
           isBold
@@ -54,8 +54,7 @@ const SelectRole = () => {
           marginTop={windowHeight * 0.03}
           elevation={false}
           onPress={() => {
-            dispatch(SetUserRole('Provider'));
-            navigationService.navigate('LoginScreen');
+            navigationService.navigate('LoginScreen', { role: 'Provider' });
           }}
         />
         <CustomButton
@@ -73,8 +72,7 @@ const SelectRole = () => {
           marginTop={windowHeight * 0.02}
           elevation={false}
           onPress={() => {
-            dispatch(SetUserRole('user'));
-            navigationService.navigate('LoginScreen');
+            navigationService.navigate('LoginScreen', { role: 'User' });
           }}
         />
       </View>

@@ -1,37 +1,56 @@
-import {useNavigation} from '@react-navigation/native';
-import {Formik} from 'formik';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   ImageBackground,
+  Platform,
   StyleSheet,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
-import {useDispatch, useSelector} from 'react-redux';
+import { moderateScale } from 'react-native-size-matters';
+import { useDispatch, useSelector } from 'react-redux';
 import Color from '../Assets/Utilities/Color';
 import CustomButton from '../Components/CustomButton';
 import CustomImage from '../Components/CustomImage';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
-import {loginSchema} from '../Constant/schema';
-import {windowHeight, windowWidth} from '../Utillity/utils';
-import {setUserToken} from '../Store/slices/auth';
+import { loginSchema } from '../Constant/schema';
+import { apiHeader, windowHeight, windowWidth } from '../Utillity/utils';
+import { SetUserRole, setUserToken } from '../Store/slices/auth';
 import navigationService from '../navigationService';
+import { Post } from '../Axios/AxiosInterceptorFunction';
+import { setUserData } from '../Store/slices/common';
+
 
 const LoginScreen = props => {
+  const role = props?.route?.params?.role;
+  console.log("🚀 ~ LoginScreen ~ role:", role)
   const dispatch = useDispatch();
   const token = useSelector(state => state.authReducer.token);
-  const role = useSelector(state => state.authReducer.role);
-  console.log('🚀 ~ role:', role, token);
+  // const role = useSelector(state => state.authReducer.role);
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const [device_token, setDeviceToken] = useState(null);
 
   const login = async values => {
-    dispatch(setUserToken({token: 'token123'}));
+    const url = 'login';
+    setIsLoading(true);
+    const response = await Post(url, values, apiHeader());
+    console.log("🚀 ~ onPressSignUp ~ response:", response?.data)
+    setIsLoading(false);
+    if (response != undefined) {
+      Platform.OS == 'android'
+        ? ToastAndroid.show('Sign In successfully', ToastAndroid.SHORT)
+        : Alert.alert('Sign In successfully');
+      dispatch(setUserData(response?.data?.user_info));
+      dispatch(setUserToken({ token: response?.data?.token }));
+      dispatch(SetUserRole(response?.data?.role))
+    }
   };
 
   return (
@@ -74,7 +93,7 @@ const LoginScreen = props => {
           }}
           validationSchema={loginSchema}
           onSubmit={login}>
-          {({handleChange, handleSubmit, values, errors, touched}) => {
+          {({ handleChange, handleSubmit, values, errors, touched }) => {
             return (
               <>
                 <TextInputWithTitle
@@ -93,21 +112,22 @@ const LoginScreen = props => {
                   borderColor={Color.white}
                   marginTop={moderateScale(10, 0.3)}
                   placeholderColor={Color.btntextColor}
-                  titleStlye={{right: 10, color: Color.white}}
+                  titleStlye={{ right: 10, color: Color.white }}
                 />
                 {touched.email && errors.email && (
                   <CustomText
                     textAlign={'left'}
                     style={{
                       fontSize: moderateScale(10, 0.6),
-                      color: Color.white,
+                      color: Color.red,
                       alignSelf: 'flex-start',
+                      marginLeft: moderateScale(10, 0.6),
                     }}>
                     {errors.email}
                   </CustomText>
                 )}
                 <TextInputWithTitle
-                iconColor={Color.btntextColor}
+                  iconColor={Color.btntextColor}
                   secureText={true}
                   placeholder={'**********'}
                   setText={handleChange('password')}
@@ -123,16 +143,17 @@ const LoginScreen = props => {
                   // borderColor={Color.white}
                   marginTop={moderateScale(10, 0.3)}
                   placeholderColor={Color.btntextColor}
-                  titleStlye={{right: 10}}
-                  // inputColor={Color.white}
+                  titleStlye={{ right: 10 }}
+                // inputColor={Color.white}
                 />
                 {touched.password && errors.password && (
                   <CustomText
                     textAlign={'left'}
                     style={{
                       fontSize: moderateScale(10, 0.6),
-                      color: Color.white,
+                      color: Color.red,
                       alignSelf: 'flex-start',
+                      marginLeft: moderateScale(10, 0.6),
                     }}>
                     {errors.password}
                   </CustomText>
@@ -144,7 +165,7 @@ const LoginScreen = props => {
                   style={styles.forgotpassword}>
                   Forgot password
                 </CustomText>
-                <View style={{marginTop: moderateScale(10, 0.6)}} />
+                <View style={{ marginTop: moderateScale(10, 0.6) }} />
                 <CustomButton
                   isBold
                   text={
@@ -160,15 +181,15 @@ const LoginScreen = props => {
                   borderColor={Color.btntextColor}
                   borderRadius={moderateScale(30, 0.3)}
                   width={windowWidth * 0.9}
-                  height={windowHeight * 0.07 }
+                  height={windowHeight * 0.07}
                   bgColor={Color.btn_Color}
                   textTransform={'capitalize'}
                   marginTop={windowHeight * 0.07}
                   elevation={true}
-                  onPress={() =>{
-                    navigationService.navigate('TabNavigation')
-                  }}
-                  // onPress={handleSubmit}
+                  // onPress={() => {
+                  //   navigationService.navigate('TabNavigation')
+                  // }}
+                  onPress={handleSubmit}
                 />
               </>
             );
@@ -200,17 +221,17 @@ const LoginScreen = props => {
           />
         </TouchableOpacity>
       </View>
-        <CustomText style={styles.do_text}>
-          Don’t have an account?
-          <CustomText
-            onPress={() => {
-              navigation.navigate('Signup');
-            }}
-            isBold
-            style={styles.Sign_text}>
-            Sign Up
-          </CustomText>
+      <CustomText style={styles.do_text}>
+        Don’t have an account?
+        <CustomText
+          onPress={() => {
+            navigation.navigate('Signup', { role: role });
+          }}
+          isBold
+          style={styles.Sign_text}>
+          Sign Up
         </CustomText>
+      </CustomText>
     </ImageBackground>
   );
 };
@@ -246,12 +267,13 @@ const styles = StyleSheet.create({
     color: Color.white,
     textAlign: 'right',
     width: '95%',
-    // top: moderateScale(-6  , 0.6),
     fontWeight: '600',
-    letterSpacing : 0.5
+    letterSpacing: 0.5,
+    marginTop: moderateScale(12, 0.6),
+    textDecorationLine: 'underline'
   },
   button_container: {
-    paddingTop: windowHeight * 0.13,
+    paddingTop: windowHeight * 0.17,
     paddingBottom: moderateScale(5, 0.6),
     flexDirection: 'row',
   },
@@ -285,7 +307,7 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.155,
     width: windowHeight * 0.23,
     // backgroundColor :'red' ,
-    marginTop: moderateScale(-8, 0.3),
+    // marginTop: moderateScale(-8, 0.3),
     marginVertical: windowHeight * 0.02,
   },
   txt: {

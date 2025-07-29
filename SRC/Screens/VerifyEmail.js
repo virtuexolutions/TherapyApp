@@ -1,38 +1,33 @@
 // import messaging from '@react-native-firebase/messaging';
 // import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useNavigation} from '@react-navigation/native';
-import {Formik} from 'formik';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
+import { Icon } from 'native-base';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
   ImageBackground,
-  Platform,
   StyleSheet,
   ToastAndroid,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
-import {useDispatch, useSelector} from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { moderateScale } from 'react-native-size-matters';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useDispatch, useSelector } from 'react-redux';
 import Color from '../Assets/Utilities/Color';
-import {Post} from '../Axios/AxiosInterceptorFunction';
 import CustomButton from '../Components/CustomButton';
-import CustomImage from '../Components/CustomImage';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
-import ImagePickerModal from '../Components/ImagePickerModal';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
-import {forgotpasswordSchema, loginSchema} from '../Constant/schema';
-import {setUserToken} from '../Store/slices/auth-slice';
-import {setUserData} from '../Store/slices/common';
-import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
-import {mode} from 'native-base/lib/typescript/theme/tools';
-import {Icon} from 'native-base';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { forgotpasswordSchema } from '../Constant/schema';
+import { apiHeader, windowHeight, windowWidth } from '../Utillity/utils';
+import { Post } from '../Axios/AxiosInterceptorFunction';
 
 const VerifyEmail = props => {
+  const role = props?.route?.params?.role;
   const dispatch = useDispatch();
   const token = useSelector(state => state.authReducer.token);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,22 +39,23 @@ const VerifyEmail = props => {
   const navigationN = useNavigation();
 
   const onPressSubmit = async values => {
-    // const body = {
-    //   email: values.email,
-    // };
-    // console.log('🚀 ~ body:', body);
-    // const url = 'password/email';
-    // setIsLoading(true);
-    // const response = await Post(url, body, apiHeader());
-    // console.log('🚀 ~ response:', response?.data);
-    // setIsLoading(false);
-    // if (response != undefined) {
-    //   Platform.OS == 'android'
-    //     ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
-    //     : Alert.alert(`OTP sent to ${values.email}`);
-      navigationN.navigate('VerifyNumber', {email: values.email});
-    // }
-  };
+    const body = {
+      email: values.email,
+    };
+    console.log('🚀 ~ body:', body);
+    const url = 'password/email';
+    setIsLoading(true);
+    const response = await Post(url, body, apiHeader());
+    console.log('🚀 ~ response:', response?.data);
+    setIsLoading(false);
+    if (response != undefined) {
+      Platform.OS == 'android'
+        ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
+        : Alert.alert(`OTP sent to ${values.email}`);
+      navigationN.navigate('VerifyNumber', { email: values.email });
+      // }
+    };
+  }
 
   return (
     <ImageBackground
@@ -112,7 +108,7 @@ const VerifyEmail = props => {
             }}
             validationSchema={forgotpasswordSchema}
             onSubmit={onPressSubmit}>
-            {({values, handleChange, handleSubmit, touched, errors}) => {
+            {({ values, handleChange, handleSubmit, touched, errors }) => {
               return (
                 <View style={styles.text_input}>
                   <TextInputWithTitle
@@ -138,7 +134,7 @@ const VerifyEmail = props => {
                     <CustomText
                       style={{
                         alignSelf: 'flex-start',
-                        color: Color.white,
+                        color: Color.red,
                       }}>
                       {errors.email}
                     </CustomText>

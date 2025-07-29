@@ -15,30 +15,27 @@ export const loginSchema = Yup.object({
 });
 
 export const SignupSchema = Yup.object({
-  name: Yup.string().required('Name is required'),
+  first_name: Yup.string().required('First name is required'),
+  last_name: Yup.string().required('Last name is required'),
+  lastName: Yup.string(),
   email: Yup.string()
     .email('Invalid email address')
-    .required('Email is requried !'),
-  contact: Yup.number()
-    // .matches(/^\d+$/, 'Mobile number must contain only digits')
-    // .min(10, 'Mobile number must be at least 10 digits')
-    // .max(15, 'Mobile number cannot exceed 15 digits')
-    .required('Mobile number is required'),
+    .required('Email is requried!'),
+  // contact: Yup.number()
+  //   // .matches(/^\d+$/, 'Mobile number must contain only digits')
+  //   // .min(10, 'Mobile number must be at least 10 digits')
+  //   // .max(15, 'Mobile number cannot exceed 15 digits')
+  //   .required('Mobile number is required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required'),
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
     .max(8, 'Password must be at least 8 characters')
-    .required('Password is required !'),
-  termsAccepted: Yup.boolean()
-    .oneOf([true], 'You must accept the terms and conditions')
-    .required('Required'),
-  // modal: Yup.boolean().required('Car number is required'),
-  // number: Yup.boolean().required('Car number is required'),
-  // seat: Yup.bool().required('Seat is required'),
-  // category: Yup.string().required('Category is Requried'),
-  // image: Yup.object().required('Image of car is required'),
+    .required('Password is required!'),
+  // termsAccepted: Yup.boolean()
+  //   .oneOf([true], 'You must accept the terms and conditions')
+  //   .required('Required'),
 });
 
 export const forgotpasswordSchema = Yup.object({
