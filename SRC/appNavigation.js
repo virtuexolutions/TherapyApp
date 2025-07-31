@@ -1,10 +1,10 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {enableScreens} from 'react-native-screens';
-import {moderateScale} from 'react-native-size-matters';
-import {useSelector} from 'react-redux';
+import { enableScreens } from 'react-native-screens';
+import { moderateScale } from 'react-native-size-matters';
+import { useSelector } from 'react-redux';
 import Drawer from './Drawer/Drawer';
 import navigationService from './navigationService';
 import LoginScreen from './Screens/LoginScreen';
@@ -16,13 +16,13 @@ import BankDetails from './Screens/BankDetails';
 import Home from './Screens/Home';
 import Discount from './Screens/Discount';
 import Setting from './Screens/Setting';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {windowHeight, windowWidth} from './Utillity/utils';
+import { windowHeight, windowWidth } from './Utillity/utils';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // 💡
 import Feather from 'react-native-vector-icons/Feather';
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 import CustomText from './Components/CustomText';
 import MemberPerks from './Screens/MemberPerks';
 import Subscription from './Screens/Subscription';
@@ -37,6 +37,7 @@ import SelectRole from './Screens/SelectRole';
 import MessagesScreen from './Screens/MessagesScreen';
 import SearchScreen from './Screens/SearchScreen';
 import VerifyEmail from './Screens/VerifyEmail';
+import ResetPassword from './Screens/ResetPassword';
 
 enableScreens();
 const AppNavigator = () => {
@@ -52,14 +53,14 @@ const AppNavigator = () => {
       walkThrough == false
         ? 'WalkThroughScreen'
         : token == null
-        ? 'SelectRole'
-        : 'TabNavigation';
+          ? 'SelectRole'
+          : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
           initialRouteName={firstScreen}
-          screenOptions={{headerShown: false}}>
+          screenOptions={{ headerShown: false }}>
           {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
           {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
           {/* initialRouteName={'MyBookings'}
@@ -101,6 +102,7 @@ const AppNavigator = () => {
           />
           <RootNav.Screen name="SelectRole" component={SelectRole} />
           <RootNav.Screen name="SearchScreen" component={SearchScreen} />
+          <RootNav.Screen name="ResetPassword" component={ResetPassword} />
 
           {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
         </RootNav.Navigator>
@@ -133,7 +135,7 @@ export const TabNavigation = () => {
       //     </LinearGradient>
       //   );
       // }}
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -144,7 +146,7 @@ export const TabNavigation = () => {
           // paddingVertical:5
           height: windowHeight * 0.08,
         },
-        tabBarIcon: ({focused}) => {
+        tabBarIcon: ({ focused }) => {
           let iconName;
           letcolor = focused ? '#8B9781' : Color.veryLightGray;
           let size = moderateScale(20, 0.3);
@@ -221,7 +223,7 @@ export const TabNavigation = () => {
         },
         tabBarShowLabel: false,
         tabBarBackground: () => (
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <View
               style={{
                 height: windowHeight * 0.4,

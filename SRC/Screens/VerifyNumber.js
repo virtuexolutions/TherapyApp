@@ -67,6 +67,7 @@ const VerifyNumber = props => {
       Platform.OS == 'android'
         ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
         : alert(`otp verified`);
+      navigationN.navigate('ResetPassword', { email: email })
     }
   };
 
