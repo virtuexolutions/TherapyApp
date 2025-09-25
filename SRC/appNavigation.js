@@ -37,6 +37,8 @@ import SelectRole from './Screens/SelectRole';
 import MessagesScreen from './Screens/MessagesScreen';
 import SearchScreen from './Screens/SearchScreen';
 import VerifyEmail from './Screens/VerifyEmail';
+import AiScreen from './Screens/AiScreen';
+import DetailScreen from './Screens/DetailScreen';
 
 enableScreens();
 const AppNavigator = () => {
@@ -58,7 +60,7 @@ const AppNavigator = () => {
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={firstScreen}
+          initialRouteName={'DetailScreen'}
           screenOptions={{headerShown: false}}>
           {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
           {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
@@ -85,6 +87,10 @@ const AppNavigator = () => {
           <RootNav.Screen name="MyBookings" component={MyBookings} />
           <RootNav.Screen name="Dashboard" component={Dashboard} />
           <RootNav.Screen name="VerifyEmail" component={VerifyEmail} />
+          <RootNav.Screen name="AiScreen" component={AiScreen} />
+          <RootNav.Screen name="DetailScreen" component={DetailScreen} />
+
+
           {/* <RootNav.Screen name="VerifyNumber" component={VerifyNumber} /> */}
 
           <RootNav.Screen

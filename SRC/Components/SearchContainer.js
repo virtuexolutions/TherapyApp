@@ -6,7 +6,7 @@ import CustomText from './CustomText';
 import Color from '../Assets/Utilities/Color';
 import TextInputWithTitle from './TextInputWithTitle';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {Icon} from 'native-base';
 import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler';
 import {windowHeight, windowWidth} from '../Utillity/utils';
@@ -26,6 +26,8 @@ const SearchContainer = ({
   placeHolder,
   rightIcon,
   height,
+  IconColor,
+  IconSize
 }) => {
   return (
     <GestureHandlerRootView>
@@ -80,6 +82,13 @@ const SearchContainer = ({
 
           {input && (
             <>
+              <Icon
+                name={'search'}
+                as={Feather}
+                size={ IconSize ? IconSize : moderateScale(17, 0.3)}
+                color={IconColor ? IconColor :'#E7DFDC'}
+                // style={{backgroundColor : 'red'}}
+              />
               <TextInput
                 placeholder={placeHolder ? placeHolder : 'Search here'}
                 placeholderTextColor={'#E7DFDC'}
@@ -93,7 +102,7 @@ const SearchContainer = ({
                     // marginLeft: moderateScale(10, 0.3),
                     width: windowWidth * 0.7,
                     // backgroundColor:'black',
-                    height : windowHeight * 0.05,
+                    height: windowHeight * 0.05,
                     // fontSize: moderateScale(15, 0.3),
                     color: Color.black,
                     // backgroundColor : 'red'
@@ -101,13 +110,7 @@ const SearchContainer = ({
                   inputStyle && inputStyle,
                 ]}
               />
-              <Icon
-                name={'search'}
-                as={FontAwesome}
-                size={moderateScale(17, 0.3)}
-                color={'#E7DFDC'}
-                // style={{backgroundColor : 'red'}}
-              />
+
               {/* <Icon
               name={'filter'}
               as={Ionicons}
