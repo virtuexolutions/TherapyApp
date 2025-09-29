@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomHeader from '../Components/CustomHeader';
 import Color from '../Assets/Utilities/Color';
-import {moderateScale} from 'react-native-size-matters';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { moderateScale } from 'react-native-size-matters';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Zocial from 'react-native-vector-icons/Zocial';
 
-import {AirbnbRating, Rating} from 'react-native-ratings';
+import { AirbnbRating, Rating } from 'react-native-ratings';
 import CustomButton from '../Components/CustomButton';
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 // import {moderateScale} from 'react-native-size-matters';
 const PricingComparison = () => {
   const [selected, setSelected] = useState('monthly');
@@ -120,17 +120,73 @@ const PricingComparison = () => {
             </CustomText>
           </TouchableOpacity>
         </View>
-
         <FlatList
           showsVerticalScrollIndicator={false}
           data={plans}
-          // data={[]}
-          renderItem={({item}) => {(
-            <View></View>
-
-          )}}
-          ListEmptyComponent={<CustomText style={styles.empty_text}>No Plans Found!</CustomText>}
+          numColumns={3}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  backgroundColor: item?.id === 2 ? Color.themeColor : 'transparent',
+                  width: windowWidth * 0.29,
+                  height: windowHeight * 0.62,
+                  margin: 5,
+                  alignItems: 'center',
+                  paddingVertical: moderateScale(10, 0.6),
+                  borderRadius: moderateScale(10, 0.6),
+                  borderWidth: 1.5,
+                  borderColor: Color.themeColor
+                }}
+              >
+                <CustomText isBold style={{
+                  fontSize: moderateScale(20, 0.6),
+                  color: item?.id === 2 ? Color.white : Color.themeTextColor
+                }}>{item?.title}</CustomText>
+                <CustomText isBold style={{
+                  fontSize: moderateScale(20, 0.6),
+                  color: item?.id === 2 ? Color.white : Color.themeTextColor,
+                  marginTop: moderateScale(10, 0.6)
+                }}>{'$ ' + item?.price}</CustomText>
+                <CustomText style={{
+                  fontSize: moderateScale(12, 0.6),
+                  color: item?.id === 2 ? Color.white : Color.themeTextColor,
+                  // marginTop: moderateScale(10, 0.6)
+                }}>{'/' + item?.period}</CustomText>
+                {item?.features?.map((data) => {
+                  return (
+                    <CustomText style={{
+                      fontSize: moderateScale(14, 0.6),
+                      marginTop: moderateScale(22, 0.6),
+                      paddingHorizontal: moderateScale(15, 0.6),
+                      color: item?.id === 2 ? Color.white : Color.black,
+                    }}>{data}</CustomText>
+                  )
+                })}
+                <CustomButton
+                  text={item?.buttonText}
+                  textColor={item?.id === 2 ? Color.black : item?.id === 3 ? Color.white : Color.black}
+                  width={windowWidth * 0.26}
+                  height={windowHeight * 0.05}
+                  borderRadius={moderateScale(10, 0.6)}
+                  onPress={() => { }}
+                  style={{
+                    position: 'absolute',
+                    bottom: 10,
+                  }}
+                  borderWidth={2}
+                  bgColor={item?.id === 2 ? Color.white : item?.id === 3 ? Color.themeColor : 'transparent'}
+                  borderColor={'#8B9781'}
+                  textstyle={{ fontSize: moderateScale(10, 0.6) }}
+                />
+              </View>
+            )
+          }}
+          ListEmptyComponent={
+            <CustomText style={styles.empty_text}>No Plans Found!</CustomText>
+          }
         />
+
       </View>
     </SafeAreaView>
   );
@@ -144,14 +200,14 @@ const styles = StyleSheet.create({
     width: windowWidth,
   },
   inner_container: {
-    paddingHorizontal: moderateScale(20, 0.6),
+    paddingHorizontal: moderateScale(10, 0.6),
     width: '100%',
     backgroundColor: Color.bgColor,
     height: '100%',
     paddingVertical: moderateScale(10, 0.6),
   },
   title: {
-    fontSize: moderateScale(25, 0.6),
+    fontSize: moderateScale(22, 0.6),
     color: Color.black,
     fontWeight: 'bold',
     marginBottom: moderateScale(20, 0.6),
@@ -174,12 +230,12 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(17, 0.6),
     color: Color.black,
   },
-  empty_text :{
-    textAlign : 'center',
-    marginTop : moderateScale(20,.6),
-    fontSize : moderateScale(16,.6),
-    color : Color.black,
-    alignSelf : 'center',
-    marginTop : windowHeight * 0.25,
+  empty_text: {
+    textAlign: 'center',
+    marginTop: moderateScale(20, .6),
+    fontSize: moderateScale(16, .6),
+    color: Color.black,
+    alignSelf: 'center',
+    marginTop: windowHeight * 0.25,
   }
 });

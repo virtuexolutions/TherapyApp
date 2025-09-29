@@ -40,6 +40,11 @@ import VerifyEmail from './Screens/VerifyEmail';
 import AiScreen from './Screens/AiScreen';
 import DetailScreen from './Screens/DetailScreen';
 import PricingComparison from './Screens/PricingComparison';
+import ResetPassword from './Screens/ResetPassword';
+import SavedClinic from './Screens/SavedClinics';
+import CompairProvider from './Screens/CompairProvider';
+import PackagesBundles from './Screens/PackagesBundles';
+import PaitentReview from './Screens/PaitentReview';
 
 enableScreens();
 const AppNavigator = () => {
@@ -61,8 +66,8 @@ const AppNavigator = () => {
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'PricingComparison'}
-          screenOptions={{headerShown: false}}>
+          initialRouteName={'PaitentReview'}
+          screenOptions={{ headerShown: false }}>
           {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
           {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
           {/* initialRouteName={'MyBookings'}
@@ -91,11 +96,10 @@ const AppNavigator = () => {
           <RootNav.Screen name="AiScreen" component={AiScreen} />
           <RootNav.Screen name="DetailScreen" component={DetailScreen} />
           <RootNav.Screen name="PricingComparison" component={PricingComparison} />
-
-
-
+          <RootNav.Screen name="SavedClinic" component={SavedClinic} />
+          <RootNav.Screen name="PackagesBundles" component={PackagesBundles} />
+          <RootNav.Screen name="PaitentReview" component={PaitentReview} />
           {/* <RootNav.Screen name="VerifyNumber" component={VerifyNumber} /> */}
-
           <RootNav.Screen
             name="ServicesManagement"
             component={ServicesManagement}
@@ -111,6 +115,7 @@ const AppNavigator = () => {
           <RootNav.Screen name="SelectRole" component={SelectRole} />
           <RootNav.Screen name="SearchScreen" component={SearchScreen} />
           <RootNav.Screen name="ResetPassword" component={ResetPassword} />
+          <RootNav.Screen name="CompairProvider" component={CompairProvider} />
 
           {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
         </RootNav.Navigator>

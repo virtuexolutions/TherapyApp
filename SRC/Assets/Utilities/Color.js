@@ -27,6 +27,8 @@ export default Color = {
   grey: '#5D5D5D', 
   circleblue: '#404552',
   themeDarkGray: '#535353',
+  themeColor:'#8B9781',
+  themeTextColor: '#2A3821',
   themeLightGray: '#8D8D8D',
   themeBlack: '#000000',
   btn_Color: '#C0BDAE', 
