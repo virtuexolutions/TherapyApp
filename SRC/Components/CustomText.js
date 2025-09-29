@@ -5,6 +5,7 @@ import {FONTS} from '../Constant/theme';
 
 const CustomText = props => {
   const {children, numberOfLines, textAlign, style, isBold, onPress} = props;
+  console.log("🚀 ~ CustomText ~ isBold:", isBold)
   return (
     <Text
       onPress={onPress}

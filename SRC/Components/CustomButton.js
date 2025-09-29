@@ -50,6 +50,7 @@ const CustomButton = props => {
     fontcase,
     style,
   } = props;
+  console.log('🚀 ~ CustomButton ~ fontSize:', fontSize);
   return (
     <TouchableOpacity
       activeOpacity={activeOpacity ? activeOpacity : 0.9}
@@ -199,6 +200,9 @@ const CustomButton = props => {
               disabled && {
                 color: Color.white,
                 opacity: 0.6,
+              },
+              fontSize && {
+                fontSize: fontSize ? fontSize : moderateScale(13, 0.3),
               },
             ]}
             isRegular={isBold ? false : true}
