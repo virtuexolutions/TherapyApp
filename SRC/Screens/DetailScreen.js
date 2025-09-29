@@ -1,4 +1,10 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomStatusBar from '../Components/CustomStatusBar';
@@ -26,6 +32,15 @@ const DetailScreen = () => {
       },
       label: 'phone no',
     },
+
+    {
+      id: 3,
+      icon: {
+        name: 'email',
+        as: Zocial,
+      },
+      label: 'email',
+    },
     {
       id: 2,
       icon: {
@@ -34,13 +49,27 @@ const DetailScreen = () => {
       },
       label: 'whatsapp',
     },
+  ];
+  const servicesArray = [
+    {
+      id: 1,
+      label: 'Cardiology\n Checkups',
+      image: require('../Assets/Images/services1.png'),
+    },
+    {
+      id: 2,
+      label: 'Ecg And \nStress Test',
+      image: require('../Assets/Images/service2.png'),
+    },
     {
       id: 3,
-      icon: {
-        name: 'email',
-        as: Zocial,
-      },
-      label: 'email',
+      label: 'Hypertension \n Management',
+      image: require('../Assets/Images/service3.png'),
+    },
+    {
+      id: 4,
+      label: 'Online \n Consultation',
+      image: require('../Assets/Images/service4.png'),
     },
   ];
 
@@ -162,7 +191,7 @@ const DetailScreen = () => {
               <CustomText
                 isBold
                 style={{
-                  fontSize: moderateScale(15, 0.6),
+                  fontSize: moderateScale(16, 0.6),
                   color: Color.black,
                 }}>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -178,8 +207,7 @@ const DetailScreen = () => {
               <View style={styles.box_con}>
                 {contactArray?.map((item, index) => {
                   return (
-                    <View style={styles.row}>
-                    {/* // <View> */}
+                    <View style={styles.sec_btn}>
                       <Icon
                         as={item?.icon?.as}
                         name={item?.icon?.name}
@@ -194,12 +222,51 @@ const DetailScreen = () => {
                         }}>
                         {item?.label}
                       </CustomText>
-                     </View> 
-                    {/* </View> */}
+                    </View>
                   );
                 })}
               </View>
             </View>
+          </View>
+          <CustomText isBold style={styles.heading}>
+            services
+          </CustomText>
+          <View
+            style={[
+              styles.box_con,
+              {
+                width: '100%',
+              },
+            ]}>
+            {servicesArray?.map((item, index) => {
+              return (
+                <TouchableOpacity style={styles.service_btn}>
+                  <View
+                    style={{
+                      height: windowHeight * 0.04,
+                      width: windowHeight * 0.04,
+                    }}>
+                    <CustomImage
+                      style={{
+                        height: '100%',
+                        width: '100%',
+                      }}
+                      source={item.image}
+                    />
+                  </View> 
+                  <CustomText
+                    style={[
+                      styles.btn_text,
+                      {
+                        textAlign: 'center',
+                        marginLeft: moderateScale(5, 0.6),
+                       },
+                    ]}>
+                    {item?.label}
+                  </CustomText>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
       </View>
@@ -249,14 +316,28 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(15, 0.6),
   },
   contact_con: {
-    marginLeft: moderateScale(58, 0.6),
+    marginLeft: moderateScale(20, 0.6),
   },
   box_con: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: '100%',
-    backgroundColor: 'red',
-    alignContent: 'center',
+    width: '80%',
+    alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  sec_btn: {
+    flexDirection: 'row',
+    padding: moderateScale(5, 0.6),
+    borderRadius: 15,
+  },
+  service_btn: {
+    flexDirection: 'row',
+    marginVertical: moderateScale(10, 0.6),
+    width: '48%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: moderateScale(5, 0.6),
+    backgroundColor: '#8B9781',
+    borderRadius: 20,
   },
 });
