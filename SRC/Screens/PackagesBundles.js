@@ -57,7 +57,7 @@ const PackagesBundles = () => {
     }
     return (
         <SafeAreaView style={styles.main_con}>
-            <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.red} />
+            <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
             <CustomHeader
                 title={'Compare Providers'}
                 backgroundColor={Color.bgColor}

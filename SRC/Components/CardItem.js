@@ -7,7 +7,7 @@ import CustomText from './CustomText'
 import CustomButton from './CustomButton'
 import Color from '../Assets/Utilities/Color'
 
-const CardItem = ({ item, isDetails = true }) => {
+const CardItem = ({ item, isDetails = true, onPressBtn }) => {
     return (
         <View style={styles.card_main_view}>
             <View style={styles.image_view}>
@@ -28,12 +28,12 @@ const CardItem = ({ item, isDetails = true }) => {
                         width={windowWidth * 0.26}
                         height={windowHeight * 0.045}
                         borderRadius={moderateScale(10, 0.6)}
-                        onPress={() => { }}
                         borderWidth={2}
                         bgColor={item?.buttonText === 'Remove' ? 'transparent' : Color.themeColor}
                         borderColor={'#8B9781'}
                         textstyle={{ fontSize: moderateScale(13, 0.6) }}
                         textTransform={'capitilize'}
+                        onPress={onPressBtn}
                     />
                 </View>
             </View>

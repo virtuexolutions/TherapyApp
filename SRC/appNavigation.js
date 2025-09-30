@@ -45,6 +45,10 @@ import SavedClinic from './Screens/SavedClinics';
 import CompairProvider from './Screens/CompairProvider';
 import PackagesBundles from './Screens/PackagesBundles';
 import PaitentReview from './Screens/PaitentReview';
+import TrustBadge from './Screens/TrustBadge';
+import journeyGuide from './Screens/journeyGuide';
+import Language from './Screens/Language';
+import Chat from './Screens/Chat';
 
 enableScreens();
 const AppNavigator = () => {
@@ -66,13 +70,8 @@ const AppNavigator = () => {
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'PaitentReview'}
+          initialRouteName={firstScreen}
           screenOptions={{ headerShown: false }}>
-          {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
-          {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
-          {/* initialRouteName={'MyBookings'}
-          screenOptions={{headerShown: false}}> */}
-          {/* <RootNav.Screen name="MyDrawer" component={MyDrawer} /> */}
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
@@ -99,6 +98,9 @@ const AppNavigator = () => {
           <RootNav.Screen name="SavedClinic" component={SavedClinic} />
           <RootNav.Screen name="PackagesBundles" component={PackagesBundles} />
           <RootNav.Screen name="PaitentReview" component={PaitentReview} />
+          <RootNav.Screen name="journeyGuide" component={journeyGuide} />
+          <RootNav.Screen name="Language" component={Language} />
+          <RootNav.Screen name="Chat" component={Chat} />
           {/* <RootNav.Screen name="VerifyNumber" component={VerifyNumber} /> */}
           <RootNav.Screen
             name="ServicesManagement"
@@ -116,7 +118,7 @@ const AppNavigator = () => {
           <RootNav.Screen name="SearchScreen" component={SearchScreen} />
           <RootNav.Screen name="ResetPassword" component={ResetPassword} />
           <RootNav.Screen name="CompairProvider" component={CompairProvider} />
-
+          <RootNav.Screen name="TrustBadge" component={TrustBadge} />
           {/* <RootNav.Screen name="AccountSettings" component={AccountSettings} /> */}
         </RootNav.Navigator>
       </NavigationContainer>
@@ -129,6 +131,7 @@ const AppNavigator = () => {
 export const TabNavigation = () => {
   const Tabs = createBottomTabNavigator();
   const role = useSelector(state => state.authReducer.role);
+  console.log(role, 'rollllllllllllllllleeeeee')
   // const role = 'user';
 
   return (
@@ -249,7 +252,7 @@ export const TabNavigation = () => {
       })}>
       <Tabs.Screen
         name={'Home'}
-        component={role === 'user' ? Home : Dashboard}
+        component={role === 'user' ? AiScreen : Dashboard}
       />
       <Tabs.Screen
         name={'Search'}
@@ -259,7 +262,7 @@ export const TabNavigation = () => {
         name={'MemberPerks'}
         component={role === 'user' ? MemberPerks : PerformanceAndAnalytics}
       />
-      <Tabs.Screen name={'Inbox'} component={MessagesScreen} />
+      <Tabs.Screen name={'Inbox'} component={Chat} />
       <Tabs.Screen name={'setting'} component={Setting} />
     </Tabs.Navigator>
   );

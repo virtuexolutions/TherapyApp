@@ -2,22 +2,23 @@ import React from 'react';
 import {
   FlatList,
   ImageBackground,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {moderateScale} from 'react-native-size-matters';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { moderateScale } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import Header from '../Components/Header';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import MembershipCard from '../Components/MembershipCard';
 import AppointmentCard from '../Components/AppointmentCard';
 import CustomButton from '../Components/CustomButton';
-import {useDispatch, useSelector} from 'react-redux';
-import {setUserLogoutAuth} from '../Store/slices/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLogoutAuth } from '../Store/slices/auth';
 import navigationService from '../navigationService';
 
 const Setting = () => {
@@ -26,7 +27,7 @@ const Setting = () => {
   return (
     <ImageBackground
       source={require('../Assets/Images/background_image.jpg')}
-      imageStyle={{width: '100%', height: '100%'}}
+      imageStyle={{ width: '100%', height: '100%' }}
       style={styles.main_con}>
       <CustomStatusBar
         backgroundColor={Color.white}
@@ -44,6 +45,7 @@ const Setting = () => {
         }
         headerColor={Color.bgColor}
       />
+
       <View style={styles.box_view}>
         {role?.toLowerCase() == 'user' && (
           <CustomText isBold style={styles.h1}>
@@ -58,13 +60,14 @@ const Setting = () => {
             marginVertical: moderateScale(10, 0.6),
           }}
         />
-        <TouchableOpacity>
+
+        {/* <TouchableOpacity>
           <CustomText style={[styles.txt]}>Manage Profile Info</CustomText>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {role == 'user' && (
           <TouchableOpacity
             onPress={() => {
-              navigationService.navigate('Subscription');
+              navigationService.navigate('PricingComparison');
             }}>
             <CustomText style={[styles.txt]}>
               Subscription Management
@@ -87,6 +90,42 @@ const Setting = () => {
             <CustomText style={[styles.txt]}>Referral Discount</CustomText>
           </TouchableOpacity>
         )}
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('CompairProvider');
+          }}>
+          <CustomText style={[styles.txt]}>Compare providers</CustomText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('PaitentReview');
+          }}>
+          <CustomText style={[styles.txt]}>Reviews</CustomText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('SavedClinic');
+          }}>
+          <CustomText style={[styles.txt]}>Saved Clinic</CustomText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('PackagesBundles');
+          }}>
+          <CustomText style={[styles.txt]}>Packages / Bundles</CustomText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('TrustBadge');
+          }}>
+          <CustomText style={[styles.txt]}>Badges</CustomText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('journeyGuide');
+          }}>
+          <CustomText style={[styles.txt]}>Journey Guide</CustomText>
+        </TouchableOpacity>
         {role != 'user' && (
           <TouchableOpacity
             onPress={() => {
@@ -95,7 +134,7 @@ const Setting = () => {
             <CustomText style={[styles.txt]}>Appointment management</CustomText>
           </TouchableOpacity>
         )}
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <CustomText style={[styles.txt]}>
             Set Notification Perfereces
           </CustomText>
@@ -108,7 +147,7 @@ const Setting = () => {
         </TouchableOpacity>
         <TouchableOpacity>
           <CustomText style={[styles.txt]}>Refer A Friend</CustomText>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {role != 'user' && (
           <TouchableOpacity
             onPress={() => {
@@ -130,7 +169,7 @@ const Setting = () => {
           <CustomText style={[styles.txt]}>Logout</CustomText>
         </TouchableOpacity>
       </View>
-    </ImageBackground>
+    </ImageBackground >
   );
 };
 

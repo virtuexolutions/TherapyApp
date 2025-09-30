@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useRef} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useRef } from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -8,12 +8,13 @@ import {
   View,
 } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {moderateScale} from 'react-native-size-matters';
-import {useDispatch} from 'react-redux';
+import { moderateScale } from 'react-native-size-matters';
+import { useDispatch } from 'react-redux';
 import Color from '../Assets/Utilities/Color';
 import CustomText from '../Components/CustomText';
-import {setWalkThrough} from '../Store/slices/auth-slice';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { setWalkThrough } from '../Store/slices/auth-slice';
+import { windowHeight, windowWidth } from '../Utillity/utils';
+import CustomStatusBar from '../Components/CustomStatusBar';
 
 const WalkThroughScreen = props => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const WalkThroughScreen = props => {
   ];
   console.log(slidesref.current, 'indexxxxxxx');
 
-  const RenderSlider = ({item}) => {
+  const RenderSlider = ({ item }) => {
     return (
       <ImageBackground
         imageStyle={{
@@ -85,7 +86,7 @@ const WalkThroughScreen = props => {
     );
   };
 
-  const RenderNextBtn = ({onPress}) => {
+  const RenderNextBtn = ({ onPress }) => {
     return (
       <TouchableOpacity
         onPress={onPress}
@@ -151,6 +152,10 @@ const WalkThroughScreen = props => {
 
   return (
     <View style={styles.container1}>
+      <CustomStatusBar
+        backgroundColor={Color.white}
+        barStyle={'dark-content'}
+      />
       <AppIntroSlider
         renderItem={RenderSlider}
         data={slides}
@@ -183,7 +188,7 @@ const WalkThroughScreen = props => {
           );
         }}
         showNextButton={true}
-        activeDotStyle={{backgroundColor: Color.themeBlack}}
+        activeDotStyle={{ backgroundColor: Color.themeBlack }}
         dotStyle={{
           backgroundColor: 'transparent',
           borderWidth: 1,
@@ -215,6 +220,6 @@ const styles = StyleSheet.create({
 });
 
 export default WalkThroughScreen;
-const BoldText = ({children}) => {
-  return <Text style={{fontWeight: 'bold'}}>{children}</Text>;
+const BoldText = ({ children }) => {
+  return <Text style={{ fontWeight: 'bold' }}>{children}</Text>;
 };

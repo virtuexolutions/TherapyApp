@@ -39,22 +39,22 @@ const VerifyEmail = props => {
   const navigationN = useNavigation();
 
   const onPressSubmit = async values => {
-    const body = {
-      email: values.email,
-    };
-    console.log('🚀 ~ body:', body);
-    const url = 'password/email';
-    setIsLoading(true);
-    const response = await Post(url, body, apiHeader());
-    console.log('🚀 ~ response:', response?.data);
-    setIsLoading(false);
-    if (response != undefined) {
-      Platform.OS == 'android'
-        ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
-        : Alert.alert(`OTP sent to ${values.email}`);
-      navigationN.navigate('VerifyNumber', { email: values.email });
-      // }
-    };
+    // const body = {
+    //   email: values.email,
+    // };
+    // console.log('🚀 ~ body:', body);
+    // const url = 'password/email';
+    // setIsLoading(true);
+    // const response = await Post(url, body, apiHeader());VerifyNumber
+    // console.log('🚀 ~ response:', response?.data);
+    // setIsLoading(false);
+    // if (response != undefined) {
+    //   Platform.OS == 'android'
+    //     ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
+    //     : Alert.alert(`OTP sent to ${values.email}`);
+    navigationN.navigate('VerifyNumber', { email: values.email });
+    // }
+    // };
   }
 
   return (

@@ -29,27 +29,30 @@ const Signup = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onPressSignUp = async values => {
-    const body = {
-      first_name: values.first_name,
-      email: values.email,
-      password: values.password,
-      confirm_password: values.confirmPassword,
-      role: role.toLowerCase(),
-      last_name: values.last_name
-    };
-    const url = 'register';
-    setIsLoading(true);
-    const response = await Post(url, body, apiHeader());
-    console.log("🚀 ~ onPressSignUp ~ response:", response?.data)
-    setIsLoading(false);
-    if (response != undefined) {
-      Platform.OS == 'android'
-        ? ToastAndroid.show('Sign up successfully', ToastAndroid.SHORT)
-        : Alert.alert('Sign up successfully');
-      dispatch(setUserData(response?.data?.user_info));
-      dispatch(setUserToken({ token: response?.data?.token }));
-      dispatch(SetUserRole(response?.data?.role))
-    }
+    // const body = {
+    //   first_name: values.first_name,
+    //   email: values.email,
+    //   password: values.password,
+    //   confirm_password: values.confirmPassword,
+    //   role: role.toLowerCase(),
+    //   last_name: values.last_name
+    // };
+    // const url = 'register';
+    // setIsLoading(true);
+    // const response = await Post(url, body, apiHeader());
+    // console.log("🚀 ~ onPressSignUp ~ response:", response?.data)
+    // setIsLoading(false);
+    // if (response != undefined) {
+    //   Platform.OS == 'android'
+    //     ? ToastAndroid.show('Sign up successfully', ToastAndroid.SHORT)
+    //     : Alert.alert('Sign up successfully');
+    //   dispatch(setUserData(response?.data?.user_info));
+    //   dispatch(setUserToken({ token: response?.data?.token }));
+    //   dispatch(SetUserRole(response?.data?.role))
+    // }
+    dispatch(setUserToken({ token: '' }));
+    dispatch(SetUserRole(role === 'User' ? 'user' : 'provider'))
+    dispatch(setUserData({}))
   }
 
 

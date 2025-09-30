@@ -38,19 +38,22 @@ const LoginScreen = props => {
   const [device_token, setDeviceToken] = useState(null);
 
   const login = async values => {
-    const url = 'login';
-    setIsLoading(true);
-    const response = await Post(url, values, apiHeader());
-    console.log("🚀 ~ onPressSignUp ~ response:", response?.data)
-    setIsLoading(false);
-    if (response != undefined) {
-      Platform.OS == 'android'
-        ? ToastAndroid.show('Sign In successfully', ToastAndroid.SHORT)
-        : Alert.alert('Sign In successfully');
-      dispatch(setUserData(response?.data?.user_info));
-      dispatch(setUserToken({ token: response?.data?.token }));
-      dispatch(SetUserRole(response?.data?.role))
-    }
+    // const url = 'login';
+    // setIsLoading(true);
+    // const response = await Post(url, values, apiHeader());
+    // console.log("🚀 ~ onPressSignUp ~ response:", response?.data)
+    // setIsLoading(false);
+    // if (response != undefined) {
+    //   Platform.OS == 'android'
+    //     ? ToastAndroid.show('Sign In successfully', ToastAndroid.SHORT)
+    //     : Alert.alert('Sign In successfully');
+    //   dispatch(setUserData(response?.data?.user_info));
+    //   dispatch(setUserToken({ token: response?.data?.token }));
+    //   dispatch(SetUserRole(response?.data?.role))
+    // }
+    dispatch(setUserToken({ token: '' }));
+    dispatch(SetUserRole(role === 'User' ? 'user' : 'provider'))
+    dispatch(setUserData({}))
   };
 
   return (
@@ -58,7 +61,6 @@ const LoginScreen = props => {
       style={styles.main_con}
       source={require('../Assets/Images/loginbg.png')}>
       <CustomStatusBar backgroundColor={Color.white} barStyle={'dark-light'} />
-
       <View style={styles.image_con}>
         <CustomImage
           resizeMode="contain"
@@ -69,7 +71,6 @@ const LoginScreen = props => {
           }}
         />
       </View>
-
       <View style={styles.input_container}>
         <CustomText
           isBold
@@ -92,7 +93,8 @@ const LoginScreen = props => {
             password: '',
           }}
           validationSchema={loginSchema}
-          onSubmit={login}>
+          onSubmit={login}
+        >
           {({ handleChange, handleSubmit, values, errors, touched }) => {
             return (
               <>

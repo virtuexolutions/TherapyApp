@@ -5,21 +5,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomHeader from '../Components/CustomHeader';
 import Color from '../Assets/Utilities/Color';
-import {moderateScale} from 'react-native-size-matters';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { moderateScale } from 'react-native-size-matters';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Zocial from 'react-native-vector-icons/Zocial';
 
-import {AirbnbRating, Rating} from 'react-native-ratings';
+import { AirbnbRating, Rating } from 'react-native-ratings';
 import CustomButton from '../Components/CustomButton';
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 // import {moderateScale} from 'react-native-size-matters';
 const DetailScreen = () => {
   const [rating, setRating] = useState(5);
@@ -75,7 +75,7 @@ const DetailScreen = () => {
 
   return (
     <SafeAreaView style={styles.main_con}>
-      <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.red} />
+      <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
       <CustomHeader
         title={'Find Doctors/Clinic'}
         backgroundColor={Color.bgColor}
@@ -84,7 +84,7 @@ const DetailScreen = () => {
         <View style={styles.row}>
           <View style={styles.image_con}>
             <CustomImage
-              style={{height: '100%', width: '100%'}}
+              style={{ height: '100%', width: '100%' }}
               source={require('../Assets/Images/doctor.png')}
             />
           </View>
@@ -102,7 +102,7 @@ const DetailScreen = () => {
               />
               <CustomText
                 style={{
-                  fontSize: moderateScale(14, 0.6),
+                  fontSize: moderateScale(12, 0.6),
                   color: Color.black,
                 }}>
                 (230 Reviews)
@@ -119,7 +119,7 @@ const DetailScreen = () => {
                 style={[
                   styles.text1,
                   {
-                    fontSize: moderateScale(15, 0.6),
+                    fontSize: moderateScale(13, 0.6),
                   },
                 ]}>
                 cardiology
@@ -144,13 +144,13 @@ const DetailScreen = () => {
               <CustomText
                 style={{
                   color: Color.black,
-                  fontSize: moderateScale(15, 0.6),
+                  fontSize: moderateScale(13, 0.6),
                 }}>
                 cardiology
               </CustomText>
               <CustomText
                 style={{
-                  fontSize: moderateScale(15, 0.6),
+                  fontSize: moderateScale(13, 0.6),
                   color: Color.black,
                 }}>
                 10 +year
@@ -187,11 +187,11 @@ const DetailScreen = () => {
             />
           </View>
           <View style={[styles.row]}>
-            <View style={{width: windowWidth * 0.3}}>
+            <View style={{ width: windowWidth * 0.3 }}>
               <CustomText
                 isBold
                 style={{
-                  fontSize: moderateScale(16, 0.6),
+                  fontSize: moderateScale(13, 0.6),
                   color: Color.black,
                 }}>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -216,7 +216,7 @@ const DetailScreen = () => {
                       />
                       <CustomText
                         style={{
-                          fontSize: moderateScale(16, 0.6),
+                          fontSize: moderateScale(14, 0.6),
                           color: Color.black,
                           paddingHorizontal: moderateScale(5, 0.6),
                         }}>
@@ -253,14 +253,14 @@ const DetailScreen = () => {
                       }}
                       source={item.image}
                     />
-                  </View> 
+                  </View>
                   <CustomText
                     style={[
                       styles.btn_text,
                       {
                         textAlign: 'center',
                         marginLeft: moderateScale(5, 0.6),
-                       },
+                      },
                     ]}>
                     {item?.label}
                   </CustomText>
@@ -301,12 +301,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(15, 0.6),
   },
   h1: {
-    fontSize: moderateScale(25, 0.6),
+    fontSize: moderateScale(22, 0.6),
     color: Color.black,
   },
 
   text1: {
-    fontSize: moderateScale(15, 0.6),
+    fontSize: moderateScale(13, 0.6),
     color: Color.black,
     paddingVertical: moderateScale(10, 0.6),
   },

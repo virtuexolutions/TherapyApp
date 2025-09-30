@@ -15,6 +15,7 @@ import SearchbarComponent from '../Components/SearchbarComponent';
 import CardItem from '../Components/CardItem';
 import { Icon } from 'native-base';
 import CustomText from '../Components/CustomText';
+import navigationService from '../navigationService';
 // import {moderateScale} from 'react-native-size-matters';
 
 const SavedClinic = () => {
@@ -60,7 +61,7 @@ const SavedClinic = () => {
     }
     return (
         <SafeAreaView style={styles.main_con}>
-            <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.red} />
+            <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
             <CustomHeader
                 title={'Saved Clinics'}
                 backgroundColor={Color.bgColor}
@@ -75,7 +76,7 @@ const SavedClinic = () => {
                     style={{ marginTop: moderateScale(15, 0.6) }}
                     renderItem={({ item }) => {
                         return (
-                            <CardItem item={item} />
+                            <CardItem item={item} onPressBtn={() => navigationService.navigate('DetailScreen')} />
                         )
                     }}
                 />

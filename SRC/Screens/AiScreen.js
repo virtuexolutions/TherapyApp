@@ -1,15 +1,15 @@
-import {useRef} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import { useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Carousel from 'react-native-new-snap-carousel';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {moderateScale} from 'react-native-size-matters';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { moderateScale } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import CustomHeader from '../Components/CustomHeader';
 import CustomImage from '../Components/CustomImage';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import SearchContainer from '../Components/SearchContainer';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 
 const AiScreen = () => {
   const carouselRef = useRef(null);
@@ -19,7 +19,7 @@ const AiScreen = () => {
     'yoga routines',
     'better sleep habits ',
   ];
-  const data = [{title: 'Slide 1'}, {title: 'Slide 2'}, {title: 'Slide 3'}];
+  const data = [{ title: 'Slide 1' }, { title: 'Slide 2' }, { title: 'Slide 3' }];
   const secondArray = ['knowledge', 'guided meditations', 'nutrition\nplans'];
   return (
     <SafeAreaView style={styles.main_con}>
@@ -55,7 +55,7 @@ const AiScreen = () => {
           {dummyArray?.map((item, index) => {
             return (
               <TouchableOpacity style={styles.btn}>
-                <CustomText style={styles.btn_text}>{item}</CustomText>
+                <CustomText isBold style={styles.btn_text}>{item}</CustomText>
               </TouchableOpacity>
             );
           })}
@@ -64,11 +64,10 @@ const AiScreen = () => {
           <Carousel
             ref={carouselRef}
             data={data}
-            renderItem={({index}) => (
+            renderItem={({ index }) => (
               <View
                 style={[
                   styles.item,
-                  // { backgroundColor: Color.bgColor[index % Color.bgColor.length] }
                 ]}>
                 <View style={styles.row}>
                   <View style={styles.circle} />
@@ -88,10 +87,6 @@ const AiScreen = () => {
             sliderWidth={windowWidth * 0.8}
             itemWidth={windowWidth}
             layout="default"
-            // style={{
-            //     alignItems:'center'
-            // }}
-            // loop={true}
           />
         </View>
         <View style={styles.box_con}>
@@ -106,12 +101,11 @@ const AiScreen = () => {
                     }}
                   />
                 </View>
-                <CustomText
+                <CustomText isBold
                   style={[
                     styles.btn_text,
                     {
                       textAlign: 'center',
-                      // fontSize :  moderateScale(16,.6)
                     },
                   ]}>
                   {item}
@@ -150,7 +144,7 @@ const styles = StyleSheet.create({
     height: '10%',
   },
   btn: {
-    backgroundColor: 'red',
+    backgroundColor: '#D0D4C4',
     marginVertical: moderateScale(5, 0.6),
     marginHorizontal: moderateScale(5, 0.6),
     height: windowHeight * 0.06,
@@ -160,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(30, 0.6),
   },
   btn_text: {
-    fontSize: moderateScale(15, 0.6),
+    fontSize: moderateScale(12, 0.6),
     color: Color.black,
   },
   item: {
@@ -171,7 +165,7 @@ const styles = StyleSheet.create({
   },
   cards: {
     height: windowHeight * 0.2,
-    backgroundColor: 'green',
+    backgroundColor: '#D0D4C4',
     width: windowWidth * 0.85,
     borderRadius: 20,
     alignSelf: 'center',
@@ -181,12 +175,12 @@ const styles = StyleSheet.create({
   },
   h1: {
     marginHorizontal: moderateScale(90, 0.6),
-    fontSize: moderateScale(20, 0.6),
+    fontSize: moderateScale(18, 0.6),
     fontWeight: 'bold',
     paddingVertical: moderateScale(5, 0.6),
   },
   sub_heading: {
-    fontSize: moderateScale(15, 0.6),
+    fontSize: moderateScale(12, 0.6),
     textAlign: 'center',
     width: windowWidth * 0.62,
     marginHorizontal: moderateScale(40, 0.6),
@@ -194,13 +188,13 @@ const styles = StyleSheet.create({
   sec_btn: {
     height: windowHeight * 0.125,
     width: windowWidth * 0.27,
-    backgroundColor: 'red',
+    backgroundColor: '#D0D4C4',
     borderRadius: 15,
   },
   image_con: {
     height: windowHeight * 0.07,
     width: windowWidth * 0.2,
-    backgroundColor: 'green',
+    // backgroundColor: '#D0D4C4',
     alignSelf: 'center',
     marginTop: moderateScale(5, 0.6),
   },

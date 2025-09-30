@@ -38,24 +38,24 @@ const ResetPassword = props => {
     const [isLoading, setIsLoading] = useState(false);
 
     const onPressSubmit = async values => {
-        console.log("🚀 ~ resetPassword ~ values:", values)
-        const url = 'password/reset';
-        const data = {
-            email: email,
-            password: values.password,
-            confirm_password: values.confirmPassword,
-        };
-        console.log("🚀 ~ resetPassword ~ data:", data)
-        setIsLoading(true);
-        const response = await Post(url, data, apiHeader());
-        setIsLoading(false);
-        if (response != undefined) {
-            console.log('response data =>', response?.data);
-            Platform.OS == 'android'
-                ? ToastAndroid.show(`Password Reset SuccessFully`, ToastAndroid.SHORT)
-                : alert(`Password Reset SuccessFully`);
-            navigationN.navigate('LoginScreen');
-        }
+        // console.log("🚀 ~ resetPassword ~ values:", values)
+        // const url = 'password/reset';
+        // const data = {
+        //     email: email,
+        //     password: values.password,
+        //     confirm_password: values.confirmPassword,
+        // };
+        // console.log("🚀 ~ resetPassword ~ data:", data)
+        // setIsLoading(true);
+        // const response = await Post(url, data, apiHeader());
+        // setIsLoading(false);
+        // if (response != undefined) {
+        //     console.log('response data =>', response?.data);
+        //     Platform.OS == 'android'
+        //         ? ToastAndroid.show(`Password Reset SuccessFully`, ToastAndroid.SHORT)
+        //         : alert(`Password Reset SuccessFully`);
+        navigationN.navigate('LoginScreen');
+        // }
     };
 
     return (

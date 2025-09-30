@@ -58,17 +58,17 @@ const VerifyNumber = props => {
 
 
   const VerifyOTP = async () => {
-    const url = 'password/code/check';
-    setIsLoading(true);
-    console.log(code);
-    const response = await Post(url, { code: code }, apiHeader());
-    setIsLoading(false);
-    if (response != undefined) {
-      Platform.OS == 'android'
-        ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
-        : alert(`otp verified`);
-      navigationN.navigate('ResetPassword', { email: email })
-    }
+    // const url = 'password/code/check';
+    // setIsLoading(true);
+    // console.log(code);
+    // const response = await Post(url, { code: code }, apiHeader());
+    // setIsLoading(false);
+    // if (response != undefined) {
+    //   Platform.OS == 'android'
+    //     ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
+    //     : alert(`otp verified`);
+    navigationN.navigate('ResetPassword', { email: email })
+    // }
   };
 
   useEffect(() => {

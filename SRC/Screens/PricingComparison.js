@@ -65,9 +65,9 @@ const PricingComparison = () => {
 
   return (
     <SafeAreaView style={styles.main_con}>
-      <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.red} />
+      <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
       <CustomHeader
-        title={'Find Doctors/Clinic'}
+        title={'Find Wellnes Services'}
         backgroundColor={Color.bgColor}
       />
       <View style={styles.inner_container}>

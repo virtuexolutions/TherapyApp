@@ -6,21 +6,29 @@ import CustomImage from './CustomImage'
 import CustomText from './CustomText'
 import Color from '../Assets/Utilities/Color'
 
-const ReviewCard = ({ item }) => {
+const Card = ({ item, isImage = true }) => {
     return (
         <View style={styles.card_view}>
-            <View>
-                <View style={styles.image_view}>
+            {isImage === true ? (
+                <View style={styles.image_card}>
+                    <View style={styles.image_view}>
+                        <CustomImage source={item?.image} style={styles.image} />
+                    </View>
+                </View>
+            ) : (
+                <View style={styles.image_card}>
                     <CustomImage source={item?.image} style={styles.image} />
                 </View>
-                <CustomText isBold style={styles.heading_text}>{item?.name}</CustomText>
+            )}
+            <View style={{ marginLeft: moderateScale(10, 0.6) }}>
+                <CustomText isBold style={styles.heading_text}>{item?.title}</CustomText>
+                <CustomText style={styles.sub_heading_text}>{item?.text}</CustomText>
             </View>
-            <CustomText style={styles.sub_heading_text}>{item?.text}</CustomText>
         </View>
     )
 }
 
-export default ReviewCard
+export default Card
 
 const styles = StyleSheet.create({
     card_view: {
@@ -33,23 +41,32 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: 'row'
     },
-    image_view: {
+    image_card: {
         width: windowWidth * 0.15,
         height: windowWidth * 0.15,
-        borderRadius: windowWidth
+        borderRadius: windowWidth * 0.5,
+        backgroundColor: Color.themeColor,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image_view: {
+        width: windowWidth * 0.10,
+        height: windowWidth * 0.08,
+        borderRadius: windowWidth * 0.5,
     },
     image: {
         width: '100%',
         height: '100%',
-        borderRadius: windowWidth
+        borderRadius: windowWidth * 0.5,
+        resizeMode: 'contain',
     },
     heading_text: {
-        fontSize: moderateScale(12, 0.6),
+        fontSize: moderateScale(15, 0.6),
         color: Color.black,
     },
     sub_heading_text: {
-        fontSize: moderateScale(12, 0.6),
-        width: '75%',
+        fontSize: moderateScale(11, 0.6),
+        width: '55%',
         color: Color.black,
         letterSpacing: 0.3
     },

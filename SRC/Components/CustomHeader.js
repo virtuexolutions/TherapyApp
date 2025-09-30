@@ -7,7 +7,7 @@ import CustomText from './CustomText';
 import { Icon } from 'native-base';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 
-const CustomHeader = ({ title, backgroundColor, isSearch }) => {
+const CustomHeader = ({ title, backgroundColor, isSearch, isProfile = true }) => {
   return (
     <View
       style={[
@@ -32,21 +32,25 @@ const CustomHeader = ({ title, backgroundColor, isSearch }) => {
           size={moderateScale(28, 0.6)}
         />
       ) : (
-        <View
-          style={{
-            width: windowHeight * 0.055,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: windowHeight * 0.055,
-            borderRadius: (windowHeight * 0.055) / 2,
-            backgroundColor: Color.btntextColor,
-          }}>
-          <CustomImage
-            onPress={() => { }}
-            source={require('../Assets/Images/headerimage.png')}
-            style={{ width: windowHeight * 0.06, height: windowHeight * 0.06 }}
-          />
-        </View>
+        <>
+          {isProfile &&
+            <View
+              style={{
+                width: windowHeight * 0.055,
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: windowHeight * 0.055,
+                borderRadius: (windowHeight * 0.055) / 2,
+                backgroundColor: Color.btntextColor,
+              }}>
+              <CustomImage
+                onPress={() => { }}
+                source={require('../Assets/Images/headerimage.png')}
+                style={{ width: windowHeight * 0.06, height: windowHeight * 0.06 }}
+              />
+            </View>
+          }
+        </>
       )
       }
     </View>
