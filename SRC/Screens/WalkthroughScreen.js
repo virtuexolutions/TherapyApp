@@ -61,8 +61,8 @@ const WalkThroughScreen = props => {
             width: windowWidth,
             height: windowHeight * 0.2,
             position: 'absolute',
-            top: item?.key == 2 && 100,
-            bottom: 100,
+            top: item?.key == 2 && windowHeight * 0.1,
+            bottom: windowHeight * 0.15,
             marginHorizontal: moderateScale(25, 0.3),
           }}>
           <CustomText
@@ -73,11 +73,14 @@ const WalkThroughScreen = props => {
             {item?.title}
           </CustomText>
           <CustomText
+            numberOfLines={6}
             style={{
+              height: windowHeight * 0.12,
               width: windowWidth * 0.89,
               lineHeight: moderateScale(16, 0.6),
               fontSize: moderateScale(11, 0.6),
               color: Color.white,
+              // backgroundColor : 'red'
             }}>
             {item?.text}
           </CustomText>
@@ -165,13 +168,14 @@ const WalkThroughScreen = props => {
 
           return (
             <View
-              style={{
+              style={[{
                 width: windowWidth,
                 position: 'absolute',
-                top: activeindex == 1 && '30%',
-                bottom: activeindex == 0 ? '13%' : '8%',
+
+
                 alignSelf: 'flex-start',
-              }}>
+              },
+              activeindex == 1 ? { top: windowHeight * 0.3 } : { bottom: windowHeight * 0.08 }]}>
               {/* <RenderSkipBtn /> */}
               <RenderNextBtn
                 onPress={() => {

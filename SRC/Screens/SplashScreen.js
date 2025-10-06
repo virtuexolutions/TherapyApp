@@ -15,6 +15,7 @@ const SplashScreen = () => {
         <CustomImage
           source={require('../Assets/Images/logo.png')}
           style={styles.logo}
+          resizeMode={'stretch'}
         />
       </View>
     </ImageBackground>

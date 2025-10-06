@@ -189,7 +189,6 @@ const DetailScreen = () => {
           <View style={[styles.row]}>
             <View style={{ width: windowWidth * 0.3 }}>
               <CustomText
-                isBold
                 style={{
                   fontSize: moderateScale(13, 0.6),
                   color: Color.black,
@@ -243,8 +242,9 @@ const DetailScreen = () => {
                 <TouchableOpacity style={styles.service_btn}>
                   <View
                     style={{
-                      height: windowHeight * 0.04,
-                      width: windowHeight * 0.04,
+                      height: windowHeight * 0.03,
+                      width: windowHeight * 0.03,
+                      backgroundColor:Color.red
                     }}>
                     <CustomImage
                       style={{
@@ -259,6 +259,7 @@ const DetailScreen = () => {
                       styles.btn_text,
                       {
                         textAlign: 'center',
+                        
                         marginLeft: moderateScale(5, 0.6),
                       },
                     ]}>
