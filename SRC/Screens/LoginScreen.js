@@ -110,9 +110,9 @@ const LoginScreen = props => {
                   fontSize={moderateScale(10, 0.6)}
                   borderRadius={30}
                   inputColor={'white'}
-                  backgroundColor={'transparent'}
                   borderColor={Color.white}
                   marginTop={moderateScale(10, 0.3)}
+                  backgroundColor={Color.themtxtColor}
                   placeholderColor={Color.btntextColor}
                   titleStlye={{ right: 10, color: Color.white }}
                 />
@@ -141,11 +141,11 @@ const LoginScreen = props => {
                   border={1}
                   color={Color.white}
                   borderRadius={30}
-                  backgroundColor={'transparent'}
-                  // borderColor={Color.white}
+                  borderColor={Color.white}
                   marginTop={moderateScale(10, 0.3)}
                   placeholderColor={Color.btntextColor}
                   titleStlye={{ right: 10 }}
+                  backgroundColor={Color.themtxtColor}
                 // inputColor={Color.white}
                 />
                 {touched.password && errors.password && (
@@ -261,7 +261,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: moderateScale(15, 0.6),
     paddingHorizontal: moderateScale(10, 0.6),
-    backgroundColor: 'rgba(127,138,115,255)',
+    // backgroundColor: 'rgba(127,138,115,255)',
+    backgroundColor: Color.themtxtColor
   },
 
   forgotpassword: {

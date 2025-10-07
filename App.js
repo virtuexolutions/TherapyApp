@@ -18,6 +18,7 @@ import {
   requestWritePermission
 } from './SRC/Utillity/utils';
 import AppNavigator from './SRC/appNavigation';
+import { ModalProvider } from './SRC/Config/ModalContext';
 
 const App = () => {
   const [publishableKey, setPublishableKey] = useState('');
@@ -28,14 +29,15 @@ const App = () => {
     //     'pk_test_51NjQZRBqyObuQCkVVZujGGQ9w7PjZegPiZvL9MEH12KsxQmTsLpBxsXdeyN8Tu3mYkN8YZt8WutsTCEexDwIOxaB00a6zjjE12'
     //   }
     // >
+    <ModalProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NativeBaseProvider>
             <MainContainer />
           </NativeBaseProvider>
         </PersistGate>
-      
       </Provider>
+    </ModalProvider>
     // </StripeProvider>
   );
 };

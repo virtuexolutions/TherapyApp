@@ -1,7 +1,8 @@
 import axios from 'axios';
-import {Alert} from 'react-native';
+import { Alert, Modal } from 'react-native';
 // import NetworkErrorAlert from "../Components/NetworkErrorAlert";
-import {baseUrl} from '../Config';
+import { baseUrl } from '../Config';
+import { useModal } from '../Config/ModalContext';
 
 /**
  * @description Sends a Get request to api
@@ -13,6 +14,7 @@ import {baseUrl} from '../Config';
 const URL = link => {
   return `${baseUrl}/api/${link}`;
 };
+const { showModal } = useModal();
 
 let Get = async (route, token, showAlert = true) => {
   const options = {
@@ -26,39 +28,19 @@ let Get = async (route, token, showAlert = true) => {
   try {
     const response = await axios.get(apiUrl, options);
     return response;
-  } catch (error) {
+  }
+  catch (error) {
     console.log('error', error.response);
+
     let networkError = error.message === 'Network Error';
-    if (showAlert == true) {
-      if (networkError === true) {
-        Alert.alert(
-          error.message,
-          'Please Check Your Network Connection',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                console.log('OK Pressed');
-              },
-            },
-          ],
-          {cancelable: false},
-        );
-        // <NetworkErrorAlert/>
+    if (showAlert) {
+      if (networkError) {
+        showModal('Please check your network connection.');
       } else {
-        Alert.alert(
-          'Submission Errors',
-          error.response.data.message,
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                console.log('OK Pressed');
-              },
-            },
-          ],
-          {cancelable: false},
-        );
+        const msg =
+          error?.response?.data?.message ||
+          'Something went wrong, please try again later.';
+        showModal(msg);
       }
     }
   }
@@ -97,7 +79,7 @@ let Post = async (route, data, headers, showAlert = true) => {
               },
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
         // <NetworkErrorAlert/>
       } else {
@@ -112,7 +94,7 @@ let Post = async (route, data, headers, showAlert = true) => {
               },
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
       }
     }
@@ -148,7 +130,7 @@ let Patch = async (route, data, headers, showAlert = true) => {
               },
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
         console.log('sadasdsad');
         // <NetworkErrorAlert/>
@@ -164,7 +146,7 @@ let Patch = async (route, data, headers, showAlert = true) => {
               },
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
       }
     }
@@ -194,7 +176,7 @@ let Delete = async (route, data, headers, showAlert = true) => {
               },
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
       } else {
         Alert.alert(
@@ -208,11 +190,11 @@ let Delete = async (route, data, headers, showAlert = true) => {
               },
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
       }
     }
   }
 };
 
-export {Post, Get, Patch, Delete};
+export { Post, Get, Patch, Delete };

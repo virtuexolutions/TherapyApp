@@ -244,7 +244,7 @@ const DetailScreen = () => {
                     style={{
                       height: windowHeight * 0.03,
                       width: windowHeight * 0.03,
-                      backgroundColor:Color.red
+                      backgroundColor: Color.red
                     }}>
                     <CustomImage
                       style={{
@@ -259,7 +259,7 @@ const DetailScreen = () => {
                       styles.btn_text,
                       {
                         textAlign: 'center',
-                        
+
                         marginLeft: moderateScale(5, 0.6),
                       },
                     ]}>
