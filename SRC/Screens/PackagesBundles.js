@@ -22,21 +22,21 @@ const PackagesBundles = () => {
     const providers = [
         {
             id: 1,
-            name: "Dr.Emily Clarke",
+            name: "Yoga Package",
             distance: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry.",
             image: require("../Assets/Images/yoga.png"),
             buttonText: "View"
         },
         {
             id: 2,
-            name: "Michael Brown",
+            name: "Nutrition Bundle",
             distance: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry.",
             image: require("../Assets/Images/nutrations.png"),
             buttonText: "View"
         },
         {
             id: 3,
-            name: "Dr.Emily Clarke",
+            name: "Mindfulness Pack",
             distance: "Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry.",
             image: require("../Assets/Images/meditaion.png"),
             buttonText: "View"
@@ -59,7 +59,7 @@ const PackagesBundles = () => {
         <SafeAreaView style={styles.main_con}>
             <CustomStatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
             <CustomHeader
-                title={'Compare Providers'}
+                title={'Packages / bundle'}
                 backgroundColor={Color.bgColor}
                 isSearch
             />
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.bgColor
     },
     main_view: {
-        paddingHorizontal: moderateScale(15, 0.6),
+        paddingHorizontal: moderateScale(12, 0.6),
         paddingVertical: moderateScale(10, 0.6)
     },
     emphty_text_heading: {

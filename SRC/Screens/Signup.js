@@ -59,7 +59,7 @@ const Signup = props => {
   return (
     <ImageBackground
       style={styles.main_con}
-      source={require('../Assets/Images/loginbg.png')}>
+      source={require('../Assets/Images/loginbg.jpg')}>
       <CustomStatusBar backgroundColor={Color.white} barStyle={'dark-light'} />
 
       <View style={styles.image_con}>

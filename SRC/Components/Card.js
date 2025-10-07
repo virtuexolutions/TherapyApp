@@ -17,7 +17,8 @@ const Card = ({ item, isImage = true }) => {
                 </View>
             ) : (
                 <View style={styles.image_card}>
-                    <CustomImage source={item?.image} style={styles.image} />
+                    <CustomImage source={item?.image} style={styles.image} resizeMode={'contain'}
+                    />
                 </View>
             )}
             <View style={{ marginLeft: moderateScale(10, 0.6) }}>
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     },
     image_view: {
         width: windowWidth * 0.10,
-        height: windowWidth * 0.08,
+        height: windowWidth * 0.07,
         borderRadius: windowWidth * 0.5,
     },
     image: {

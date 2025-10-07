@@ -20,7 +20,23 @@ const AiScreen = () => {
     'better sleep habits ',
   ];
   const data = [{ title: 'Slide 1' }, { title: 'Slide 2' }, { title: 'Slide 3' }];
-  const secondArray = ['knowledge', 'guided meditations', 'nutrition\nplans'];
+  // const secondArray = ['knowledge', 'guided meditations', 'nutrition\nplans'];
+  const secondArray = [
+    {
+      id: 1,
+      name: 'knowledge',
+      image: require('../Assets/Images/img6.png')
+    },
+    {
+      id: 2,
+      name: 'guided meditations',
+      image: require('../Assets/Images/img7.png')
+    }, {
+      id: 3,
+      name: 'nutrition\nplans',
+      image: require('../Assets/Images/img8.png')
+    },
+  ]
   return (
     <SafeAreaView style={styles.main_con}>
       <CustomStatusBar
@@ -94,7 +110,7 @@ const AiScreen = () => {
             return (
               <TouchableOpacity style={styles.sec_btn}>
                 <View style={styles.image_con}>
-                  <CustomImage
+                  <CustomImage source={item?.image}
                     style={{
                       height: '100%',
                       width: '100%',
@@ -108,7 +124,7 @@ const AiScreen = () => {
                       textAlign: 'center',
                     },
                   ]}>
-                  {item}
+                  {item?.name}
                 </CustomText>
               </TouchableOpacity>
             );
@@ -190,10 +206,12 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.27,
     backgroundColor: '#D0D4C4',
     borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   image_con: {
-    height: windowHeight * 0.07,
-    width: windowWidth * 0.2,
+    height: windowHeight * 0.05,
+    width: windowWidth * 0.11,
     // backgroundColor: '#D0D4C4',
     alignSelf: 'center',
     marginTop: moderateScale(5, 0.6),

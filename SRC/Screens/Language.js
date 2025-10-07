@@ -1,18 +1,18 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import Header from '../Components/Header';
 import CustomStatusBar from '../Components/CustomStatusBar';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '../Components/CustomText';
-import {moderateScale} from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomImage from '../Components/CustomImage';
 import * as Progress from 'react-native-progress';
 import CustomHeader from '../Components/CustomHeader';
 import Card from '../Components/Card';
 import CustomButton from '../Components/CustomButton';
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Language = () => {
@@ -222,6 +222,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
+    tintColor: Color.themeTextColor
   },
   txt: {
     color: Color.black,

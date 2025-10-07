@@ -12,6 +12,7 @@ import * as Progress from 'react-native-progress';
 import CustomHeader from '../Components/CustomHeader';
 import Card from '../Components/Card';
 import CustomButton from '../Components/CustomButton';
+import navigationService from '../navigationService';
 
 const TrustBadge = () => {
     const cardItem = [
@@ -55,7 +56,6 @@ const TrustBadge = () => {
                         <Card item={item} />
                     )
                 })}
-
                 <CustomButton
                     isBold
                     text={'Learn Safety Tips'}
@@ -74,7 +74,7 @@ const TrustBadge = () => {
                 />
                 <CustomButton
                     isBold
-                    text={'How do I gat my badge'}
+                    text={'How do I get my badge'}
                     fontSize={moderateScale(13, 0.6)}
                     textColor={Color.themeTextColor}
                     borderColor={Color.themtxtColor}

@@ -19,31 +19,31 @@ const JourneyGuide = () => {
             id: 1,
             title: 'Getting Started',
             text: 'lorem ipsum is simply dummy text of the printing and typesetting industry.',
-            image: require('../Assets/Images/meditaion.png'),
+            image: require('../Assets/Images/img1.png'),
         },
         {
             id: 2,
             title: 'Strenght Training',
             text: 'lorem ipsum is simply dummy text of the printing and typesetting industry.',
-            image: require('../Assets/Images/therapy2.png'),
+            image: require('../Assets/Images/img2.png'),
         },
         {
             id: 3,
             title: 'Nutraition Balance',
             text: 'lorem ipsum is simply dummy text of the printing and typesetting industry.',
-            image: require('../Assets/Images/nutrations.png'),
+            image: require('../Assets/Images/img3.png'),
         },
-            {
+        {
             id: 1,
             title: 'Getting Started',
             text: 'lorem ipsum is simply dummy text of the printing and typesetting industry.',
-            image: require('../Assets/Images/meditaion.png'),
+            image: require('../Assets/Images/img4.png'),
         },
         {
             id: 2,
             title: 'Strenght Training',
             text: 'lorem ipsum is simply dummy text of the printing and typesetting industry.',
-            image: require('../Assets/Images/therapy2.png'),
+            image: require('../Assets/Images/img5.png'),
         },
     ]
     return (
@@ -64,7 +64,16 @@ const JourneyGuide = () => {
                 </View>
                 {cardItem?.map((item) => {
                     return (
-                        <Card item={item} isImage={false} />
+                        <View style={styles.card_view}>
+                            <View style={styles.image_card}>
+                                <CustomImage source={item?.image} style={styles.image} resizeMode={'contain'}
+                                />
+                            </View>
+                            <View style={{ marginLeft: moderateScale(10, 0.6) }}>
+                                <CustomText isBold style={styles.heading_text}>{item?.title}</CustomText>
+                                <CustomText style={styles.sub_heading_text}>{item?.text}</CustomText>
+                            </View>
+                        </View>
                     )
                 })}
             </View>
@@ -105,5 +114,48 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: moderateScale(12, 0.6),
         letterSpacing: 0.6
+    },
+    card_view: {
+        width: windowWidth * 0.9,
+        height: windowWidth * 0.22,
+        marginTop: moderateScale(10, 0.6),
+        paddingVertical: moderateScale(10, 0.6),
+        paddingHorizontal: moderateScale(10, 0.6),
+        justifyContent: 'space-between',
+        alignItems: "center",
+        flexDirection: 'row'
+    },
+    image_card: {
+        width: windowWidth * 0.17,
+        height: windowWidth * 0.17,
+        borderRadius: windowWidth * 0.5,
+        backgroundColor: Color.themeColor,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        borderRadius: windowWidth * 0.5,
+        resizeMode: 'contain',
+    },
+    heading_text: {
+        fontSize: moderateScale(15, 0.6),
+        color: Color.black,
+    },
+    sub_heading_text: {
+        fontSize: moderateScale(11, 0.6),
+        width: '55%',
+        color: Color.black,
+        letterSpacing: 0.3
+    },
+    row_view: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: moderateScale(5, 0.6),
+        width: '90%',
+    },
+    distance_text: {
+        fontSize: moderateScale(11, 0.6),
+        width: '40%',
     }
 });

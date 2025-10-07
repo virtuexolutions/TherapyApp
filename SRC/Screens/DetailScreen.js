@@ -244,7 +244,6 @@ const DetailScreen = () => {
                     style={{
                       height: windowHeight * 0.03,
                       width: windowHeight * 0.03,
-                      backgroundColor: Color.red
                     }}>
                     <CustomImage
                       style={{

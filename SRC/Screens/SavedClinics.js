@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.bgColor
     },
     main_view: {
-        paddingHorizontal: moderateScale(15, 0.6),
+        paddingHorizontal: moderateScale(12, 0.6),
         paddingVertical: moderateScale(10, 0.6)
     },
     emphty_text_heading: {

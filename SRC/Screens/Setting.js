@@ -7,16 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { moderateScale } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import Header from '../Components/Header';
 import { windowHeight, windowWidth } from '../Utillity/utils';
-import MembershipCard from '../Components/MembershipCard';
-import AppointmentCard from '../Components/AppointmentCard';
-import CustomButton from '../Components/CustomButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserLogoutAuth } from '../Store/slices/auth';
 import navigationService from '../navigationService';
@@ -33,7 +29,6 @@ const Setting = () => {
         backgroundColor={Color.white}
         barStyle={'dark-content'}
       />
-      {/* <View style={{ marginTop: moderateScale(20, 0.6) }} /> */}
       <Header
         textstyle={{
           right: 25,
@@ -45,7 +40,6 @@ const Setting = () => {
         }
         headerColor={Color.bgColor}
       />
-
       <View style={styles.box_view}>
         {role?.toLowerCase() == 'user' && (
           <CustomText isBold style={styles.h1}>
@@ -60,10 +54,6 @@ const Setting = () => {
             marginVertical: moderateScale(10, 0.6),
           }}
         />
-
-        {/* <TouchableOpacity>
-          <CustomText style={[styles.txt]}>Manage Profile Info</CustomText>
-        </TouchableOpacity> */}
         {role == 'user' && (
           <TouchableOpacity
             onPress={() => {
@@ -125,6 +115,12 @@ const Setting = () => {
             navigationService.navigate('journeyGuide');
           }}>
           <CustomText style={[styles.txt]}>Journey Guide</CustomText>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigationService.navigate('Language');
+          }}>
+          <CustomText style={[styles.txt]}>Language</CustomText>
         </TouchableOpacity>
         {role != 'user' && (
           <TouchableOpacity

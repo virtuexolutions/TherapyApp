@@ -59,7 +59,7 @@ const LoginScreen = props => {
   return (
     <ImageBackground
       style={styles.main_con}
-      source={require('../Assets/Images/loginbg.png')}>
+      source={require('../Assets/Images/loginbg.jpg')}>
       <CustomStatusBar backgroundColor={Color.white} barStyle={'dark-light'} />
       <View style={styles.image_con}>
         <CustomImage
@@ -75,7 +75,7 @@ const LoginScreen = props => {
         <CustomText
           isBold
           style={{
-            fontSize: moderateScale(20, 0.6),
+            fontSize: moderateScale(22, 0.6),
             color: Color.white,
           }}>
           login{' '}
@@ -256,13 +256,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Color.white,
     borderRadius: 20,
-    height: windowHeight * 0.32,
+    height: windowHeight * 0.3,
     width: windowWidth * 0.9,
     alignItems: 'center',
     paddingTop: moderateScale(15, 0.6),
     paddingHorizontal: moderateScale(10, 0.6),
     // backgroundColor: 'rgba(127,138,115,255)',
-    backgroundColor: Color.themtxtColor
+    backgroundColor: Color.themtxtColor,
   },
 
   forgotpassword: {
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   soc_text: {
-    fontSize: moderateScale(6, 6),
+    fontSize: moderateScale(10, 6),
     paddingHorizontal: moderateScale(8, 0.6),
     textAlign: 'center',
     letterSpacing: 0.7,
