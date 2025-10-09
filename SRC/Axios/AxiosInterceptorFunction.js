@@ -1,8 +1,9 @@
-import axios from 'axios';
-import { Alert, Modal } from 'react-native';
+import axios from "axios";
+import { Alert } from "react-native";
 // import NetworkErrorAlert from "../Components/NetworkErrorAlert";
-import { baseUrl } from '../Config';
-import { useModal } from '../Config/ModalContext';
+import { baseUrl } from "../Config";
+import { store } from "../Store";
+import { showErrorModal } from "../Store/slices/common";
 
 /**
  * @description Sends a Get request to api
@@ -11,10 +12,10 @@ import { useModal } from '../Config/ModalContext';
  * @returns Promise<any>
  */
 
-const URL = link => {
+const URL = (link) => {
   return `${baseUrl}/api/${link}`;
+  // return `${baseUrl}${link}`
 };
-const { showModal } = useModal();
 
 let Get = async (route, token, showAlert = true) => {
   const options = {
@@ -24,23 +25,44 @@ let Get = async (route, token, showAlert = true) => {
     },
   };
   const apiUrl = URL(route);
+  console.log('here is the url =>', apiUrl);
   // console.log(apiUrl);
   try {
     const response = await axios.get(apiUrl, options);
     return response;
-  }
-  catch (error) {
-    console.log('error', error.response);
-
-    let networkError = error.message === 'Network Error';
-    if (showAlert) {
-      if (networkError) {
-        showModal('Please check your network connection.');
+  } catch (error) {
+    console.log("error", error);
+    let networkError = error.message === "Network Error";
+    if (showAlert == true) {
+      if (networkError === true) {
+        Alert.alert(
+          error.message,
+          "Please Check Your Network Connection",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                console.log("OK Pressed");
+              },
+            },
+          ],
+          { cancelable: false }
+        );
+        // <NetworkErrorAlert/>
       } else {
-        const msg =
-          error?.response?.data?.message ||
-          'Something went wrong, please try again later.';
-        showModal(msg);
+        Alert.alert(
+          "Submission Errors",
+          error.response.data.message,
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                console.log("OK Pressed");
+              },
+            },
+          ],
+          { cancelable: false }
+        );
       }
     }
   }
@@ -66,36 +88,15 @@ let Post = async (route, data, headers, showAlert = true) => {
     let networkError = error.message === 'Network Error';
     if (showAlert == true) {
       if (networkError === true) {
-        console.log('sadasdsad');
-
-        Alert.alert(
-          error.message,
-          'Please Check Your Network Connection',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                console.log('OK Pressed');
-              },
-            },
-          ],
-          { cancelable: false },
-        );
-        // <NetworkErrorAlert/>
+        store.dispatch(showErrorModal({
+          title: 'Network Error',
+          message: 'We couldn’t connect to the internet. Please check your connection and try again.'
+        }))
       } else {
-        Alert.alert(
-          'Submission Errors',
-          error.response.data.message,
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                console.log('OK Pressed');
-              },
-            },
-          ],
-          { cancelable: false },
-        );
+        store.dispatch(showErrorModal({
+          title: 'Submission Error',
+          message: error?.response?.data?.message || "Something went wrong!"
+        }))
       }
     }
     return undefined;
@@ -115,38 +116,39 @@ let Patch = async (route, data, headers, showAlert = true) => {
   try {
     return await axios.patch(apiUrl, data, headers);
   } catch (error) {
-    console.log('error', error?.response?.data);
-    let networkError = error.message === 'Network Error';
+    console.log("error", error?.response?.data);
+    let networkError = error.message === "Network Error";
     if (showAlert == true) {
       if (networkError === true) {
         Alert.alert(
           error.message,
-          'Please Check Your Network Connection',
+          "Please Check Your Network Connection",
           [
             {
-              text: 'OK',
+              text: "OK",
               onPress: () => {
-                console.log('OK Pressed');
+                console.log("OK Pressed");
               },
             },
           ],
-          { cancelable: false },
+          { cancelable: false }
         );
         console.log('sadasdsad');
         // <NetworkErrorAlert/>
+
       } else {
         Alert.alert(
-          'Submission Errors',
+          "Submission Errors",
           error.response.data.message,
           [
             {
-              text: 'OK',
+              text: "OK",
               onPress: () => {
-                console.log('OK Pressed');
+                console.log("OK Pressed");
               },
             },
           ],
-          { cancelable: false },
+          { cancelable: false }
         );
       }
     }
@@ -161,36 +163,36 @@ let Delete = async (route, data, headers, showAlert = true) => {
       ? await axios.delete(apiUrl, headers)
       : await axios.delete(apiUrl, data, headers);
   } catch (error) {
-    console.log('error', error?.response?.data);
-    let networkError = error.message === 'Network Error';
+    console.log("error", error?.response?.data);
+    let networkError = error.message === "Network Error";
     if (showAlert == true) {
       if (networkError === true) {
         Alert.alert(
           error.message,
-          'Please Check Your Network Connection',
+          "Please Check Your Network Connection",
           [
             {
-              text: 'OK',
+              text: "OK",
               onPress: () => {
-                console.log('OK Pressed');
+                console.log("OK Pressed");
               },
             },
           ],
-          { cancelable: false },
+          { cancelable: false }
         );
       } else {
         Alert.alert(
-          'Submission Errors',
+          "Submission Errors",
           error.response.data.message,
           [
             {
-              text: 'OK',
+              text: "OK",
               onPress: () => {
-                console.log('OK Pressed');
+                console.log("OK Pressed");
               },
             },
           ],
-          { cancelable: false },
+          { cancelable: false }
         );
       }
     }

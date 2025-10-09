@@ -30,7 +30,8 @@ const VerifyNumber = props => {
   const navigationN = useNavigation();
 
   const email = props?.route?.params?.email;
-  const phoneNumber = props?.route?.params?.phoneNumber;
+  const verify_code = props?.route?.params?.otp;
+  console.log(verify_code, email, '============>')
 
   const [code, setCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -58,17 +59,17 @@ const VerifyNumber = props => {
 
 
   const VerifyOTP = async () => {
-    // const url = 'password/code/check';
-    // setIsLoading(true);
-    // console.log(code);
-    // const response = await Post(url, { code: code }, apiHeader());
-    // setIsLoading(false);
-    // if (response != undefined) {
-    //   Platform.OS == 'android'
-    //     ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
-    //     : alert(`otp verified`);
-    navigationN.navigate('ResetPassword', { email: email })
-    // }
+    const url = 'password/code/check';
+    setIsLoading(true);
+    console.log(code);
+    const response = await Post(url, { code: code }, apiHeader());
+    setIsLoading(false);
+    if (response != undefined) {
+      Platform.OS == 'android'
+        ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
+        : alert(`otp verified`);
+      navigationN.navigate('ResetPassword', { email: email })
+    }
   };
 
   useEffect(() => {
@@ -96,12 +97,8 @@ const VerifyNumber = props => {
         width: '100%',
         height: '100%',
       }}>
-      <CustomStatusBar
-        backgroundColor={Color.white}
-        barStyle={'light-content'}
-      />
-
-      <CustomText
+      <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
+      {/* <CustomText
         isBold
         style={{
           color: Color.white,
@@ -109,11 +106,18 @@ const VerifyNumber = props => {
           fontSize: moderateScale(15, 0.6),
         }}>
         OTP Verification
-      </CustomText>
+      </CustomText> */}
       <CustomText style={styles.h1}>Enter Verification Code</CustomText>
       <CustomText style={styles.h2}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque
         turpis iaculis{' '}
+      </CustomText>
+      <CustomText style={{
+        fontSize: moderateScale(13, 0.6),
+        color: Color.white,
+        marginTop: moderateScale(20, 0.6)
+      }}>
+        {"Here is the code  " + verify_code}
       </CustomText>
       <CodeField
         placeholder={'0'}
@@ -136,20 +140,7 @@ const VerifyNumber = props => {
           </View>
         )}
       />
-      <CustomText style={[styles.txt3, { width: windowWidth * 0.6 }]}>
-        Don’t receive the OTP ?
-        {
-          <TouchableOpacity
-            disabled={timerLabel == 'Resend otp ' ? false : true}
-            onPress={() => {
-              settimerLabel('ReSend in '), settime(120);
-            }}>
-            <CustomText style={[styles.txt4]}>
-              {timerLabel} {time}
-            </CustomText>
-          </TouchableOpacity>
-        }
-      </CustomText>
+
       <CustomButton
         text={
           isLoading ? (
@@ -160,15 +151,33 @@ const VerifyNumber = props => {
         }
         isBold
         textColor={Color.btntextColor}
-        width={windowWidth * 0.85}
+        width={windowWidth * 0.8}
         height={windowHeight * 0.065}
         borderRadius={30}
-        marginTop={moderateScale(30, 0.3)}
+        marginTop={moderateScale(10, 0.3)}
         onPress={() => {
           VerifyOTP();
         }}
         bgColor={Color.btn_Color}
       />
+      <CustomText style={[styles.txt3, { width: windowWidth * 0.66, alignItems: 'center', justifyContent: 'center' }]}>
+        Don’t receive the OTP ?
+        {
+          <TouchableOpacity
+            style={{
+              paddingTop: moderateScale(8, 0.6),
+              marginLeft: moderateScale(12, 0.6)
+            }}
+            disabled={timerLabel == 'Resend otp ' ? false : true}
+            onPress={() => {
+              settimerLabel('Resend in '), settime(120);
+            }}>
+            <CustomText style={[styles.txt4]}>
+              {timerLabel} {time}
+            </CustomText>
+          </TouchableOpacity>
+        }
+      </CustomText>
     </ImageBackground>
   );
 };

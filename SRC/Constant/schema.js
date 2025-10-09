@@ -70,9 +70,50 @@ export const editProfileSchema = Yup.object({
   phoneNumber: Yup.number(),
 });
 
-export const addYourCarSchema = Yup.object({
-  carName: Yup.string().required('Car Name is required'),
-  carModel: Yup.string().required('Car Model is required'),
-  carNumber: Yup.string().required('Car Number is required'),
-  carSeats: Yup.string().required('Car Seat is required'),
-});
+export const profileSetupSchema = Yup.object().shape({
+  clinic_name: Yup.string().required('Clinic Name is required'),
+  description: Yup.string()
+    .required('Description is required')
+    .min(20, 'Description must be at least 20 characters long'),
+  location: Yup.string().required('Location is required'),
+  services_offered: Yup.array()
+    .of(Yup.string())
+    .min(1, 'At least one service must be selected')
+    .required('Services are required'),
+  languages_spoken: Yup.array()
+    .of(Yup.string())
+    .min(1, 'At least one language must be selected'),
+  logo: Yup.mixed().nullable(),
+  before_after_images: Yup.array()
+    .max(20, 'You can upload up to 20 images'),
+  google_reviews_link: Yup.string()
+    .url('Invalid Google review link')
+    .nullable(),
+  trustpilot_link: Yup.string()
+    .url('Invalid Trustpilot link')
+    .nullable(),
+  testimonials: Yup.array()
+    .of(
+      Yup.object().shape({
+        name: Yup.string().required('Patient name is required'),
+        review: Yup.string().required('Review is required'),
+        image: Yup.mixed().nullable(),
+      })
+    )
+    .min(3, 'At least 3 testimonials required')
+    .nullable(),
+  availability_calendar: Yup.string().nullable(),
+  inquiry_email: Yup.string()
+    .email('Invalid email format')
+    .nullable(),
+  }).test(
+  'review-or-testimonial',
+  'Provide either Google/Trustpilot link or 3–5 testimonials',
+  (values) => {
+    return (
+      values.google_reviews_link ||
+      values.trustpilot_link ||
+      (values.testimonials && values.testimonials.length >= 3)
+    );
+  }
+);

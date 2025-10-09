@@ -24,14 +24,14 @@ const TextInputWithTitle = props => {
   return (
     <>
       {props?.title && (
-        <CustomText
+        <CustomText isBold
           style={[
             {
               color: Color.black,
-              fontSize: moderateScale(12, 0.3),
+              fontSize: moderateScale(16, 0.3),
               // marginBottom: moderateScale(5, 0.3),
               width: windowWidth * props.viewWidth,
-              paddingHorizontal: moderateScale(20, 0.6),
+              paddingHorizontal: moderateScale(10, 0.6),
               marginTop: props.marginTop
                 ? props.marginTop
                 : moderateScale(10, 0.3),
@@ -47,8 +47,7 @@ const TextInputWithTitle = props => {
           {
             width: windowWidth * props.viewWidth,
             borderWidth: props.border,
-            // borderColor: Color.veryLightGray,
-            backgroundColor: props.backgroundColor ? props?.backgroundColor : '#C0BDAE5E',
+            backgroundColor: props.backgroundColor ? props?.backgroundColor : Color.themtxtColor,
             borderBottomWidth: props.borderBottomWidth,
             borderColor: props.borderColor ? props.borderColor : Color.themtxtColor,
           },

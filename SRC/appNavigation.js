@@ -49,6 +49,7 @@ import TrustBadge from './Screens/TrustBadge';
 import journeyGuide from './Screens/journeyGuide';
 import Language from './Screens/Language';
 import Chat from './Screens/Chat';
+import AddDetails from './Screens/AddDetails';
 
 enableScreens();
 const AppNavigator = () => {
@@ -101,6 +102,7 @@ const AppNavigator = () => {
           <RootNav.Screen name="journeyGuide" component={journeyGuide} />
           <RootNav.Screen name="Language" component={Language} />
           <RootNav.Screen name="Chat" component={Chat} />
+          <RootNav.Screen name="AddDetails" component={AddDetails} />
           {/* <RootNav.Screen name="VerifyNumber" component={VerifyNumber} /> */}
           <RootNav.Screen
             name="ServicesManagement"

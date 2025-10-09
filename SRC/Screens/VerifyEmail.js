@@ -39,23 +39,22 @@ const VerifyEmail = props => {
   const navigationN = useNavigation();
 
   const onPressSubmit = async values => {
-    // const body = {
-    //   email: values.email,
-    // };
-    // console.log('🚀 ~ body:', body);
-    // const url = 'password/email';
-    // setIsLoading(true);
-    // const response = await Post(url, body, apiHeader());VerifyNumber
-    // console.log('🚀 ~ response:', response?.data);
-    // setIsLoading(false);
-    // if (response != undefined) {
-    //   Platform.OS == 'android'
-    //     ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
-    //     : Alert.alert(`OTP sent to ${values.email}`);
-    navigationN.navigate('VerifyNumber', { email: values.email });
-    // }
-    // };
-  }
+    const body = {
+      email: values.email,
+    };
+    console.log('🚀 ~ body:', body);
+    const url = 'password/email';
+    setIsLoading(true);
+    const response = await Post(url, body, apiHeader());
+    console.log('🚀 ~ response:', response?.data?.data[0]?.code);
+    setIsLoading(false);
+    if (response != undefined) {
+      Platform.OS == 'android'
+        ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
+        : Alert.alert(`OTP sent to ${values.email}`);
+      navigationN.navigate('VerifyNumber', { email: values.email, otp: response?.data?.data[0]?.code });
+    }
+  };
 
   return (
     <ImageBackground
@@ -71,12 +70,9 @@ const VerifyEmail = props => {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <CustomStatusBar
-        backgroundColor={Color.white}
-        barStyle={'dark-content'}
-      />
+      <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
       <View style={styles.main_container}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             navigationN.goBack();
           }}
@@ -91,7 +87,7 @@ const VerifyEmail = props => {
               navigationN.goBack();
             }}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <KeyboardAwareScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.container}>
@@ -122,10 +118,10 @@ const VerifyEmail = props => {
                     border={1}
                     borderRadius={moderateScale(30, 0.3)}
                     borderColor={Color.btn_Color}
-                    backgroundColor={'transparent'}
+                    backgroundColor={Color.themtxtColor}
                     marginTop={moderateScale(10, 0.3)}
+                    placeholderColor={Color.btntextColor}
                     inputColor={Color.white}
-                    placeholderColor={Color.veryLightGray}
                     titleStlye={{
                       color: Color.white,
                     }}
@@ -140,7 +136,7 @@ const VerifyEmail = props => {
                     </CustomText>
                   )}
                   <CustomButton
-                    onPress={handleSubmit}
+                    onPress={handleSubmit} isBold
                     text={
                       isLoading ? (
                         <ActivityIndicator color={Color.white} size={'small'} />
@@ -153,7 +149,7 @@ const VerifyEmail = props => {
                     borderWidth={1.5}
                     borderColor={Color.btn_Color}
                     borderRadius={moderateScale(30, 0.3)}
-                    width={windowWidth * 0.85}
+                    width={windowWidth * 0.8}
                     marginTop={moderateScale(20, 0.3)}
                     height={windowHeight * 0.065}
                     bgColor={Color.btn_Color}
@@ -205,7 +201,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(11, 0.6),
     textAlign: 'center',
     width: '80%',
-    marginVertical: moderateScale(15, 0.3),
+    marginVertical: moderateScale(10, 0.3),
     lineHeight: moderateScale(17, 0.3),
   },
   text_input: {
@@ -213,10 +209,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: windowWidth * 0.9,
     borderColor: Color.white,
-    height: windowHeight * 0.25,
+    height: windowHeight * 0.24,
     borderRadius: 20,
-    paddingTop: windowHeight * 0.03,
+    paddingTop: windowHeight * 0.01,
     paddingHorizontal: moderateScale(30, 0.6),
+    backgroundColor: Color.themtxtColor
   },
   forgotpassword: {
     fontSize: moderateScale(10, 0.6),

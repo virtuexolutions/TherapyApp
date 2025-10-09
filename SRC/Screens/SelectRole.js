@@ -17,10 +17,7 @@ const SelectRole = () => {
     <ImageBackground
       style={styles.main_con}
       source={require('../Assets/Images/loginbg.jpg')}>
-      <CustomStatusBar
-        backgroundColor={Color.white}
-        barStyle={'dark-content'}
-      />
+      <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
       <View
         style={{
           borderWidth: 1,
@@ -34,7 +31,7 @@ const SelectRole = () => {
           backgroundColor: 'rgba(127,138,115,255)',
         }}>
         <CustomText style={styles.txt}>Select Your Role</CustomText>
-        <CustomText style={{
+        <CustomText style={{  
           fontSize: moderateScale(10, .6), color: Color.white,
           textAlign: 'center',
           width: windowWidth * 0.7,

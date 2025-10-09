@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Icon} from 'native-base';
+import React, { useState } from 'react';
+import { Icon } from 'native-base';
 import {
   View,
   Platform,
@@ -8,28 +8,28 @@ import {
   ToastAndroid,
   Alert,
 } from 'react-native';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {moderateScale, ScaledSheet} from 'react-native-size-matters';
+import { moderateScale, ScaledSheet } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomText from './CustomText';
 import CustomImage from './CustomImage';
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 import Feather from 'react-native-vector-icons/Feather';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {imageUrl} from '../Config';
-import {setUserLogout, setUserLogoutAuth} from '../Store/slices/auth-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { imageUrl } from '../Config';
+import { setUserLogout, setUserLogoutAuth } from '../Store/slices/auth-slice';
 import LinearGradient from 'react-native-linear-gradient';
-import {setUserLogOut} from '../Store/slices/common';
+import { setUserLogOut } from '../Store/slices/common';
 import navigationService from '../navigationService';
 
 const Header = props => {
   const dispatch = useDispatch();
   const notification = useSelector(state => state.commonReducer.notification);
   const cartData = useSelector(state => state.commonReducer.cart);
-  
+
   const user = useSelector(state => state.commonReducer.userData);
   const userRole = useSelector(state => state.commonReducer.selectedRole);
   console.log("🚀 ~ userRole:", userRole)
@@ -55,14 +55,15 @@ const Header = props => {
     textstyle,
     isFilledButton,
     notificationIcon,
+    isFilter = true
   } = props;
 
   const [searchText, setSearchText] = useState('');
   const statusArray = [
-    {label: 'Change Password', value: 'ChangePassword'},
-    {label: 'Terms & Conditions', value: 'TermsAndConditions'},
-    {label: 'Financial Breakdown', value: 'FinancialBreakDown'},
-    {label: 'Logout', value: 'Logout'},
+    { label: 'Change Password', value: 'ChangePassword' },
+    { label: 'Terms & Conditions', value: 'TermsAndConditions' },
+    { label: 'Financial Breakdown', value: 'FinancialBreakDown' },
+    { label: 'Logout', value: 'Logout' },
   ];
 
   const Confirm = () => {
@@ -86,7 +87,7 @@ const Header = props => {
     <View
       style={[
         styles.header2,
-        {backgroundColor: headerColor ? headerColor : Color.white},
+        { backgroundColor: headerColor ? headerColor : Color.white },
       ]}>
       <View
         style={{
@@ -117,12 +118,12 @@ const Header = props => {
                   as={Feather}
                   size={moderateScale(21, 0.3)}
                   color={Color.white}
-                  // onPress={() => {
-                  //   console.log('hello mg ');
-                  //   navigationN.toggleDrawer();
-                  //   // navigation.openDrawer()
-                  //   // navigationN.dispatch(DrawerActions.toggleDrawer());
-                  // }}
+                // onPress={() => {
+                //   console.log('hello mg ');
+                //   navigationN.toggleDrawer();
+                //   // navigation.openDrawer()
+                //   // navigationN.dispatch(DrawerActions.toggleDrawer());
+                // }}
                 />
               </TouchableOpacity>
             ) : (
@@ -170,7 +171,7 @@ const Header = props => {
             width: windowWidth * 0.21,
             height: windowHeight * 0.05,
           }}
-          // source={require('../Assets/Images/customerservice.png')}
+        // source={require('../Assets/Images/customerservice.png')}
         />
       )}
       {!hideUser && cart ? (
@@ -224,22 +225,24 @@ const Header = props => {
           />
         </View>
       ) : (
-        <View
-          style={{
-            width: windowHeight * 0.055,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: windowHeight * 0.055,
-            borderRadius: (windowHeight * 0.055) / 2,
-            backgroundColor: Color.btntextColor,
-          }}>
-          <Icon
-            name={'filter'}
-            size={moderateScale(20, 0.6)}
-            color={Color.white}
-            as={Feather}
-          />
-          {/* <CustomImage
+        <>
+          {isFilter &&
+            <View
+              style={{
+                width: windowHeight * 0.055,
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: windowHeight * 0.055,
+                borderRadius: (windowHeight * 0.055) / 2,
+                backgroundColor: Color.btntextColor,
+              }}>
+              <Icon
+                name={'filter'}
+                size={moderateScale(20, 0.6)}
+                color={Color.white}
+                as={Feather}
+              />
+              {/* <CustomImage
             onPress={() => {
               // navigation.navigate('Profile')
               // dispatch(setUserLogoutAuth());
@@ -247,7 +250,9 @@ const Header = props => {
             source={notificationIcon ? require('../Assets/Images/bell.png') : require('../Assets/Images/filter.png')}
             style={{width: windowHeight * 0.06, height: windowHeight * 0.06}}
           /> */}
-        </View>
+            </View>
+          }
+        </>
       )}
     </View>
   );
@@ -313,7 +318,7 @@ const styles = ScaledSheet.create({
     backgroundColor: Color.white,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: moderateScale(20, 0.3),
+    paddingHorizontal: moderateScale(10, 0.3),
     paddingVertical: moderateScale(15, 0.3),
     alignItems: 'center',
   },

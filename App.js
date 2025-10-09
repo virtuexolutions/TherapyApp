@@ -19,6 +19,7 @@ import {
 } from './SRC/Utillity/utils';
 import AppNavigator from './SRC/appNavigation';
 import { ModalProvider } from './SRC/Config/ModalContext';
+import GlobalErrorModal from './SRC/Components/ErrorModal';
 
 const App = () => {
   const [publishableKey, setPublishableKey] = useState('');
@@ -34,6 +35,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <NativeBaseProvider>
             <MainContainer />
+            <GlobalErrorModal />
           </NativeBaseProvider>
         </PersistGate>
       </Provider>

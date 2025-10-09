@@ -38,24 +38,24 @@ const ResetPassword = props => {
     const [isLoading, setIsLoading] = useState(false);
 
     const onPressSubmit = async values => {
-        // console.log("🚀 ~ resetPassword ~ values:", values)
-        // const url = 'password/reset';
-        // const data = {
-        //     email: email,
-        //     password: values.password,
-        //     confirm_password: values.confirmPassword,
-        // };
-        // console.log("🚀 ~ resetPassword ~ data:", data)
-        // setIsLoading(true);
-        // const response = await Post(url, data, apiHeader());
-        // setIsLoading(false);
-        // if (response != undefined) {
-        //     console.log('response data =>', response?.data);
-        //     Platform.OS == 'android'
-        //         ? ToastAndroid.show(`Password Reset SuccessFully`, ToastAndroid.SHORT)
-        //         : alert(`Password Reset SuccessFully`);
-        navigationN.navigate('LoginScreen');
-        // }
+        console.log("🚀 ~ resetPassword ~ values:", values)
+        const url = 'password/reset';
+        const data = {
+            email: email,
+            password: values.password,
+            confirm_password: values.confirmPassword,
+        };
+        console.log("🚀 ~ resetPassword ~ data:", data)
+        setIsLoading(true);
+        const response = await Post(url, data, apiHeader());
+        setIsLoading(false);
+        if (response != undefined) {
+            console.log('response data =>', response?.data);
+            Platform.OS == 'android'
+                ? ToastAndroid.show(`Password Reset SuccessFully`, ToastAndroid.SHORT)
+                : alert(`Password Reset SuccessFully`);
+            navigationN.navigate('LoginScreen');
+        }
     };
 
     return (
@@ -73,10 +73,7 @@ const ResetPassword = props => {
                 width: '100%',
                 height: '100%',
             }}>
-            <CustomStatusBar
-                backgroundColor={Color.white}
-                barStyle={'dark-content'}
-            />
+            <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
             <View style={styles.main_container}>
                 <KeyboardAwareScrollView
                     showsVerticalScrollIndicator={false}
@@ -108,11 +105,11 @@ const ResetPassword = props => {
                                         border={1}
                                         fontSize={moderateScale(10, 0.6)}
                                         borderRadius={30}
-                                        inputColor={'white'}
-                                        backgroundColor={'transparent'}
+                                        backgroundColor={Color.themtxtColor}
                                         borderColor={Color.white}
                                         marginTop={moderateScale(10, 0.3)}
                                         placeholderColor={Color.btntextColor}
+                                        inputColor={Color.white}
                                         titleStlye={{ right: 10, color: Color.white }}
                                         secureText
                                     />
@@ -132,11 +129,11 @@ const ResetPassword = props => {
                                         border={1}
                                         fontSize={moderateScale(10, 0.6)}
                                         borderRadius={30}
-                                        inputColor={'white'}
-                                        backgroundColor={'transparent'}
+                                        backgroundColor={Color.themtxtColor}
                                         borderColor={Color.white}
                                         marginTop={moderateScale(10, 0.3)}
                                         placeholderColor={Color.btntextColor}
+                                        inputColor={Color.white}
                                         titleStlye={{ right: 10, color: Color.white }}
                                         secureText
                                     />
@@ -157,14 +154,14 @@ const ResetPassword = props => {
                                         fontSize={moderateScale(15, 0.3)}
                                         textColor={Color.btntextColor}
                                         borderWidth={1.5}
-                                        borderColor={Color.btntextColor}
+                                        borderColor={Color.themtxtColor}
                                         borderRadius={moderateScale(30, 0.3)}
                                         width={windowWidth * 0.8}
-                                        height={windowHeight * 0.07}
+                                        height={windowHeight * 0.065}
                                         bgColor={Color.btn_Color}
                                         textTransform={'capitalize'}
-                                        marginTop={windowHeight * 0.03}
-                                        elevation={true}
+                                        marginTop={windowHeight * 0.02}
+                                        elevation={false}
                                         onPress={handleSubmit}
                                     />
                                 </View>
@@ -215,6 +212,7 @@ const styles = ScaledSheet.create({
         borderRadius: 20,
         paddingTop: windowHeight * 0.03,
         paddingHorizontal: moderateScale(30, 0.6),
+        backgroundColor: Color.themtxtColor
     },
     container: {
         paddingBottom: moderateScale(20, 0.3),

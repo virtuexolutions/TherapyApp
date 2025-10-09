@@ -24,19 +24,19 @@ const WalkThroughScreen = props => {
   const slides = [
     {
       key: '1',
-      image: require('../Assets/Images/walk1.png'),
+      image: require('../Assets/Images/walk1.jpg'),
       title: 'mission',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas efficitur consectetur ligula eget ultrices. Cras ac risus sodales, posuere nibh et, molestie',
     },
     {
       key: '2',
-      image: require('../Assets/Images/walk2.png'),
+      image: require('../Assets/Images/walk2.jpg'),
       title: 'benefit',
       text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`,
     },
     {
       key: '3',
-      image: require('../Assets/Images/walk3.png'),
+      image: require('../Assets/Images/walk3.jpg'),
       title: 'service',
       text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`,
     },

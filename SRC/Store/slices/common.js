@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment';
 
 const initialState = {
@@ -17,6 +17,11 @@ const initialState = {
   location: '',
   pickupLocatin: {},
   dropoffLocation: {},
+  error: {
+    visible: false,
+    title: '',
+    message: ''
+  }
 };
 
 const CommonSlice = createSlice({
@@ -50,11 +55,11 @@ const CommonSlice = createSlice({
     setNotification(state, action) {
       state.notification = action.payload;
     },
- 
+
 
     AddToCart(state, action) {
       const itemId = action.payload.id;
-      state.cart.push({date: moment(), ...action.payload});
+      state.cart.push({ date: moment(), ...action.payload });
     },
 
     RemoveToCart(state, action) {
@@ -123,7 +128,7 @@ const CommonSlice = createSlice({
       }
     },
     setServiceBooking(state, action) {
- 
+
       state.bookings.push(action.payload);
     },
 
@@ -191,6 +196,17 @@ const CommonSlice = createSlice({
       state.location = action.payload;
       console.log('🚀 ~ setLoaction ~ ==============location:', action.payload);
     },
+    showErrorModal(state, action) {
+      console.log(state.error, ' state.error')
+      state.error = {
+        visible: true,
+        title: action.payload?.title || "Error",
+        message: action.payload?.message || 'Something went wrong'
+      }
+    },
+    hideErrorModal(state) {
+      state.error.visible = false
+    },
   },
 });
 
@@ -220,6 +236,8 @@ export const {
   setLoaction,
   setPickupLocation,
   setDropoffLocation,
+  hideErrorModal,
+  showErrorModal
 } = CommonSlice.actions;
 
 export default CommonSlice.reducer;
