@@ -32,7 +32,7 @@ const LoginScreen = props => {
   console.log("🚀 ~ LoginScreen ~ role:", role)
   const dispatch = useDispatch();
   const token = useSelector(state => state.authReducer.token);
-  // const role = useSelector(state => state.authReducer.role);
+  // const role = useSelector(state => state.authReducer.role);   
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
   const [device_token, setDeviceToken] = useState(null);

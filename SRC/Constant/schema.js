@@ -10,7 +10,7 @@ export const loginSchema = Yup.object({
     .required('Email is requried !'),
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
-    .max(8, 'Password must be at least 8 characters')
+    .max(8, 'Password cannot exceed 20 characters')
     .required('Password is required !'),
 });
 
@@ -21,21 +21,13 @@ export const SignupSchema = Yup.object({
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is requried!'),
-  // contact: Yup.number()
-  //   // .matches(/^\d+$/, 'Mobile number must contain only digits')
-  //   // .min(10, 'Mobile number must be at least 10 digits')
-  //   // .max(15, 'Mobile number cannot exceed 15 digits')
-  //   .required('Mobile number is required'),
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .max(20, 'Password cannot exceed 10 characters')
+    .required('Password is required!'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required'),
-  password: Yup.string()
-    .min(8, 'Password must be at least 8 characters')
-    .max(8, 'Password must be at least 8 characters')
-    .required('Password is required!'),
-  // termsAccepted: Yup.boolean()
-  //   .oneOf([true], 'You must accept the terms and conditions')
-  //   .required('Required'),
 });
 
 export const forgotpasswordSchema = Yup.object({
@@ -106,7 +98,7 @@ export const profileSetupSchema = Yup.object().shape({
   inquiry_email: Yup.string()
     .email('Invalid email format')
     .nullable(),
-  }).test(
+}).test(
   'review-or-testimonial',
   'Provide either Google/Trustpilot link or 3–5 testimonials',
   (values) => {

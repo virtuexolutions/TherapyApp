@@ -19,6 +19,7 @@ import navigationService from '../navigationService';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import { Formik } from 'formik';
 import { profileSetupSchema } from '../Constant/schema';
+import CustomImage from '../Components/CustomImage';
 
 const AddDetails = () => {
     const dispatch = useDispatch();
@@ -41,7 +42,11 @@ const AddDetails = () => {
                     width: windowWidth * 0.82
                 }}
             />
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{
+                width: windowWidth,
+                height: windowHeight,
+                marginBottom: moderateScale(20, 0.6)
+            }}>
                 <View style={styles.main_view}>
                     <Formik
                         initialValues={{
@@ -65,6 +70,17 @@ const AddDetails = () => {
                     >
                         {({ handleChange, handleSubmit, values, errors, touched }) => (
                             <>
+                                <CustomText isBold style={styles.title_txt}>
+                                    Add Logo :
+                                </CustomText>
+                                <TouchableOpacity style={{
+                                    width: windowWidth * 0.3,
+                                    height: windowWidth * 0.3,
+                                    backgroundColor: Color.lightGrey,
+                                    borderRadius: moderateScale(10, 0.6)
+                                }}>
+                                    <CustomImage source={require('../Assets/Images/no_image.jpg')} style={styles.image} />
+                                </TouchableOpacity>
                                 <TextInputWithTitle
                                     title={'Clinic Name :'}
                                     placeholder={'Enter clinic name'}
@@ -82,7 +98,6 @@ const AddDetails = () => {
                                     placeholderColor={Color.btntextColor}
                                     inputColor={Color.white}
                                     titleStlye={{ color: Color.white }}
-
                                 />
                                 <TextInputWithTitle
                                     title={'Description:'}
@@ -122,7 +137,24 @@ const AddDetails = () => {
                                     inputColor={Color.white}
                                     titleStlye={{ color: Color.white }}
                                 />
-
+                                <TextInputWithTitle
+                                    title={'Location :'}
+                                    placeholder={'Enter your Location'}
+                                    setText={handleChange('location')}
+                                    value={values.location}
+                                    viewHeight={0.06}
+                                    viewWidth={0.95}
+                                    inputWidth={0.9}
+                                    border={1}
+                                    fontSize={moderateScale(9, 0.6)}
+                                    borderRadius={30}
+                                    backgroundColor={Color.themtxtColor}
+                                    borderColor={Color.white}
+                                    marginTop={moderateScale(10, 0.3)}
+                                    placeholderColor={Color.btntextColor}
+                                    inputColor={Color.white}
+                                    titleStlye={{ color: Color.white }}
+                                />
                                 <TextInputWithTitle
                                     title={'Google reviews link:'}
                                     placeholder={'Enter Google review link'}
@@ -179,7 +211,7 @@ const AddDetails = () => {
                                     inputColor={Color.white}
                                     titleStlye={{ color: Color.white }}
                                 />
-                                
+
                             </>
                         )}
                     </Formik>
@@ -212,5 +244,17 @@ const styles = StyleSheet.create({
     },
     main_view: {
         paddingHorizontal: moderateScale(10, 0.6),
+    },
+    title_txt: {
+        color: Color.white,
+        fontSize: moderateScale(16, 0.3),
+        width: windowWidth,
+        paddingHorizontal: moderateScale(10, 0.6),
+        marginVertical: moderateScale(10, 0.3),
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        borderRadius: moderateScale(10, 0.6)
     }
 });

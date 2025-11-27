@@ -31,42 +31,25 @@ let Get = async (route, token, showAlert = true) => {
     const response = await axios.get(apiUrl, options);
     return response;
   } catch (error) {
-    console.log("error", error);
-    let networkError = error.message === "Network Error";
+    console.log('error', error.message);
+    let networkError = error.message === 'Network Error';
     if (showAlert == true) {
       if (networkError === true) {
-        Alert.alert(
-          error.message,
-          "Please Check Your Network Connection",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                console.log("OK Pressed");
-              },
-            },
-          ],
-          { cancelable: false }
-        );
-        // <NetworkErrorAlert/>
+        store.dispatch(showErrorModal({
+          title: 'Network Error',
+          message: 'We couldn’t connect to the internet. Please check your connection and try again.'
+        }))
       } else {
-        Alert.alert(
-          "Submission Errors",
-          error.response.data.message,
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                console.log("OK Pressed");
-              },
-            },
-          ],
-          { cancelable: false }
-        );
+        store.dispatch(showErrorModal({
+          title: 'Submission Error',
+          message: error?.response?.data?.message || "Something went wrong!"
+        }))
       }
+
     }
-  }
-};
+    return undefined;
+  };
+}
 
 /**
  * @description Sends a post request to api
@@ -83,7 +66,8 @@ let Post = async (route, data, headers, showAlert = true) => {
 
   try {
     return await axios.post(apiUrl, data, headers);
-  } catch (error) {
+  }
+  catch (error) {
     console.log('error', error.message);
     let networkError = error.message === 'Network Error';
     if (showAlert == true) {
