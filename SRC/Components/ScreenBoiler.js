@@ -5,32 +5,32 @@ import CustomStatusBar from './CustomStatusBar';
 import Header from './Header';
 import { useNavigation } from '@react-navigation/native';
 
-const ScreenBoiler = props => {
-  const navigation = useNavigation()
-  const {
-    // navigation,
-    showHeader,
-    statusBarBackgroundColor,
-    statusBarContentStyle,
-    onPressSearch,
-    onPressSearchInput,
-    title,
-    titleColor,
-    showBack,
-    showDrawer,
-    useDebounce,
-    headerIconStyle,
-    children,
-    headerColor,
-    headerHeight,
-    close,
-    navigateTO,
-    headerType,
-    showList,
-    Notify,
-    hideUser,
-    headertextstyle
-  } = props;
+const ScreenBoiler = ({
+  // navigation,
+  showHeader,
+  statusBarBackgroundColor,
+  statusBarContentStyle,
+  onPressSearch,
+  onPressSearchInput,
+  title,
+  titleColor,
+  showBack,
+  showDrawer,
+  useDebounce,
+  headerIconStyle,
+  children,
+  headerColor,
+  headerHeight,
+  close,
+  navigateTO,
+  headerType,
+  showList,
+  Notify,
+  hideUser,
+  headertextstyle
+}) => {
+  // const navigation = useNavigation()
+  // const  = props;
 
   return (
     <>

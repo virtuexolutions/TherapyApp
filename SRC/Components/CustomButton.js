@@ -60,7 +60,7 @@ const CustomButton = props => {
         {
           width: width,
           height: height,
-          borderWidth: borderWidth,
+          // borderWidth: borderWidth,
           backgroundColor: bgColor,
           borderColor: borderColor,
           marginTop: marginTop || 0,

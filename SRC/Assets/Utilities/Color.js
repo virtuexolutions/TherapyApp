@@ -37,8 +37,30 @@ export default Color = {
 
   primaryColor:"#2A3821",
   secondaryColor:"#8B9781",
- 
+  
+  gray50:"#F5F7FA",
+  gray300:"#CACFD8",
+  
+  themeDarkGreen:"#042E27",
+  themeLightGreen:"#486761",
+  themeBrand600: "#069571",
+  themeBrand800: "#075E4B",
+  themeBrand50: "#ECFDF6",
+  
+  themeLightAqua:"#23675F",
+  themeVeryLightAqua:"#619892",
 
+  themeMediumGrey :"#354654",
+  themeVeryLightGrey :"#778B9C",
+
+
+  themeDarkBlueGray : "#1B2730",
+  themeLightBlueGray : "#374653",
+  
+  themeBluishBlack:"#172129",
+  themeGrayColor:"#5E636E",
+
+  // themeDarkGray: "#1B2730",
 
   //gradientColors
   btnColor: ['#565657', '#000000'],

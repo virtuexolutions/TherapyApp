@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, View } from 'react-native';
-import { scale, moderateScale, ScaledSheet } from 'react-native-size-matters';
+import { Dimensions, Image, View } from 'react-native';
+import { scale, moderateScale, ScaledSheet, verticalScale } from 'react-native-size-matters';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -25,6 +25,11 @@ const DropDownSingleSelect = ({
   disabled,
   backgroundColor,
   width,
+  leftIcon,
+  title, titleColor,
+  titleStyle,
+  iconIsImage,
+  imageSrc, 
   iconName,
   iconType,
   extreme,
@@ -197,6 +202,7 @@ const DropDownSingleSelect = ({
     //   />
     // </View>
     <SelectDropdown
+    
       data={data}
 
       onSelect={(selectedItem, index) => {
@@ -206,10 +212,38 @@ const DropDownSingleSelect = ({
 
       renderButton={(selectedItem, isOpened) => {
         return (
+          <View style={{width: windowWidth, alignItems:"center"}}>
+          {title && (
+        <CustomText isBold
+          style={[
+            {
+              color: titleColor ? titleColor : Color.black,
+              fontSize: moderateScale(16, 0.3),
+              top:5,
+              left:5,
+              // marginBottom: moderateScale(5, 0.3),
+              width: windowWidth,
+              paddingHorizontal: moderateScale(15, 0.6),
+              marginTop: moderateScale(10, 0.3),
+            },
+            titleStyle,
+          ]}>
+          {title}
+        </CustomText>
+      )}
           <View style={[styles.dropdownButtonStyle,
           btnStyle && btnStyle,
           width && { width: width }]}>
-
+          { leftIcon && iconIsImage && (
+            <Image
+            resizeMode='cover' 
+            source={imageSrc}
+            style={{
+              // backgroundColor:"red",
+              left: scale(6)
+            }}
+            />
+          ) }
             <CustomText style={[styles.dropdownButtonTxtStyle, placeHolderColor && {
               color: placeHolderColor
             }]}>
@@ -221,11 +255,12 @@ const DropDownSingleSelect = ({
               as={Entypo}
               name={isOpened ? 'chevron-small-up' : 'chevron-small-down'} style={styles.dropdownButtonArrowStyle} />
           </View>
+          </View>
         );
       }}
       renderItem={(item, index, isSelected) => {
         return (
-          <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: Color.primary }) }}>
+          <View style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: Color.themeBrand600 }) }}>
             {/* <Icon name={item.icon} style={styles.dropdownItemIconStyle} /> */}
             <CustomText style={styles.dropdownItemTxtStyle}>{typeof item == "object" ? item.title : item?.trim()}</CustomText>
           </View>
@@ -279,6 +314,10 @@ const styles = ScaledSheet.create({
     textTransform: 'capitalize',
     marginLeft: moderateScale(15, 0.3),
   },
+  dropdownButtonArrowStyle:{
+    position:"absolute",
+    right:scale(10)
+  },
   icon: {
     marginTop: 3,
 
@@ -302,7 +341,8 @@ const styles = ScaledSheet.create({
     marginTop: moderateScale(10, 0.2),
     padding: moderateScale(10, 0.3),
     backgroundColor: Color.white,
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
+    gap:scale(5),
     flexDirection: "row",
     borderColor: Color.mediumGray,
     borderRadius: moderateScale(25, 0.3),
@@ -316,19 +356,22 @@ const styles = ScaledSheet.create({
   },
   dropdownButtonTxtStyle: {
     color: Color.mediumGray,
-    paddingHorizontal: moderateScale(11, 0.2)
+    paddingHorizontal: moderateScale(11, 0.2),
+    // backgroundColor:"red",
+    // width: windowWidth * 0.60
+    
   },
   dropdownMenuStyle: {
     // backgroundColor:Color.red,
-    backgroundColor: Color.secondaryColor,
+    backgroundColor: Color.themeDarkBlueGray,
     // borderColor:Color.mediumGray,
     width: "90%",
     borderWidth: 1,
-    marginTop: moderateScale(-35, 0.2),
+    marginTop: verticalScale(-45),
     // 
     // position:"absolute",
-    // top:-10,
-    borderRadius: moderateScale(15, 0.2)
+    // top:scale(-30),
+    borderRadius: moderateScale(10, 0.2)
   }
 });
 

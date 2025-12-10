@@ -36,7 +36,8 @@ export default function CustomStatusBar(props) {
         <View
           style={[
             {
-              height: Platform.OS == "android" ? 0 : StatusBarHeight,
+              // height: Platform.OS == "android" ? 0 : StatusBarHeight,
+              height: StatusBarHeight,
               width: windowWidth,
               backgroundColor: backgroundColor
                 ? backgroundColor
@@ -45,7 +46,8 @@ export default function CustomStatusBar(props) {
           ]}
         >
           <StatusBar
-            translucent={Platform.OS == "android" ? false : true}
+            // translucent={Platform.OS == "android" ? false : true}
+            translucent={true}
             backgroundColor={
               Platform.OS == "android"
                 ? backgroundColor

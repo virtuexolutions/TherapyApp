@@ -7,6 +7,7 @@ import {
   TextInput,
   I18nManager,
   Platform,
+  Image,
 } from 'react-native';
 
 import { Icon } from 'native-base';
@@ -27,11 +28,13 @@ const TextInputWithTitle = props => {
         <CustomText isBold
           style={[
             {
-              color: Color.black,
+              color: props.titleColor ? props?.titleColor : Color.black,
               fontSize: moderateScale(16, 0.3),
+              top:5,
+              // left:1,
               // marginBottom: moderateScale(5, 0.3),
               width: windowWidth * props.viewWidth,
-              paddingHorizontal: moderateScale(10, 0.6),
+              paddingHorizontal: moderateScale(15, 0.6),
               marginTop: props.marginTop
                 ? props.marginTop
                 : moderateScale(10, 0.3),
@@ -94,6 +97,18 @@ const TextInputWithTitle = props => {
             color={props.iconColor}
             name={props.iconName}
             size={moderateScale(20, 0.2)}
+          />
+        )}
+        {props?.leftIcon && props.iconIsImage && (
+          <Image
+          resizeMode='cover' 
+          source={props.iamgeSrc}
+          style={{
+            // width:scale(30),
+            // height:scale(30),
+            // position:"absolute",
+            left:scale(10),
+          }}
           />
         )}
         {props.iconName && !props.foundation && (
@@ -159,6 +174,7 @@ const TextInputWithTitle = props => {
                   ]
                   : [
                     styles.inputBox,
+                    {paddingLeft:scale(10)},
                     {
                       paddingBottom: 0,
                     },
@@ -206,12 +222,17 @@ const TextInputWithTitle = props => {
               style={[
                 {
                   width: windowWidth * props.inputWidth,
+
+                  // backgroundColor:"red",
                 },
                 Platform.OS === 'android'
                   ? styles.inputBox
                   : [styles.inputBox, { paddingBottom: 0 }],
                 props.numberOfLines > 1 && {
                   textAlignVertical: 'top',
+                },
+                 {
+                  paddingLeft:props.leftIcon ? scale(20) : scale(10)
                 },
                 props.inputHeight && {
                   height: windowHeight * props.inputHeight,
@@ -222,7 +243,7 @@ const TextInputWithTitle = props => {
                 props.multiline && {
                   paddingTop: moderateScale(10, 0.5),
                   textAlignVertical: 'top',
-                  marginLeft: moderateScale(15, 0.3),
+                  // marginLeft: moderateScale(15, 0.3),
                 },
                 props.color && {
                   color: Color.black,
@@ -265,9 +286,9 @@ const styles = ScaledSheet.create({
     // textTransform: 'capitalize',
   },
   inputBox: {
-    paddingLeft: moderateScale(20, 0.6),
+    // paddingLeft: moderateScale(10, 0.6),
     borderRadius: 8,
-    fontSize: moderateScale(14, 0.3),
+    fontSize: moderateScale(16, 0.3),
     // textTransform: 'capitalize',
     // fontFamily: 'PlusJakartaDisplay-Regular',
     textAlign: I18nManager.isRTL ? 'right' : 'left',

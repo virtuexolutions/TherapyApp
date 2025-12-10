@@ -20,6 +20,11 @@ import {
 import AppNavigator from './SRC/appNavigation';
 import { ModalProvider } from './SRC/Config/ModalContext';
 import GlobalErrorModal from './SRC/Components/ErrorModal';
+import AuthScreen from './SRC/Screens/AuthScreen';
+import OnboardingScreen from './SRC/Screens/OnboardingScreen';
+import LifeStyle from './SRC/Screens/LifeStyle';
+import SetupAICoach from './SRC/Screens/SetupAICoach';
+import HomeScreen from './SRC/Screens/HomeScreen';
 
 const App = () => {
   const [publishableKey, setPublishableKey] = useState('');
@@ -59,7 +64,11 @@ const MainContainer = () => {
   if (isloading == true) {
     return <SplashScreen />;
   }
-  return <AppNavigator />;
+  // return <AppNavigator />;
+  // return <OnboardingScreen/>;
+  // return <LifeStyle/>;
+  // return <SetupAICoach/>;
+  return <HomeScreen/>;
 };
 
 const useloader = value => {
