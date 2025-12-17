@@ -25,7 +25,7 @@ const ThemeIconButton = ({
     ? require('../Assets/Images/categories.png')
     : cross
     ? require('../Assets/Images/cross.png')
-    : null;
+    : require('../Assets/Images/headphones.png');
   return (
     <Pressable
       style={[

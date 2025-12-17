@@ -1,62 +1,73 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Icon} from 'native-base';
 import React from 'react';
-import { enableScreens } from 'react-native-screens';
-import { moderateScale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
+import {View} from 'react-native';
+import {enableScreens} from 'react-native-screens';
+import {moderateScale} from 'react-native-size-matters';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons'; // 💡
+import {useSelector} from 'react-redux';
+import CustomText from './Components/CustomText';
 import Drawer from './Drawer/Drawer';
 import navigationService from './navigationService';
-import LoginScreen from './Screens/LoginScreen';
-import Signup from './Screens/Signup';
-import WalkThroughScreen from './Screens/WalkthroughScreen';
-import VerifyNumber from './Screens/VerifyNumber';
-import UploadImages from './Screens/UploadImages';
-import BankDetails from './Screens/BankDetails';
-import Home from './Screens/Home';
-import Discount from './Screens/Discount';
-import Setting from './Screens/Setting';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { windowHeight, windowWidth } from './Utillity/utils';
-import Ionicons from 'react-native-vector-icons/Ionicons'; // 💡
-import Feather from 'react-native-vector-icons/Feather';
-import { Icon } from 'native-base';
-import CustomText from './Components/CustomText';
-import MemberPerks from './Screens/MemberPerks';
-import Subscription from './Screens/Subscription';
-import Directory from './Screens/Directory';
-import BookingScreen from './Screens/BookingScreen';
-import MyBookings from './Screens/MyBookings';
-import Dashboard from './Screens/Dashboard';
-import ServicesManagement from './Screens/ServicesManagement';
-import AppointmentManagement from './Screens/AppointmentManagement';
-import PerformanceAndAnalytics from './Screens/PerformanceAndAnalytics';
-import SelectRole from './Screens/SelectRole';
-import MessagesScreen from './Screens/MessagesScreen';
-import SearchScreen from './Screens/SearchScreen';
-import VerifyEmail from './Screens/VerifyEmail';
+import AddDetails from './Screens/AddDetails';
 import AiScreen from './Screens/AiScreen';
-import DetailScreen from './Screens/DetailScreen';
-import PricingComparison from './Screens/PricingComparison';
-import ResetPassword from './Screens/ResetPassword';
-import SavedClinic from './Screens/SavedClinics';
+import AppointmentManagement from './Screens/AppointmentManagement';
+import BankDetails from './Screens/BankDetails';
+import BookingScreen from './Screens/BookingScreen';
+import Chat from './Screens/Chat';
 import CompairProvider from './Screens/CompairProvider';
-import PackagesBundles from './Screens/PackagesBundles';
-import PaitentReview from './Screens/PaitentReview';
-import TrustBadge from './Screens/TrustBadge';
+import Dashboard from './Screens/Dashboard';
+import DetailScreen from './Screens/DetailScreen';
+import Directory from './Screens/Directory';
+import Discount from './Screens/Discount';
+import Home from './Screens/Home';
 import journeyGuide from './Screens/journeyGuide';
 import Language from './Screens/Language';
-import Chat from './Screens/ChatScreen';
-import AddDetails from './Screens/AddDetails';
+import LoginScreen from './Screens/LoginScreen';
+import MarketPlaceScreen from './Screens/MarketPlaceScreen';
+import MemberPerks from './Screens/MemberPerks';
+import MyBookings from './Screens/MyBookings';
+import PackagesBundles from './Screens/PackagesBundles';
+import PaitentReview from './Screens/PaitentReview';
+import PerformanceAndAnalytics from './Screens/PerformanceAndAnalytics';
+import PricingComparison from './Screens/PricingComparison';
+import ProductScreen from './Screens/ProductsScreen';
+import ResetPassword from './Screens/ResetPassword';
+import SavedClinic from './Screens/SavedClinics';
+import SearchScreen from './Screens/SearchScreen';
+import SeeAllScreen from './Screens/SeeAllScreen';
+import SelectRole from './Screens/SelectRole';
+import ServicesManagement from './Screens/ServicesManagement';
+import Setting from './Screens/Setting';
+import Signup from './Screens/Signup';
+import Subscription from './Screens/Subscription';
+import TrustBadge from './Screens/TrustBadge';
+import UploadImages from './Screens/UploadImages';
+import VerifyEmail from './Screens/VerifyEmail';
+import VerifyNumber from './Screens/VerifyNumber';
+import WalkThroughScreen from './Screens/WalkthroughScreen';
+import {windowHeight, windowWidth} from './Utillity/utils';
+import DetailedScreen from './Screens/DetailedScreen';
+import PurchaseTreatment from './Screens/PurchaseTreatment';
+import PaymentConfirmation from './Screens/PaymentConfirmation';
+import OrderScreen from './Screens/OrderScreen';
+import ProviderScreen from './Screens/ProviderScreen';
+import SpecialistScreen from './Screens/SpecialistScreen';
+import ReviewScreen from './Screens/ReviewScreen';
+import ChatScreen from './Screens/ChatScreen';
+import CallBooking from './Screens/CallBooking';
+import AudioCAllScreen from './Screens/AudioCAllScreen';
+import VideoCallScreen from './Screens/VideoCallScreen';
 
 enableScreens();
 const AppNavigator = () => {
   const walkThrough = useSelector(state => state.authReducer.userWalkThrough);
   const role = useSelector(state => state.authReducer.role);
   const token = useSelector(state => state.authReducer.token);
-  console.log('🚀 ~ AppNavigator ~ token:', token);
 
   const RootNav = createNativeStackNavigator();
 
@@ -65,14 +76,14 @@ const AppNavigator = () => {
       walkThrough == false
         ? 'WalkThroughScreen'
         : token == null
-          ? 'SelectRole'
-          : 'TabNavigation';
+        ? 'SelectRole'
+        : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
           initialRouteName={firstScreen}
-          screenOptions={{ headerShown: false }}>
+          screenOptions={{headerShown: false}}>
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
@@ -95,7 +106,10 @@ const AppNavigator = () => {
           <RootNav.Screen name="VerifyEmail" component={VerifyEmail} />
           <RootNav.Screen name="AiScreen" component={AiScreen} />
           <RootNav.Screen name="DetailScreen" component={DetailScreen} />
-          <RootNav.Screen name="PricingComparison" component={PricingComparison} />
+          <RootNav.Screen
+            name="PricingComparison"
+            component={PricingComparison}
+          />
           <RootNav.Screen name="SavedClinic" component={SavedClinic} />
           <RootNav.Screen name="PackagesBundles" component={PackagesBundles} />
           <RootNav.Screen name="PaitentReview" component={PaitentReview} />
@@ -103,7 +117,35 @@ const AppNavigator = () => {
           <RootNav.Screen name="Language" component={Language} />
           <RootNav.Screen name="Chat" component={Chat} />
           <RootNav.Screen name="AddDetails" component={AddDetails} />
-          {/* <RootNav.Screen name="VerifyNumber" component={VerifyNumber} /> */}
+          <RootNav.Screen
+            name="MarketPlaceScreen"
+            component={MarketPlaceScreen}
+          />
+          <RootNav.Screen name="ProductScreen" component={ProductScreen} />
+          <RootNav.Screen name="SeeAllScreen" component={SeeAllScreen} />
+          <RootNav.Screen name="DetailedScreen" component={DetailedScreen} />
+          <RootNav.Screen
+            name="PurchaseTreatment"
+            component={PurchaseTreatment}
+          />
+          <RootNav.Screen
+            name="PaymentConfirmation"
+            component={PaymentConfirmation}
+          />
+          <RootNav.Screen name="OrderScreen" component={OrderScreen} />
+          <RootNav.Screen
+            name="SpecialistScreen "
+            component={SpecialistScreen}
+          />
+
+          <RootNav.Screen name="SpecialistScreen " component={ReviewScreen} />
+          <RootNav.Screen name="CallBooking" component={CallBooking} />
+
+          <RootNav.Screen name="ChatScreen " component={ChatScreen} />
+
+          <RootNav.Screen name="AudioCAllScreen" component={AudioCAllScreen} />
+          <RootNav.Screen name="VideoCallScreen" component={VideoCallScreen} />
+
           <RootNav.Screen
             name="ServicesManagement"
             component={ServicesManagement}
@@ -133,7 +175,7 @@ const AppNavigator = () => {
 export const TabNavigation = () => {
   const Tabs = createBottomTabNavigator();
   const role = useSelector(state => state.authReducer.role);
-  console.log(role, 'rollllllllllllllllleeeeee')
+  console.log(role, 'rollllllllllllllllleeeeee');
   // const role = 'user';
 
   return (
@@ -153,7 +195,7 @@ export const TabNavigation = () => {
       //     </LinearGradient>
       //   );
       // }}
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -164,7 +206,7 @@ export const TabNavigation = () => {
           // paddingVertical:5
           height: windowHeight * 0.08,
         },
-        tabBarIcon: ({ focused }) => {
+        tabBarIcon: ({focused}) => {
           let iconName;
           letcolor = focused ? '#8B9781' : Color.veryLightGray;
           let size = moderateScale(20, 0.3);
@@ -241,7 +283,7 @@ export const TabNavigation = () => {
         },
         tabBarShowLabel: false,
         tabBarBackground: () => (
-          <View style={{ flex: 1 }}>
+          <View style={{flex: 1}}>
             <View
               style={{
                 height: windowHeight * 0.4,
