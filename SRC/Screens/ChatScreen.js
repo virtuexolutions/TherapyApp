@@ -25,18 +25,6 @@ import ScreenBoiler from '../Components/ScreenBoiler';
 import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import ChatHeader from '../Components/ChatHeader';
-
-// const Color = {
-//   white: '#FFFFFF',
-//   black: '#000000',
-//   blue: '#6B8E23',
-//   lightBlue: '#E6F0FA',
-//   darkGray: '#555555',
-//   lightGrey: '#F2F2F2',
-//   themeColor: '#6B8E23',
-//   darkBlue: '#003366',
-// };
-
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   console.log("🚀 ~ Chat ~ messages:", messages)
@@ -81,8 +69,7 @@ const ChatScreen = () => {
   }, []);
 
   return (
-    // <SafeAreaView style={styles.mainScreen}>
-    // <ScreenBoiler statusBarBackgroundColor={Color.themeDarkBlueGray}>
+
 <>
       <CustomStatusBar
         backgroundColor={Color.themeDarkBlueGray}
