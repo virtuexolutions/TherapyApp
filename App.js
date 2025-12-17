@@ -6,10 +6,13 @@
  * @flow strict-local
  */
 
+import { NativeBaseProvider } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { NativeBaseProvider } from 'native-base';
+import GlobalErrorModal from './SRC/Components/ErrorModal';
+import { ModalProvider } from './SRC/Config/ModalContext';
+import SeeAllScreen from './SRC/Screens/SeeAllScreen';
 import SplashScreen from './SRC/Screens/SplashScreen';
 import { persistor, store } from './SRC/Store/index';
 import {
@@ -17,14 +20,18 @@ import {
   requestLocationPermission,
   requestWritePermission
 } from './SRC/Utillity/utils';
-import AppNavigator from './SRC/appNavigation';
-import { ModalProvider } from './SRC/Config/ModalContext';
-import GlobalErrorModal from './SRC/Components/ErrorModal';
-import AuthScreen from './SRC/Screens/AuthScreen';
-import OnboardingScreen from './SRC/Screens/OnboardingScreen';
-import LifeStyle from './SRC/Screens/LifeStyle';
-import SetupAICoach from './SRC/Screens/SetupAICoach';
-import HomeScreen from './SRC/Screens/HomeScreen';
+import DetailedScreen from './SRC/Screens/DetailedScreen';
+import ProductScreen from './SRC/Screens/ProductsScreen';
+import PurchaseTreatment from './SRC/Screens/PurchaseTreatment';
+import PaymentConfirmation from './SRC/Screens/PaymentConfirmation';
+import OrderScreen from './SRC/Screens/OrderScreen';
+import ProviderScreen from './SRC/Screens/ProviderScreen';
+import SpecialistScreen from './SRC/Screens/SpecialistScreen';
+import ReviewScreen from './SRC/Screens/ReviewScreen';
+import ChatScreen from './SRC/Screens/ChatScreen';
+import CallBooking from './SRC/Screens/CallBooking';
+import AudioCAllScreen from './SRC/Screens/AudioCAllScreen';
+import VideoCallScreen from './SRC/Screens/VideoCallScreen';
 
 const App = () => {
   const [publishableKey, setPublishableKey] = useState('');
@@ -68,7 +75,7 @@ const MainContainer = () => {
   // return <OnboardingScreen/>;
   // return <LifeStyle/>;
   // return <SetupAICoach/>;
-  return <HomeScreen/>;
+  return <VideoCallScreen/>;
 };
 
 const useloader = value => {

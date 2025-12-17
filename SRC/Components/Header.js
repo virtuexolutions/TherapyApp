@@ -1,16 +1,27 @@
-import { StyleSheet } from "react-native";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { windowHeight, windowWidth } from "../Utillity/utils";
-import Color from "../Assets/Utilities/Color";
-import ThemeIconButton from "./ThemeIconButton";
-import CustomText from "./CustomText";
-import { View } from "native-base";
-import BackButton from "./BackButton";
+import {StyleSheet} from 'react-native';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
+import {windowHeight, windowWidth} from '../Utillity/utils';
+import Color from '../Assets/Utilities/Color';
+import ThemeIconButton from './ThemeIconButton';
+import CustomText from './CustomText';
+import {View} from 'native-base';
+import BackButton from './BackButton';
 
-const Header = ({showBack, showGreeting, showCart = false}) => {
+const Header = ({title, showBack, showGreeting, showCart = false}) => {
   return (
     <View style={styles.header}>
       {showBack && <BackButton style={styles.backBtn} />}
+      {/* <View
+        style={{
+          width: showBack ? windowWidth * 0.7 : windowWidth * 0.8,
+        }}></View> */}
+      <View>
+        {title && (
+          <View style={{width: !showBack ?windowWidth  : windowWidth * 0.7, alignItems: 'center'}}>
+            <CustomText children={title} style={styles.title} />
+          </View>
+        )}
+      </View>
       {showGreeting && (
         <View style={{width: showBack ? windowWidth * 0.7 : windowWidth * 0.8}}>
           <CustomText children={'Hello,'} style={styles.text2} />
@@ -29,7 +40,7 @@ const Header = ({showBack, showGreeting, showCart = false}) => {
   );
 };
 export default Header;
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     width: windowWidth,
     paddingHorizontal: scale(10),
@@ -46,6 +57,10 @@ const styles= StyleSheet.create({
   backBtn: {
     // position:"absolute"
   },
+  title: {
+    color: Color.white,
+    fontSize: moderateScale(16, 0.2),
+  },
   text1: {
     color: Color.white,
     fontSize: moderateScale(16, 0.2),
@@ -54,4 +69,4 @@ const styles= StyleSheet.create({
     color: Color.white,
     fontSize: moderateScale(14, 0.2),
   },
-})
+});
