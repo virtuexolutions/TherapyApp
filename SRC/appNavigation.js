@@ -48,7 +48,7 @@ import PaitentReview from './Screens/PaitentReview';
 import TrustBadge from './Screens/TrustBadge';
 import journeyGuide from './Screens/journeyGuide';
 import Language from './Screens/Language';
-import Chat from './Screens/Chat';
+import Chat from './Screens/ChatScreen';
 import AddDetails from './Screens/AddDetails';
 
 enableScreens();

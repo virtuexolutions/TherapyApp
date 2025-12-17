@@ -43,15 +43,21 @@ export default Color = {
   
   themeDarkGreen:"#042E27",
   themeLightGreen:"#486761",
+  themeGreen500:"#629E44",
   themeBrand600: "#069571",
   themeBrand800: "#075E4B",
+  themeBrand500: "#12B78A",
   themeBrand50: "#ECFDF6",
+  themeGrey200:"#E1E4EA",
+  themeGrey60:"#202F3A",
   
   themeLightAqua:"#23675F",
   themeVeryLightAqua:"#619892",
 
   themeMediumGrey :"#354654",
   themeVeryLightGrey :"#778B9C",
+
+  themeNavyBlue:"#1F2D37",
 
 
   themeDarkBlueGray : "#1B2730",

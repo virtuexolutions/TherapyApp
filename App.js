@@ -25,6 +25,8 @@ import OnboardingScreen from './SRC/Screens/OnboardingScreen';
 import LifeStyle from './SRC/Screens/LifeStyle';
 import SetupAICoach from './SRC/Screens/SetupAICoach';
 import HomeScreen from './SRC/Screens/HomeScreen';
+import ChatScreen from './SRC/Screens/ChatScreen';
+import Chat from './SRC/Screens/ChatScreen';
 
 const App = () => {
   const [publishableKey, setPublishableKey] = useState('');
@@ -39,6 +41,7 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NativeBaseProvider>
+            
             <MainContainer />
             <GlobalErrorModal />
           </NativeBaseProvider>
@@ -68,7 +71,8 @@ const MainContainer = () => {
   // return <OnboardingScreen/>;
   // return <LifeStyle/>;
   // return <SetupAICoach/>;
-  return <HomeScreen/>;
+  // return <HomeScreen/>;
+  return <ChatScreen/>;
 };
 
 const useloader = value => {

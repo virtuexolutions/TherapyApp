@@ -9,13 +9,17 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const ThemeIconButton = ({
   onPress = () => {},
   style,
+  iconStyle,
   cart = false,
   cross = false,
   explore = false,
   favourite = false,
   isFavSelected = false,
+  source=null,
+  iconName="",
+  iconType=null,
 }) => {
-  const iconSource = cart
+  const iconSource = source ?? cart
     ? require('../Assets/Images/cart.png')
     : explore
     ? require('../Assets/Images/categories.png')
@@ -30,12 +34,20 @@ const ThemeIconButton = ({
         favourite && {borderRadius: scale(17)},
       ]}
       onPress={onPress}>
-      {iconSource && <CustomImage source={iconSource} style={styles.icon} />}
+      {iconName != "" && iconSource && <CustomImage source={iconSource} style={[styles.icon, iconStyle]} />}
+      {iconName && (
+        <Icon
+        size={scale(15)}
+        as={iconType}
+        color={Color.themeGrey200}
+        name={iconName}
+      />
+      )}
       {favourite && (
         <Icon
-          size={scale(18)}
+          size={scale(15)}
           as={Ionicons}
-          color={Color.themeLightGray}
+          color={Color.themeGrey200}
           name={isFavSelected ? 'heart' : 'heart-outline'}
         />
       )}
