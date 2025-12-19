@@ -33,8 +33,11 @@ const HomeScreen = () => {
       <LinearGradient
         style={styles.mainScreen}
         colors={[Color.themeBluishBlack, Color.themeDarkGreen]}>
-      <ScrollView style={{width:windowWidth, height: windowHeight * 0.925}}>
-
+      <ScrollView 
+      contentContainerStyle={{
+        paddingBottom:scale(50)
+      }}
+      >
         <AskYourAICoach 
         onIconPress={()=>{
           refRBSheet.current?.open();

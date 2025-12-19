@@ -12,7 +12,7 @@ import { moderateScale } from 'react-native-size-matters';
 import { useDispatch } from 'react-redux';
 import Color from '../Assets/Utilities/Color';
 import CustomText from '../Components/CustomText';
-import { setWalkThrough } from '../Store/slices/auth-slice';
+import { setWalkThrough } from '../Store/slices/auth';
 import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomStatusBar from '../Components/CustomStatusBar';
 

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { moderateScale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import Header from '../Components/Header';
 import ScreenBoiler from '../Components/ScreenBoiler';
@@ -14,6 +14,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FlatList, Icon, ScrollView } from 'native-base';
 import SeeAllCard from '../Components/SeeAllCard';
 import FilterModal from '../Components/FilterModal';
+import ThemeIconButton from '../Components/ThemeIconButton';
 
 const SeeAllScreen = () => {
   //  const [rbRef, setRbRef] = useState(null);
@@ -93,21 +94,25 @@ const SeeAllScreen = () => {
     <ScreenBoiler
       statusBarBackgroundColor={Color.themeBluishBlack}
       statusBarContentStyle={'light-content'}>
-      <Header showGreeting={true} showCart />
+      <Header  
+      showBack={true}
+      title={"Treatments"}
+      showGreeting={false} showCart />
       <LinearGradient
         style={styles.mainScreen}
         colors={[Color.themeBluishBlack, Color.themeDarkGreen]}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          style={{
-            // backgroundColor :'red',
-            paddingBottom: moderateScale(50, 0.6),
-          }}>
+         
+          contentContainerStyle={{
+            paddingBottom:scale(50),
+          }}
+          >
           <View
             style={{
-              // backgroundColor :'green',
               height: windowHeight * 0.1,
               flexDirection: 'row',
+              alignItems:"center"
             }}>
             <SearchContainer
               placeHolder={'Search treaments'}
@@ -115,14 +120,14 @@ const SeeAllScreen = () => {
               IconSize={moderateScale(22, 0.6)}
               IconColor={Color.white}
               width={windowWidth * 0.77}
-              height={windowHeight * 0.053}
+              height={scale(40)}
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: Color.themeDarkBlueGray,
                 borderRadius: moderateScale(10, 0.6),
                 borderColor: Color.white,
                 borderWidth: 0.1,
 
-                marginTop: moderateScale(15, 0.6),
+                // marginTop: moderateScale(15, 0.6),
               }}
               inputStyle={{
                 paddingHorizontal: moderateScale(15, 0.5),
@@ -131,17 +136,15 @@ const SeeAllScreen = () => {
                 fontSize: moderateScale(14, 0.6),
               }}
             />
-            <TouchableOpacity  onPress={() =>{
-              refRBSheet?.current?.open()
-            }}style={styles.filter}>
-              <Icon
-                as={Ionicons}
-                name="filter-outline"
-                color={Color.white}
-                size={moderateScale(25, 0.6)}
-              />
-            </TouchableOpacity>
-          </View>
+               <ThemeIconButton
+           iconName='filter-outline'
+          iconType={Ionicons}
+          onPress={()=>{
+            refRBSheet?.current?.open()
+          }}
+           style={{width:scale(40), height:scale(40)}}   
+           />                  
+           </View>
           {/* <CustomText>dfkasdjfkkdjfklsjdklfjskldjfkl</CustomText> */}
 
           <FlatList

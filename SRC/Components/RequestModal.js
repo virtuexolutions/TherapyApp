@@ -16,6 +16,7 @@ import TextInputWithTitle from './TextInputWithTitle';
 import {color} from 'native-base/lib/typescript/theme/styled-system';
 import CustomButton from './CustomButton';
 import CallBooking from '../Screens/CallBooking';
+import navigationService from '../navigationService';
 
 const RequestModal = ({setRef, ref}) => {;
   const [minPrice, setinPrice] = useState('');
@@ -43,7 +44,7 @@ const RequestModal = ({setRef, ref}) => {;
         container: {
           borderTopRightRadius: 10,
           borderTopLeftRadius: 10,
-          height: callType != '' ? windowHeight * 0.7 : windowHeight * 0.27,
+          height: callType != '' ? windowHeight * 0.75 : windowHeight * 0.27,
         },
       }}>
       <View
@@ -56,7 +57,9 @@ const RequestModal = ({setRef, ref}) => {;
           <CustomText style={styles.title}>
             {callType != '' ? 'Call' : 'Request a call'}
           </CustomText>
-          <TouchableOpacity style={styles.cross_btn}>
+          <TouchableOpacity style={styles.cross_btn} onPress={()=>{
+            ref.current?.close()
+          }}>
             <Icon
               as={Entypo}
               color={Color.white}
@@ -185,7 +188,10 @@ const RequestModal = ({setRef, ref}) => {;
               textTransform={'capitalize'}
               marginTop={moderateScale(10, 0.6)}
               onPress={() =>{
-                setIsVisible(true)
+                // setIsVisible(true)
+                navigationService.navigate("CallBooking", {
+                  fromCall:false
+                })
                 // console.log('fasjhdfjkhjaksdh fjkhad hello mai hu ')
               }}
             />
@@ -244,9 +250,9 @@ const RequestModal = ({setRef, ref}) => {;
           </>
         )}
       </View>
-      <CallBooking
+      {/* <CallBooking
       isvisible={isvisible}
-      setIsVisible={setIsVisible}/>
+      setIsVisible={setIsVisible}/> */}
     </RBSheet>
   );
 };

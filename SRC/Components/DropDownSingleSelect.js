@@ -367,7 +367,8 @@ const styles = ScaledSheet.create({
     // borderColor:Color.mediumGray,
     width: "90%",
     borderWidth: 1,
-    marginTop: verticalScale(-45),
+    marginLeft:scale(15),
+    marginTop: verticalScale(-28),
     // 
     // position:"absolute",
     // top:scale(-30),

@@ -11,6 +11,7 @@ import {Avatar, Divider} from 'native-base';
 import StepComponent from '../Components/StepComponent';
 import CustomSteps from '../Components/CustomSteps';
 import CustomButton from '../Components/CustomButton';
+import navigationService from '../navigationService';
 
 const GetStarted = () => {
   return (
@@ -55,7 +56,9 @@ const GetStarted = () => {
           // onPress={() => {
           //   navigationService.navigate('TabNavigation')
           // }}
-          onPress={() => {}}
+          onPress={() => {
+            navigationService.navigate("WellnessGoalsScreen")
+          }}
         />
       </LinearGradient>
     </ScreenBoiler>

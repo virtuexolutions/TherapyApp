@@ -94,6 +94,9 @@ const OrderCard = ({item}) => {
             <CustomText style={styles.btn_text}>request a call</CustomText>
           </TouchableOpacity>
           <TouchableOpacity
+          onPress={()=>{
+            navigationService.navigate("MessageScreen")
+          }}
             style={[
               styles.detail_btn,
               {

@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Icon} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -19,7 +19,8 @@ const ThemeIconButton = ({
   iconName="",
   iconType=null,
 }) => {
-  const iconSource = source ?? cart
+  console.log("🚀 ~ ThemeIconButton ~ cart:", cart)
+  const iconSource = source ? source : cart
     ? require('../Assets/Images/cart.png')
     : explore
     ? require('../Assets/Images/categories.png')
@@ -34,7 +35,7 @@ const ThemeIconButton = ({
         favourite && {borderRadius: scale(17)},
       ]}
       onPress={onPress}>
-      {iconName != "" && iconSource && <CustomImage source={iconSource} style={[styles.icon, iconStyle]} />}
+      {iconName == "" && !favourite && iconSource && <Image source={iconSource} style={[styles.icon, iconStyle]} />}
       {iconName && (
         <Icon
         size={scale(15)}
@@ -43,7 +44,7 @@ const ThemeIconButton = ({
         name={iconName}
       />
       )}
-      {favourite && (
+      { favourite && (
         <Icon
           size={scale(15)}
           as={Ionicons}

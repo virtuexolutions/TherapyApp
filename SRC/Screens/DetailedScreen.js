@@ -15,10 +15,13 @@ import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import {color} from 'native-base/lib/typescript/theme/styled-system';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import navigationService from '../navigationService';
+import RequestModal from '../Components/RequestModal';
 
-const DetailedScreen = props => {
-  const fromOrder = true;
-  // const fromOrder = props?.route?.params?.fromOrder;
+const DetailedScreen = ({route}) => {
+  // const fromOrder = true;
+  const fromOrder = route?.params?.fromOrder;
+  const ref= useRef(null);
 
   const refRBSheet = useRef();
   const galleryData = [
@@ -398,10 +401,17 @@ const DetailedScreen = props => {
               // bottom: 10,
               // position: 'absolute',
             }}>
-            <TouchableOpacity style={styles.detail_btn}>
+            <TouchableOpacity style={styles.detail_btn}
+            onPress={()=>{
+              ref.current?.open()
+            }}
+            >
               <CustomText style={styles.btn_text}>request a call</CustomText>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={()=>{
+                navigationService.navigate("MessageScreen");
+              }}
               style={[
                 styles.detail_btn,
                 {
@@ -439,7 +449,9 @@ const DetailedScreen = props => {
                 $590.00
               </CustomText>
             </View>
-            <TouchableOpacity style={styles.detail_btn}>
+            <TouchableOpacity style={styles.detail_btn} onPress={() =>{
+              navigationService.navigate("PurchaseTreatment")
+            }}>
               <CustomText
                 style={{color: Color.white, fontSize: moderateScale(12, 0.6)}}>
                 Get treatment
@@ -447,6 +459,10 @@ const DetailedScreen = props => {
             </TouchableOpacity>
           </View>
         )}
+        <RequestModal
+        ref={ref}
+        
+        />
         {/* </LinearGradient> */}
       </ScreenBoiler>
     </View>

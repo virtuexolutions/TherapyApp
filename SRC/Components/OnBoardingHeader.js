@@ -7,7 +7,7 @@ import Color from '../Assets/Utilities/Color'
 import BackButton from './BackButton'
 import ProgressCircle from './ProgressCircle'
 
-const OnBoardingHeader = ({subtitle, title}) => {
+const OnBoardingHeader = ({subtitle, title, progress, total}) => {
   return (
     <View style={styles.header}>
         <BackButton style={styles.backBtn}/>
@@ -22,8 +22,8 @@ const OnBoardingHeader = ({subtitle, title}) => {
             />
         </View>
            <ProgressCircle
-           progress={2}
-           total={3}
+           progress={progress ?? 0}
+           total={total ?? 3}
            />
             {/* <View style={styles.indicator}>
                

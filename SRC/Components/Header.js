@@ -6,15 +6,16 @@ import ThemeIconButton from './ThemeIconButton';
 import CustomText from './CustomText';
 import {View} from 'native-base';
 import BackButton from './BackButton';
-
-const Header = ({title, showBack, showGreeting, showCart = false}) => {
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import { useDispatch } from 'react-redux';
+import { setUserLogoutAuth } from '../Store/slices/auth';
+const Header = ({title='', showBack, showGreeting, logout,showCart = false}) => {
+  const dispatch = useDispatch();
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, title == '' && {
+      justifyContent:"space-between"
+    }]}>
       {showBack && <BackButton style={styles.backBtn} />}
-      {/* <View
-        style={{
-          width: showBack ? windowWidth * 0.7 : windowWidth * 0.8,
-        }}></View> */}
       <View>
         {title && (
           <View style={{width: !showBack ?windowWidth  : windowWidth * 0.7, alignItems: 'center'}}>
@@ -29,13 +30,9 @@ const Header = ({title, showBack, showGreeting, showCart = false}) => {
         </View>
       )}
       {showCart && <ThemeIconButton cart={true} />}
-      {/* <View style={styles.indicator}>
-               
-            <CustomText
-            children={"2/3"}
-            style={styles.text2}
-            />
-            </View> */}
+      {logout && <ThemeIconButton iconName='logout' iconType={SimpleLineIcons} onPress={()=>{
+        dispatch(setUserLogoutAuth())
+      }} />}
     </View>
   );
 };

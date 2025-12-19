@@ -180,7 +180,11 @@ const LoginScreen = props => {
                     // onPress={() => {
                     //   navigationService.navigate('TabNavigation')
                     // }}
-                    onPress={handleSubmit}
+
+                    onPress={()=>{
+                      dispatch(setUserToken({token:"JWT-token"}))
+                    }}
+                    // onPress={handleSubmit}
                   />
                   <CustomButton
                     isBold

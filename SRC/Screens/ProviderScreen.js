@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {Pressable, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {moderateScale, scale} from 'react-native-size-matters';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Color from '../Assets/Utilities/Color';
@@ -13,6 +13,7 @@ import CustomText from '../Components/CustomText';
 import {Rating} from 'react-native-ratings';
 import CustomButton from '../Components/CustomButton';
 import Review from '../Components/Review';
+import navigationService from '../navigationService';
 
 const ProviderScreen = props => {
   const galleryData = [
@@ -111,15 +112,21 @@ const ProviderScreen = props => {
       <ScreenBoiler
         statusBarBackgroundColor={Color.themeBluishBlack}
         statusBarContentStyle={'light-content'}>
-        <Header title={''} showBack={true} showCart={false} />
+        <Header title={''} 
+        showGreeting={true}
+        logout={true} 
+              
+        />
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={[
             styles.mainScreen,
-            {
-              paddingBottom: moderateScale(190, 0.6),
-            },
-          ]}>
+            
+          ]}
+          contentContainerStyle={{
+            paddingBottom:scale(80)
+          }}
+          >
           <View style={styles.card_con}>
             <View
               style={{
@@ -500,7 +507,7 @@ const ProviderScreen = props => {
                     paddingHorizontal: moderateScale(5, 0.6),
                     borderWidth: 0.5,
                     width: windowWidth * 0.25,
-                    paddingVertical: moderateScale(3, 0.6),
+                    paddingVertical: moderateScale(8, 0.6),
                     borderColor: Color.white,
                     borderRadius: 5,
                     backgroundColor: '#354654',
@@ -535,13 +542,17 @@ const ProviderScreen = props => {
                   //   paddingTop: moderateScale(15, 0.6),
                 },
               ]}>
-              review (453)
+              reviews (453)
             </CustomText>
-            <View
+            <Pressable
+            onPress={()=>{
+              navigationService.navigate("ReviewScreen")
+            }}
               style={{
                 flexDirection: 'row',
               }}>
               <CustomText
+              
                 style={[
                   styles.service_text,
                   {
@@ -562,7 +573,7 @@ const ProviderScreen = props => {
                 size={moderateScale(14, 0.6)}
                 color={Color.white}
               />
-            </View>
+            </Pressable>
           </View>
           <View style={styles.map_con}>
             <FlatList

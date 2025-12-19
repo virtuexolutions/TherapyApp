@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import WellNessGoals from '../Components/WellNessGoals';
 import LinearGradient from 'react-native-linear-gradient';
 import Color from '../Assets/Utilities/Color';
@@ -8,11 +8,14 @@ import CustomButton from '../Components/CustomButton';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {Divider} from 'native-base';
+import ScreenBoiler from '../Components/ScreenBoiler';
+import OnBoardingHeader from '../Components/OnBoardingHeader';
+import navigationService from '../navigationService';
 
 const WellnessGoalsScreen = ({
-  onboardingData,
-  setOnBoardingData,
-  onContinue,
+  // onboardingData,
+  // setOnBoardingData,
+  // onContinue,
 }) => {
   const wellnessGoals = [
     'Manage a health condition',
@@ -23,7 +26,15 @@ const WellnessGoalsScreen = ({
     'Seek professional advice',
     'Establish a support network',
   ];
+  const [wellnessGoalsData ,setWellnessGoalsData ] = useState([]);
   return (
+    <ScreenBoiler statusBarBackgroundColor={Color.themeDarkBlueGray}>
+      <OnBoardingHeader  
+      // subtitle={`Next: ${pageSubtiotle}`}
+      subtitle={`Next: A Few Health Bsics`}
+      progress={1}
+      total={3}
+      />
     <LinearGradient
       style={styles.mainScreen}
       colors={[Color.themeBluishBlack, Color.themeDarkGreen]}>
@@ -38,8 +49,8 @@ const WellnessGoalsScreen = ({
       />
       <WellNessGoals
         data={wellnessGoals}
-        selectedGoal={onboardingData.wellnessGoal}
-        setSelectedGoal={setOnBoardingData}
+        selectedGoals={wellnessGoalsData}
+        setSelectedGoals={setWellnessGoalsData}
       />
 
       <Divider color={Color.themeGrayColor} />
@@ -57,12 +68,13 @@ const WellnessGoalsScreen = ({
         textTransform={'capitalize'}
         marginTop={scale(20)}
         elevation={true}
-        // onPress={() => {
-        //   navigationService.navigate('TabNavigation')
-        // }}
-        onPress={onContinue}
+        onPress={() => {
+          navigationService.navigate('HealthBasicsScreen')
+        }}
+        // onPress={onContinue}
       />
     </LinearGradient>
+    </ScreenBoiler>
   );
 };
 
@@ -82,7 +94,7 @@ const styles = StyleSheet.create({
     color: Color.white,
     fontWeight: 'semibold',
     textTransform: 'none',
-    left:scale(10)
+    left:scale(20)
     // textAlign: 'center',
     // marginTop: verticalScale(10),
 },
@@ -93,6 +105,6 @@ text2: {
     textAlign: 'center',
     // textTransform: 'none',
     marginTop: verticalScale(2),
-    left:scale(10)
+    left:scale(20)
   },
 });

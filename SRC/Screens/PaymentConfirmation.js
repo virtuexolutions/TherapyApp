@@ -8,6 +8,7 @@ import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomButton from '../Components/CustomButton';
 import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
+import navigationService from '../navigationService';
 
 const PaymentConfirmation = () => {
   const paymentData = [
@@ -104,6 +105,9 @@ const PaymentConfirmation = () => {
           width={windowWidth * 0.9}
           height={windowHeight * 0.06}
           bgColor={'#354654'}
+          onPress={()=>{
+            navigationService.navigate("TabNavigation")
+          }}
           textTransform={'capitalize'}
           marginTop={moderateScale(10, 0.6)}
         />
@@ -115,6 +119,9 @@ const PaymentConfirmation = () => {
           width={windowWidth * 0.9}
           height={windowHeight * 0.06}
           bgColor={Color.themeBrand600}
+          onPress={()=>{
+            navigationService.navigate("OrderScreen")
+          }}
           textTransform={'capitalize'}
           marginTop={moderateScale(10, 0.6)}
         />

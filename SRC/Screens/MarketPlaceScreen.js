@@ -8,6 +8,7 @@ import MarketCard from '../Components/MarketCard';
 import ScreenBoiler from '../Components/ScreenBoiler';
 import SearchContainer from '../Components/SearchContainer';
 import {windowHeight, windowWidth} from '../Utillity/utils';
+import navigationService from '../navigationService';
 
 const MarketPlaceScreen = () => {
   return (
@@ -31,7 +32,7 @@ const MarketPlaceScreen = () => {
             width={windowWidth * 0.9}
             height={windowHeight * 0.053}
             style={{
-              backgroundColor: 'transparent',
+              backgroundColor: Color.themeDarkBlueGray,
               borderRadius: moderateScale(10, 0.6),
               borderColor: Color.white,
               borderWidth: 0.1,
@@ -47,13 +48,21 @@ const MarketPlaceScreen = () => {
           />
         </View>
         <MarketCard
-          data={{
-            image: require('../Assets/Images/cart1.png'),
-            title: 'search by products',
-            sub_text: 'Find treatments, packages, services and more.',
-          }}
+        bgImage={require("../Assets/Images/gradient3.png")}
+        OnPressSeeMore={()=>{
+          navigationService.navigate("ProductScreen")
+        }}
+        data={{
+          image: require('../Assets/Images/cart1.png'),
+          title: 'search by products',
+          sub_text: 'Find treatments, packages, services and more.',
+        }}
         />
         <MarketCard
+        bgImage={require("../Assets/Images/gradient4.png")}
+        OnPressSeeMore={()=>{
+
+        }}
           data={{
             image: require('../Assets/Images/userIcon.png'),
             title: 'search by providers',

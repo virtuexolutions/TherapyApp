@@ -4,11 +4,13 @@ import { Icon } from 'native-base';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Color from '../Assets/Utilities/Color';
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
+import { useNavigation } from '@react-navigation/core';
 
 const BackButton = ({style}) => {
+  const navigation= useNavigation();
   return (
     <Pressable style={[styles.button, style]} onPress={() => {
-        // navigation.goBack()
+        navigation.goBack()
     }}>
         <Icon
         name='keyboard-backspace'

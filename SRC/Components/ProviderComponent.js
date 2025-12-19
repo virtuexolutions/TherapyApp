@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useRef } from 'react'
 import CustomImage from './CustomImage'
 import CustomText from './CustomText'
 import ThemeIconButton from './ThemeIconButton'
@@ -7,8 +7,11 @@ import CustomButton from './CustomButton'
 import Color from '../Assets/Utilities/Color'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import { windowWidth } from '../Utillity/utils'
+import navigationService from '../navigationService'
+import RequestModal from './RequestModal'
 
 const ProviderComponent = ({item}) => {
+  const ref= useRef(null);
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
@@ -58,6 +61,9 @@ const ProviderComponent = ({item}) => {
           text={'Request a call'}
           fontSize={moderateScale(12, 0.3)}
           textColor={Color.white}
+          onPress={()=>{
+            ref.current?.open()
+          }}
         //   paddingHorizontal={scale(10)}
         width={scale(110)}
           borderWidth={1.5}
@@ -73,6 +79,9 @@ const ProviderComponent = ({item}) => {
           fontSize={moderateScale(12, 0.3)}
           textColor={Color.white}
         //   paddingHorizontal={scale(10)}
+        onPress={() =>{
+          navigationService.navigate("MessageScreen")
+        }}
           width={scale(110)}
           borderRadius={moderateScale(10, 0.3)}
           height={scale(30)}
@@ -80,6 +89,10 @@ const ProviderComponent = ({item}) => {
           textTransform={'none'}
         />
       </View>
+      <RequestModal
+      ref={ref}
+
+      />
     </View>
   )
 }

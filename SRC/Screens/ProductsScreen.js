@@ -134,7 +134,9 @@ const ProductScreen = () => {
     <ScreenBoiler
       statusBarBackgroundColor={Color.themeBluishBlack}
       statusBarContentStyle={'light-content'}>
-      <Header showGreeting={true} showCart />
+      <Header title={"Products"} 
+      showBack={true}
+      showGreeting={false} showCart={true} />
       <LinearGradient
         style={styles.mainScreen}
         colors={[Color.themeBluishBlack, Color.themeDarkGreen]}>
@@ -157,7 +159,7 @@ const ProductScreen = () => {
               width={windowWidth * 0.9}
               height={windowHeight * 0.053}
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: Color.themeDarkBlueGray,
                 borderRadius: moderateScale(10, 0.6),
                 borderColor: Color.white,
                 borderWidth: 0.1,
@@ -178,7 +180,7 @@ const ProductScreen = () => {
             </CustomText>
             <TouchableOpacity
               onPress={() => {
-                navigationService.navigate('DetailedScreen');
+                navigationService.navigate('SeeAllScreen');
               }}
               style={styles.inner_row}>
               <CustomText

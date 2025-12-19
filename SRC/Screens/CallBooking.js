@@ -47,8 +47,8 @@ import navigationService from '../navigationService';
 
 // export default CallBooking;
 
-const CallBooking = () => {
-  const fromcall =true
+const CallBooking = ({navigation,route}) => {
+  const fromcall =route?.params?.fromCall;
   //  props?.params?.route?.fromcall
   return (
     <ScreenBoiler
@@ -58,7 +58,9 @@ const CallBooking = () => {
         <CustomText isBold style={styles.title}>
           Call
         </CustomText>
-        <TouchableOpacity style={styles.cross_btn}>
+        <TouchableOpacity style={styles.cross_btn} onPress={()=>{
+          navigation.goBack();
+        }}>
           <Icon
             as={Entypo}
             color={Color.white}
@@ -186,6 +188,9 @@ const CallBooking = () => {
           width={windowWidth * 0.9}
           height={windowHeight * 0.06}
           bgColor={'#354654'}
+          onPress={()=>{
+            navigationService.navigate("TabNavigation")
+          }}
           textTransform={'capitalize'}
           marginTop={moderateScale(10, 0.6)}
         />}
@@ -200,7 +205,12 @@ const CallBooking = () => {
           textTransform={'capitalize'}
           marginTop={fromcall ?  windowHeight*0.13:moderateScale(10, 0.6)}
           onPress={() =>{
-            navigationService.navigate('chatScreen',{
+            fromcall ? 
+            navigationService.navigate('AudioCAllScreen',{
+              fromcallBooking :true 
+            })
+            :
+            navigationService.navigate('ChatScreen',{
               fromcallBooking :true 
             })
           }}

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, scale} from 'react-native-size-matters';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Color from '../Assets/Utilities/Color';
@@ -110,7 +110,7 @@ const ChatScreen = props => {
         statusBarContentStyle={'light-content'}>
         <Header
           title={'Messages and calls'}
-          showBack={false}
+          showBack={fromcall}
           showCart={false}
         />
         <ScrollView
@@ -179,7 +179,11 @@ const ChatScreen = props => {
               }
               renderItem={({item}) => {
                 return (
-                  <TouchableOpacity style={styles.chat_card}>
+                  <TouchableOpacity style={styles.chat_card}
+                  onPress={()=>{
+                    navigationService.navigate("MessageScreen")
+                  }}
+                  >
                     <View style={styles.card_image}>
                       <CustomImage
                         style={{
@@ -243,7 +247,7 @@ const ChatScreen = props => {
                 </View>
                 <View
                   style={{
-                    width: windowWidth * 0.55,
+                    width: windowWidth * 0.5,
                     marginHorizontal: moderateScale(8, 0.6),
                   }}>
                   <CustomText style={styles.h1}>
@@ -282,18 +286,19 @@ const ChatScreen = props => {
                   style={{
                     alignItems: 'center',
                     justifyContent: 'center',
+                    marginLeft:scale(5),
                     width: windowWidth * 0.26,
                     // paddingVertical: moderateScale(5, 0.6),
                     backgroundColor: '#354654',
                     borderRadius: 8,
                     borderWidth : 0.4,
                     borderColor : Color.white,
-                    height: windowHeight * 0.03,
+                    height: windowHeight * 0.035,
                   }}>
                   <CustomText
                    onPress={() =>{
                   navigationService.navigate('CallBooking' ,{
-                    fromcall : true
+                    fromCall : true
                   })
                 }}    
                     style={{
@@ -316,7 +321,9 @@ const ChatScreen = props => {
                 }}
                 renderItem={({item}) => {
                   return (
-                    <TouchableOpacity style={styles.chat_card}>
+                    <TouchableOpacity style={styles.chat_card} 
+                  
+                    >
                       <View style={styles.card_image}>
                         <CustomImage
                           style={{
@@ -328,7 +335,7 @@ const ChatScreen = props => {
                       </View>
                       <View
                         style={{
-                          width: windowWidth * 0.66,
+                          width: windowWidth * 0.64,
                           marginHorizontal: moderateScale(8, 0.6),
                         }}>
                         <CustomText style={styles.h1}>{item?.name}</CustomText>
@@ -585,11 +592,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // backgroundColor: 'red',
     width: windowWidth,
-    paddingHorizontal: moderateScale(13, 0.6),
+    paddingHorizontal: moderateScale(15, 0.6),
     borderBottomWidth: 0.4,
     borderColor: Color.white,
     marginVertical: moderateScale(5, 0.6),
     paddingVertical: moderateScale(5, 0.6),
+
     paddingBottom: moderateScale(10, 0.6),
   },
   first_row: {

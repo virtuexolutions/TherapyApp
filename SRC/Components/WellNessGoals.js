@@ -9,21 +9,26 @@ import { Pressable} from 'react-native'
 import { windowHeight, windowWidth } from '../Utillity/utils';
 import CustomTile from './CustomTile';
 
-const WellNessGoals = ({data, selectedGoal, setSelectedGoal}) => {
+const WellNessGoals = ({data, selectedGoals=[], setSelectedGoals}) => {
+  console.log("🚀 ~ WellNessGoals ~ selectedGoals:", selectedGoals)
   
     return (
     <View style={styles.mainContainer}>
      {data?.map((item,index) => <CustomTile 
      title={item}
-     selected={selectedGoal?.toLowerCase() == item?.toLowerCase()}
+     selected={selectedGoals?.includes(item)}
      onPress={()=>{
-        setSelectedGoal((prev) => ({...prev, wellnessGoal:item}));
+        if(selectedGoals?.includes(item)){
+            setSelectedGoals(prev => prev.filter(goal => goal != item));
+        }else{
+            setSelectedGoals((prev) => [...prev, item]);
+        }
      }}/>)}
-     <View style={{height: windowHeight * 0.1}}/>
+     <View style={{height: windowHeight * 0.075}}/>
     </View>
   )
 }
-
+ 
 
 export default WellNessGoals
 

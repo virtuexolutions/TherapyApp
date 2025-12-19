@@ -8,6 +8,7 @@ const initialState = {
   userWalkThrough: false,
   isGoalCreated : false ,
   role : '',
+  onBoarding:false,
 };
 
 const AuthSlice = createSlice({
@@ -30,11 +31,15 @@ const AuthSlice = createSlice({
     setUserLogoutAuth(state, action) {
       state.token = null;
       state.fcmToken = null;
+      state.onBoarding=false
     },
     setWalkThrough(state, action) {
       state.userWalkThrough = action.payload;
       // console.log("🚀 ~ setWalkThrough ~ action.payload:", action.payload)
     },
+    setOnBoarding (state, action){
+      state.onBoarding= action.payload;
+    }
   },
 });
 
@@ -44,7 +49,8 @@ export const {
   setUserToken,
   SetFCMToken,
   setWalkThrough,
-  SetUserRole
+  SetUserRole,
+  setOnBoarding
 } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

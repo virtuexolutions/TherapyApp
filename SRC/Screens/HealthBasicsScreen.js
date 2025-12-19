@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import WellNessGoals from '../Components/WellNessGoals';
 import LinearGradient from 'react-native-linear-gradient';
 import Color from '../Assets/Utilities/Color';
@@ -11,14 +11,29 @@ import {Divider} from 'native-base';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import DropDownSingleSelect from '../Components/DropDownSingleSelect';
 import FormWrapper from '../Components/FormWrapper';
+import OnBoardingHeader from '../Components/OnBoardingHeader';
+import ScreenBoiler from '../Components/ScreenBoiler';
+import navigationService from '../navigationService';
 const HealthBasicsScreen = ({onContinue}) => {
+  const [age, setAge] = useState('');
+const [gender, setGender] = useState('');
+const [allergies, setAllergies] = useState('');
+const [conditions, setConditions] = useState('');
   return (
-    
+    <ScreenBoiler statusBarBackgroundColor={Color.themeDarkBlueGray}>
+    <OnBoardingHeader  
+    // subtitle={`Next: ${pageSubtiotle}`}
+    subtitle={`Next: Your Preferences For care`}
+    progress={1}
+    total={3}
+    /> 
     <LinearGradient
     style={styles.mainScreen}
     colors={[Color.themeBluishBlack, Color.themeDarkGreen]}>
-      <ScrollView style={styles.mainScreen} contentContainerStyle={{    alignItems:"center",
-    justifyContent: 'center',}}>
+      <ScrollView style={styles.mainScreen} contentContainerStyle={{    
+        alignItems:"center",
+        justifyContent: 'center',}}>
+
       <CustomText
         children={'A few health basics'}
         style={styles.text1}
@@ -28,7 +43,7 @@ const HealthBasicsScreen = ({onContinue}) => {
         children={'Your personal health information is encrypted, secure, and will always be kept private'}
         style={styles.text2}
       />
-        {/* <FormWrapper> */}
+        <FormWrapper>
       <View style={styles.form}>
     
     {/* <FormWrapper> */}
@@ -38,8 +53,8 @@ const HealthBasicsScreen = ({onContinue}) => {
         title={'Age'}
         titleColor={Color .gray50}
         placeholder={'Enter your Age'}
-        setText={()=>{}}
-        value={""}
+        setText={setAge}
+        value={age}
         iconIsImage={true}
         leftIcon={true}
         iamgeSrc={require("../Assets/Images/calendar.png")}
@@ -60,16 +75,16 @@ const HealthBasicsScreen = ({onContinue}) => {
         title={'Gender'}
         titleColor={Color .gray50}
         array={["Male", "Female"]}
-        item={""}
-        setItem={() =>{}}
+        item={gender}
+        setItem={setGender}
         width={windowWidth * 0.9}
         // placeHolderColor={Color.darkGray}
         // placeholder={'Ápproval for Admittance'}
         placeholder={'Select Your Gender'}
         dropdownStyle={{
           borderBottomWidth: 0,
-          width: windowWidth * 0.9,
-          marginTop: 10,
+          // width: windowWidth * 0.9,
+          // marginTop: 10,
         }}
         leftIcon={true}
         iconIsImage={true}
@@ -87,8 +102,8 @@ const HealthBasicsScreen = ({onContinue}) => {
                   title={'Known allergies'}
                   titleColor={Color .gray50}
                   placeholder={'Describe any known allergies you may have'}
-                  setText={()=>{}}
-                  value={""}
+                  setText={setAllergies}
+                  value={allergies}
                   multiline={true}
                   numberOfLines={6}
                   viewHeight={0.16}
@@ -105,10 +120,10 @@ const HealthBasicsScreen = ({onContinue}) => {
                   />
                 <TextInputWithTitle
                   title={'Pre-existing conditions'}
-                  titleColor={Color .gray50}
+                  titleColor={Color.gray50}
                   placeholder={'Describe any pre-existing conditions you may have'}
-                  setText={()=>{}}
-                  value={""}
+                  setText={setConditions}
+                  value={conditions}
                   multiline={true}
                   numberOfLines={6}
                   viewWidth={0.9}
@@ -125,7 +140,7 @@ const HealthBasicsScreen = ({onContinue}) => {
                   />
 
       </View>
-      {/* </FormWrapper> */}
+      </FormWrapper>
       {/* </FormWrapper> */}
       <Divider color={Color.themeGrayColor} />
       <CustomButton
@@ -142,13 +157,14 @@ const HealthBasicsScreen = ({onContinue}) => {
         textTransform={'capitalize'}
         marginTop={scale(20)}
         elevation={true}
-        // onPress={() => {
-          //   navigationService.navigate('TabNavigation')
-          // }}
-          onPress={onContinue}
+        onPress={() => {
+            navigationService.navigate('PreferencesForCare')
+          }}
+          // onPress={onContinue}
           />
           </ScrollView>
     </LinearGradient>
+    </ScreenBoiler>
   );
 };
 

@@ -17,9 +17,10 @@ const Preferences = ({data, selectedPreference, setSelectedPreference}) => {
      title={item}
      selected={selectedPreference?.toLowerCase() == item?.toLowerCase()}
      onPress={()=>{
+        setSelectedPreference(item)
         // setSelectedGoal((prev) => ({...prev, wellnessGoal:item}));
      }}/>)}
-     <View style={{height: windowHeight * 0.1}}/>
+     <View style={{height: windowHeight * 0.11}}/>
     </View>
   )
 }

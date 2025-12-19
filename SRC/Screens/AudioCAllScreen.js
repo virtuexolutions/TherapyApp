@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, scale} from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import Header from '../Components/Header';
 import ScreenBoiler from '../Components/ScreenBoiler';
@@ -14,8 +14,10 @@ import CustomText from '../Components/CustomText';
 import {color} from 'native-base/lib/typescript/theme/styled-system';
 import CustomButton from '../Components/CustomButton';
 import {mode} from 'native-base/lib/typescript/theme/tools';
+import { useNavigation } from '@react-navigation/core';
 
 const AudioCAllScreen = () => {
+  const navigation= useNavigation();
   const iscallConnected = true;
   const paymentData = [
     {
@@ -182,7 +184,9 @@ const AudioCAllScreen = () => {
             // onPress={() => {
             //   navigationService.navigate('TabNavigation')
             // }}
-            //   onPress={onContinue}
+              onPress={()=>{
+                navigation?.pop(2);
+              }}
           />
         </View>
       </View>
@@ -269,8 +273,8 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(5, 0.6),
   },
   btn: {
-    height: windowHeight * 0.052,
-    width: windowHeight * 0.075,
+    height: scale(50),
+    width:scale(65),
     borderRadius: 18,
     marginHorizontal: moderateScale(10, 0.6),
     borderWidth: 1,

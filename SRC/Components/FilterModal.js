@@ -8,13 +8,15 @@ import {Icon} from 'native-base';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import SearchContainer from './SearchContainer';
 import TextInputWithTitle from './TextInputWithTitle';
+import navigationService from '../navigationService';
+import ThemeIconButton from './ThemeIconButton';
 
 const FilterModal = ({setRef, ref}) => {
   const [maxPrice, setMaxPrice] = useState('');
-  const [minPrice, setinPrice] = useState('');
+  const [minPrice, setMinPrice] = useState('');
 
   const treaments = [
     'Dentistry',
@@ -36,7 +38,7 @@ const FilterModal = ({setRef, ref}) => {
         container: {
           borderTopRightRadius: 10,
           borderTopLeftRadius: 10,
-          height: windowHeight * 0.62,
+          height: windowHeight * 0.8,
         },
       }}>
       <View
@@ -47,14 +49,22 @@ const FilterModal = ({setRef, ref}) => {
         }}>
         <View style={styles.header}>
           <CustomText style={styles.title}>filter </CustomText>
-          <TouchableOpacity style={styles.cross_btn}>
+          {/* <TouchableOpacity style={styles.cross_btn}>
             <Icon
               as={Entypo}
               color={Color.white}
               name="cross"
               size={moderateScale(18, 0.6)}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <ThemeIconButton
+          cross
+          iconStyle={{width:scale(10), height:scale(10)}
+        }
+        onPress={()=>{
+          ref.current?.close()
+        }}
+          />
         </View>
         <View
           style={{
@@ -109,8 +119,8 @@ const FilterModal = ({setRef, ref}) => {
               iconType={Feather}
               //   title={'minimum'}
               placeholder={''}
-              setText={setMaxPrice}
-              value={maxPrice}
+              setText={setMinPrice}
+              value={minPrice}
               viewHeight={0.05}
               viewWidth={0.43}
               inputWidth={0.4}
@@ -166,7 +176,11 @@ const FilterModal = ({setRef, ref}) => {
             }}>
             clear all
           </CustomText>
-          <TouchableOpacity style={styles.save_btn}>
+          <TouchableOpacity 
+          onPress={()=>{
+            ref?.current?.close()
+          }}
+          style={styles.save_btn}>
             <CustomText
               style={{
                 fontSize: moderateScale(13, 0.6),
@@ -224,18 +238,23 @@ const styles = StyleSheet.create({
   },
   map_con: {
     flexDirection: 'row',
+    // gap
+    alignItems:"center",
+    justifyContent:"center",
+    gap:scale(15),
     flexWrap: 'wrap',
   },
   btn: {
-    width: windowWidth * 0.42,
-    height: windowHeight * 0.05,
+    width: windowWidth * 0.4,
+    paddingVertical:verticalScale(10),
+    // height: windowHeight * 0.05,
     borderWidth: 0.5,
     borderColor: Color.white,
     borderRadius: 10,
     paddingHorizontal: moderateScale(10, 0.6),
     alignItems: 'flex-start',
     justifyContent: 'center',
-    marginHorizontal: moderateScale(15, 0.6),
+    // marginHorizontal: moderateScale(15, 0.6),
     marginVertical: moderateScale(5, 0.6),
   },
   btn_text: {
@@ -253,15 +272,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    paddingHorizontal: moderateScale(15, 0.6),
+    paddingHorizontal: scale(15),
     paddingTop: moderateScale(20, 0.6),
   },
   save_btn: {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    height: windowHeight * 0.04,
-    width: windowWidth * 0.3,
+    height: scale(40),
+    width: windowWidth * 0.45,
     backgroundColor: '#069571',
     // borderWidth:
   },

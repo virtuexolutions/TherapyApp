@@ -8,7 +8,7 @@ import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import ScreenBoiler from '../Components/ScreenBoiler';
 import {setUserToken} from '../Store/slices/auth';
-import {SetUserRole} from '../Store/slices/auth-slice';
+import {SetUserRole} from '../Store/slices/auth';
 import {setUserLogOut} from '../Store/slices/common';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 

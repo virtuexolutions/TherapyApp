@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
 import Feather from 'react-native-vector-icons/Feather';
 import Color from '../Assets/Utilities/Color';
 import CustomImage from '../Components/CustomImage';
@@ -9,6 +9,7 @@ import {windowHeight, windowWidth} from '../Utillity/utils';
 import {Icon} from 'native-base';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {color} from 'native-base/lib/typescript/theme/styled-system';
+import navigationService from '../navigationService';
 
 const ProductCard = ({item, from}) => {
   console.log('first= ========================= >>>> item here', from, item);
@@ -17,9 +18,13 @@ const ProductCard = ({item, from}) => {
       style={[
         styles.card_con,
         {
-          height:
-            from == 'treatments' ? windowHeight * 0.25 : windowHeight * 0.2,
-        },
+    paddingVertical: from == 'treatments' ? moderateScale(10) : moderateScale(10, 0.6),
+
+        }
+        // {
+        //   height:
+        //     from == 'treatments' ? windowHeight * 0.25 : windowHeight * 0.2,
+        // },
       ]}>
       <View style={styles.row}>
         <View style={styles.image_con}>
@@ -116,7 +121,10 @@ const ProductCard = ({item, from}) => {
         )}
       </View>
       {from != 'packages' ? (
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={() =>{
+          console.log("first")
+          navigationService.navigate("DetailedScreen")
+        }}>
           <CustomText style={styles.btn_text}>see more information</CustomText>
         </TouchableOpacity>
       ) : (
@@ -154,10 +162,13 @@ export default ProductCard;
 const styles = StyleSheet.create({
   card_con: {
     backgroundColor: '#1B2730',
+    // backgroundColor: 'red',
     width: windowWidth * 0.75,
+
     paddingHorizontal: moderateScale(10, 0.6),
-    paddingVertical: moderateScale(10, 0.6),
-    marginVertical: moderateScale(10, 0.6),
+    // marginVertical: moderateScale(10, 0.6),
+    marginTop:moderateScale(10),
+    marginBottom:moderateScale(5),
     marginRight: moderateScale(10, 0.6),
     borderWidth: 1,
     borderColor: '#374653',
@@ -210,6 +221,7 @@ const styles = StyleSheet.create({
   btn: {
     width: windowWidth * 0.68,
     borderWidth: 1,
+    paddingVertical:verticalScale(6),
     backgroundColor: '#354654',
     padding: moderateScale(4, 0.6),
     borderColor: Color.white,
@@ -243,7 +255,7 @@ const styles = StyleSheet.create({
   },
   detail_btn: {
     width: windowWidth * 0.38,
-    height: windowHeight * 0.03,
+    // height: windowHeight * 0.03,
     marginTop: moderateScale(6, 0.6),
 
     backgroundColor: '#354654',

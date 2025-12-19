@@ -103,6 +103,9 @@ const LayoutBottomSheet = ({ref}) => {
               ListFooterComponent={
                 <CustomButton
                   isBold
+                  onPress={()=>{
+                    ref.current?.close();
+                  }}
                   text={'Save'}
                   fontSize={moderateScale(12, 0.3)}
                   textColor={Color.white}

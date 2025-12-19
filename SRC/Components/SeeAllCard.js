@@ -9,13 +9,17 @@ import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import FilterModal from './FilterModal';
+import navigationService from '../navigationService';
 
 const SeeAllCard = ({item, from}) => {
  
  
 
   return (
-    <View
+    <TouchableOpacity
+    onPress={()=>{
+      navigationService.navigate("DetailedScreen")
+    }}
       style={[
         styles.card_con,
         {
@@ -182,7 +186,7 @@ const SeeAllCard = ({item, from}) => {
         </View>
       )} */}
      
-    </View>
+    </TouchableOpacity>
   );
 };
 

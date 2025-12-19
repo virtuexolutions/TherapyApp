@@ -20,20 +20,13 @@ import {
   requestLocationPermission,
   requestWritePermission
 } from './SRC/Utillity/utils';
-import DetailedScreen from './SRC/Screens/DetailedScreen';
-import ProductScreen from './SRC/Screens/ProductsScreen';
-import PurchaseTreatment from './SRC/Screens/PurchaseTreatment';
-import PaymentConfirmation from './SRC/Screens/PaymentConfirmation';
-import OrderScreen from './SRC/Screens/OrderScreen';
-import ProviderScreen from './SRC/Screens/ProviderScreen';
-import SpecialistScreen from './SRC/Screens/SpecialistScreen';
-import ReviewScreen from './SRC/Screens/ReviewScreen';
-import ChatScreen from './SRC/Screens/ChatScreen';
-import CallBooking from './SRC/Screens/CallBooking';
-import AudioCAllScreen from './SRC/Screens/AudioCAllScreen';
+
 import VideoCallScreen from './SRC/Screens/VideoCallScreen';
-import ChatScreen from './SRC/Screens/ChatScreen';
-import Chat from './SRC/Screens/ChatScreen';
+import AppNavigator from './SRC/appNavigation';
+import Support from './SRC/Screens/Support';
+
+
+
 
 const App = () => {
   const [publishableKey, setPublishableKey] = useState('');
@@ -74,11 +67,7 @@ const MainContainer = () => {
   if (isloading == true) {
     return <SplashScreen />;
   }
-  // return <AppNavigator />;
-  // return <OnboardingScreen/>;
-  // return <LifeStyle/>;
-  // return <SetupAICoach/>;
-  return <VideoCallScreen/>;
+  return <AppNavigator />;
 };
 
 const useloader = value => {

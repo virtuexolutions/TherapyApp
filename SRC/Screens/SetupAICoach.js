@@ -17,13 +17,18 @@ import CustomTile from '../Components/CustomTile';
 import CustomImage from '../Components/CustomImage';
 import { Path, Svg } from 'react-native-svg';
 import { prepareAutoBatched } from '@reduxjs/toolkit';
+import navigationService from '../navigationService';
+import { useDispatch } from 'react-redux';
+import { setOnBoarding } from '../Store/slices/auth';
 const SetupAICoach = ({onContinue}) => {
+  const dispatch = useDispatch();
   const [coachName, setCoachName] = useState('');
   const [selectedCoachBehaviours, setSelectedCoachBehaviours] = useState([]);
   const behaviours= selectedCoachBehaviours.map(item => item + ",")
   return (
     <ScreenBoiler statusBarBackgroundColor={Color.themeDarkBlueGray}>
       <OnBoardingHeader
+        progress={2}
         title={'Set up your AI Coach'}
         subtitle={`Next: Connect your health data`}
       />
@@ -98,10 +103,11 @@ const SetupAICoach = ({onContinue}) => {
             textTransform={'capitalize'}
             marginTop={scale(20)}
             elevation={true}
-            // onPress={() => {
-            //   navigationService.navigate('TabNavigation')
-            // }}
-            onPress={onContinue}
+            onPress={() => {
+              // navigationService.navigate('TabNavigation')
+              dispatch(setOnBoarding(true))
+            }}
+            // onPress={onContinue}
           />
         </ScrollView>
       </LinearGradient>
@@ -181,7 +187,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-between',
     alignItems: 'center',
     // paddingBottom: verticalScale(100),
-    height: windowHeight * 0.78,
+    height: windowHeight * 0.73,
     // alignSelf:"center",
     width: windowWidth,
   },

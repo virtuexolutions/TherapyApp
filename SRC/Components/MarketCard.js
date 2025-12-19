@@ -1,25 +1,25 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ImageBackground, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import LinearGradient from 'react-native-linear-gradient';
-const MarketCard = ({data}) => {
+const MarketCard = ({data, bgImage,OnPressSeeMore}) => {
   console.log('dataaaaaaa ,,,,,,,,,,,,,,,', data);
   return (
-     <LinearGradient
-        colors={["#0b7a70", "#166f6a", "#115a53"]}
-      start={{ x:1, y: 0 }}
-      end={{ x: 0, y: 1 }}
+     <ImageBackground
+     source={bgImage}
       style={styles.card_Con}
     >
     {/* <View style={styles.card_Con}> */}
       <View style={styles.text_con}>
         <CustomText style={styles.h1}>{data?.title}</CustomText>
         <CustomText style={styles.h2}>{data?.sub_text}</CustomText>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={()=>{
+          OnPressSeeMore()
+        }}>
           <CustomText style={styles.btn_text}>See more</CustomText>
         </TouchableOpacity>
       </View>
@@ -42,7 +42,7 @@ const MarketCard = ({data}) => {
         <CustomImage style={styles.image} source={data?.image} />
       </View>
     {/* </View> */}
-    </LinearGradient>
+    </ImageBackground>
   );
 };
 
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     marginVertical: moderateScale(10, 0.6),
     borderRadius: moderateScale(10, 0.6),
     flexDirection: 'row',
+    overflow:"hidden"
   },
   text_con: {
     width: windowWidth * 0.619,

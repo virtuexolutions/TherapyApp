@@ -13,6 +13,7 @@ import CustomImage from '../Components/CustomImage';
 import CustomText from '../Components/CustomText';
 import {color} from 'native-base/lib/typescript/theme/styled-system';
 import CustomButton from '../Components/CustomButton';
+import navigationService from '../navigationService';
 
 const PurchaseTreatment = () => {
   const paymentData = [
@@ -167,9 +168,9 @@ const PurchaseTreatment = () => {
           textTransform={'capitalize'}
           marginTop={moderateScale(30,.6)}
           elevation={true}
-          // onPress={() => {
-          //   navigationService.navigate('TabNavigation')
-          // }}
+          onPress={() => {
+            navigationService.navigate('PaymentConfirmation')
+          }}
         //   onPress={onContinue}
         />
       </ScrollView>

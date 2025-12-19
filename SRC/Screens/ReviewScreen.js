@@ -153,7 +153,7 @@ const ReviewScreen = props => {
       <ScreenBoiler
         statusBarBackgroundColor={Color.themeBluishBlack}
         statusBarContentStyle={'light-content'}>
-        <Header title={' '} showBack={true} showCart={true} />
+        <Header title={' '} showBack={true}  showCart={true} />
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={[

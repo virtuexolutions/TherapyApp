@@ -6,7 +6,7 @@ import {Icon} from 'native-base';
 import React from 'react';
 import {View} from 'react-native';
 import {enableScreens} from 'react-native-screens';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, s, scale} from 'react-native-size-matters';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // 💡
 import {useSelector} from 'react-redux';
@@ -18,7 +18,7 @@ import AiScreen from './Screens/AiScreen';
 import AppointmentManagement from './Screens/AppointmentManagement';
 import BankDetails from './Screens/BankDetails';
 import BookingScreen from './Screens/BookingScreen';
-import Chat from './Screens/Chat';
+
 import CompairProvider from './Screens/CompairProvider';
 import Dashboard from './Screens/Dashboard';
 import DetailScreen from './Screens/DetailScreen';
@@ -62,22 +62,37 @@ import ChatScreen from './Screens/ChatScreen';
 import CallBooking from './Screens/CallBooking';
 import AudioCAllScreen from './Screens/AudioCAllScreen';
 import VideoCallScreen from './Screens/VideoCallScreen';
+import Color from './Assets/Utilities/Color';
+import HomeScreen from './Screens/HomeScreen';
+import MenuScreen from './Screens/MenuScreen';
+import CustomImage from './Components/CustomImage';
+import GetStarted from './Screens/GetStarted';
+import WellnessGoalsScreen from './Screens/WellnessGoalsScreen';
+import HealthBasicsScreen from './Screens/HealthBasicsScreen';
+import PreferencesForCare from './Screens/PreferencesForCare';
+import LifeStyle from './Screens/LifeStyle';
+import SetupAICoach from './Screens/SetupAICoach';
+import MessagesScreen from './Screens/MessagesScreen';
+import MessageScreen from './Screens/MessageScreen';
 
 enableScreens();
 const AppNavigator = () => {
   const walkThrough = useSelector(state => state.authReducer.userWalkThrough);
   const role = useSelector(state => state.authReducer.role);
   const token = useSelector(state => state.authReducer.token);
+  const onBoarding = useSelector(state => state.authReducer.onBoarding);
+  console.log("🚀 ~ AppNavigator ~ onBoarding:", onBoarding)
 
   const RootNav = createNativeStackNavigator();
 
   const AppNavigatorContainer = () => {
-    const firstScreen =
-      walkThrough == false
-        ? 'WalkThroughScreen'
-        : token == null
-        ? 'SelectRole'
-        : 'TabNavigation';
+    const firstScreen = token== null ? "LoginScreen" : onBoarding == false ?  "GetStarted" : "TabNavigation"
+  
+    // walkThrough == false
+      //   ? 'WalkThroughScreen'
+      //   : token == null
+      //   ? 'SelectRole'
+      //   : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
@@ -89,12 +104,22 @@ const AppNavigator = () => {
             component={WalkThroughScreen}
           />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
+          <RootNav.Screen name="GetStarted" component={GetStarted} />
+          <RootNav.Screen name="WellnessGoalsScreen" component={WellnessGoalsScreen} />
+          <RootNav.Screen name="HealthBasicsScreen" component={HealthBasicsScreen} />
+          <RootNav.Screen name="PreferencesForCare" component={PreferencesForCare} />
+          <RootNav.Screen name="LifeStyle" component={LifeStyle} />
+          <RootNav.Screen name="SetupAICoach" component={SetupAICoach} />
+
+
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="VerifyNumber" component={VerifyNumber} />
           <RootNav.Screen name="UploadImages" component={UploadImages} />
           <RootNav.Screen name="BankDetails" component={BankDetails} />
           <RootNav.Screen name="Home" component={Home} />
           <RootNav.Screen name="Discount" component={Discount} />
+          <RootNav.Screen name="MessageScreen" component={MessageScreen} />
+          
           <RootNav.Screen name="Setting" component={Setting} />
           <RootNav.Screen name="TabNavigation" component={TabNavigation} />
           <RootNav.Screen name="MemberPerks" component={MemberPerks} />
@@ -115,7 +140,7 @@ const AppNavigator = () => {
           <RootNav.Screen name="PaitentReview" component={PaitentReview} />
           <RootNav.Screen name="journeyGuide" component={journeyGuide} />
           <RootNav.Screen name="Language" component={Language} />
-          <RootNav.Screen name="Chat" component={Chat} />
+          {/* <RootNav.Screen name="Chat" component={Chat} /> */}
           <RootNav.Screen name="AddDetails" component={AddDetails} />
           <RootNav.Screen
             name="MarketPlaceScreen"
@@ -134,14 +159,14 @@ const AppNavigator = () => {
           />
           <RootNav.Screen name="OrderScreen" component={OrderScreen} />
           <RootNav.Screen
-            name="SpecialistScreen "
+            name="SpecialistScreen"
             component={SpecialistScreen}
           />
 
-          <RootNav.Screen name="SpecialistScreen " component={ReviewScreen} />
+          <RootNav.Screen name="ReviewScreen" component={ReviewScreen} />
           <RootNav.Screen name="CallBooking" component={CallBooking} />
 
-          <RootNav.Screen name="ChatScreen " component={ChatScreen} />
+          <RootNav.Screen name="ChatScreen" component={ChatScreen} />
 
           <RootNav.Screen name="AudioCAllScreen" component={AudioCAllScreen} />
           <RootNav.Screen name="VideoCallScreen" component={VideoCallScreen} />
@@ -172,6 +197,146 @@ const AppNavigator = () => {
   return <AppNavigatorContainer />;
 };
 
+// export const TabNavigation = () => {
+//   const Tabs = createBottomTabNavigator();
+//   const role = useSelector(state => state.authReducer.role);
+//   console.log(role, 'rollllllllllllllllleeeeee');
+//   // const role = 'user';
+
+//   return (
+//     <Tabs.Navigator
+//       // tabBar={(props) => {
+//       //   return (
+//       //     <LinearGradient
+//       //       colors={['red', 'blue']}
+
+//       //       start={[1, 0]}
+//       //       end={[0, 0]}
+//       //     >
+//       //       <BottomTabBar
+//       //         {...props}
+//       //         style={{ backgroundColor: 'transparent' }}
+//       //       />
+//       //     </LinearGradient>
+//       //   );
+//       // }}
+//       screenOptions={({route}) => ({
+//         headerShown: false,
+//         tabBarShowLabel: false,
+//         tabBarStyle: {
+//           backgroundColor: Color.white,
+//           // backgroundColor: Color.red,
+//           borderTopLeftRadius: 20,
+//           borderTopRightRadius: 20,
+//           // paddingVertical:5
+//           height: windowHeight * 0.08,
+//         },
+//         tabBarIcon: ({focused}) => {
+//           let iconName;
+//           letcolor = focused ? '#8B9781' : Color.veryLightGray;
+//           let size = moderateScale(20, 0.3);
+//           let type = Ionicons;
+//           if (route.name === 'Home') {
+//             iconName = focused ? 'home' : 'home-outline';
+//             color = focused ? '#8B9781' : Color.veryLightGray;
+//             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+//           } else if (route.name === 'Search') {
+//             iconName = focused ? 'search' : 'search';
+//             type = Ionicons;
+//             color = focused ? '#8B9781' : Color.veryLightGray;
+//             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+//           } else if (route.name === 'Inbox') {
+//             iconName = focused ? 'message-circle' : 'message-circle';
+//             color = focused ? '#8B9781' : Color.veryLightGray;
+//             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+//             type = Feather;
+//           } else if (route?.name == 'Profile') {
+//             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+//             iconName = focused ? 'settings-outline' : 'settings';
+//             color = focused ? '#8B9781' : Color.veryLightGray;
+//             type = Ionicons;
+//           } else {
+//             iconName = focused ? 'settings-outline' : 'settings';
+//             color = focused ? '#8B9781' : Color.veryLightGray;
+//             size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+//             type = Ionicons;
+//           }
+//           return route.name == 'MemberPerks' ? (
+//             <View
+//               style={{
+//                 top: role == 'user' ? 0 : 15,
+//                 height:
+//                   role == 'user'
+//                     ? moderateScale(60, 0.3)
+//                     : moderateScale(50, 0.6),
+//                 width: moderateScale(80, 0.3),
+//                 borderRadius: moderateScale(30, 0.3),
+//                 backgroundColor: '#8B9781',
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//               }}>
+//               <Icon
+//                 name={'plus'}
+//                 as={Feather}
+//                 color={Color.white}
+//                 size={moderateScale(35, 0.6)}
+//               />
+//             </View>
+//           ) : (
+//             <View
+//               style={{
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//                 // backgroundColor: 'green',
+//                 width: moderateScale(55, 0.6),
+//                 height: moderateScale(40, 0.6),
+//                 marginTop: moderateScale(20, 0.6),
+//               }}>
+//               <Icon name={iconName} as={type} color={color} size={size} />
+//               <CustomText
+//                 style={{
+//                   // backgroundColor: 'red',
+//                   fontSize: moderateScale(10, 0.6),
+//                   width: windowWidth * 0.18,
+//                   textAlign: 'center',
+//                   color: Color.btn_Color,
+//                 }}>
+//                 {route?.name}
+//               </CustomText>
+//             </View>
+//           );
+//         },
+//         tabBarShowLabel: false,
+//         tabBarBackground: () => (
+//           <View style={{flex: 1}}>
+//             <View
+//               style={{
+//                 height: windowHeight * 0.4,
+//                 backgroundColor: Color.white,
+//                 borderRadius: moderateScale(15, 0.6),
+//               }}
+//             />
+//           </View>
+//         ),
+//       })}>
+//       <Tabs.Screen
+//         name={'Home'}
+//         component={role === 'user' ? AiScreen : Dashboard}
+//       />
+//       <Tabs.Screen
+//         name={'Search'}
+//         component={role === 'user' ? Directory : SearchScreen}
+//       />
+//       <Tabs.Screen
+//         name={'MemberPerks'}
+//         component={role === 'user' ? MemberPerks : PerformanceAndAnalytics}
+//       />
+//       <Tabs.Screen name={'Inbox'} component={Chat} />
+//       <Tabs.Screen name={'setting'} component={Setting} />
+//     </Tabs.Navigator>
+//   );
+// };
+
 export const TabNavigation = () => {
   const Tabs = createBottomTabNavigator();
   const role = useSelector(state => state.authReducer.role);
@@ -180,101 +345,79 @@ export const TabNavigation = () => {
 
   return (
     <Tabs.Navigator
-      // tabBar={(props) => {
-      //   return (
-      //     <LinearGradient
-      //       colors={['red', 'blue']}
-
-      //       start={[1, 0]}
-      //       end={[0, 0]}
-      //     >
-      //       <BottomTabBar
-      //         {...props}
-      //         style={{ backgroundColor: 'transparent' }}
-      //       />
-      //     </LinearGradient>
-      //   );
-      // }}
+     
       screenOptions={({route}) => ({
         headerShown: false,
+        headerPressOpacity:0.2,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: Color.white,
+          backgroundColor: Color.themeBluishBlack,
           // backgroundColor: Color.red,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
+          borderTopLeftRadius: moderateScale(25,0.6),
+          borderTopRightRadius: moderateScale(25,0.6),
+          paddingHorizontal:scale(14),
           // paddingVertical:5
+          position:"absolute",
+          borderTopWidth:0.5,
+          borderTopColor:Color.themeLightBlueGray,
           height: windowHeight * 0.08,
         },
         tabBarIcon: ({focused}) => {
           let iconName;
-          letcolor = focused ? '#8B9781' : Color.veryLightGray;
+          let color = focused ? '#8B9781' : Color.veryLightGray;
           let size = moderateScale(20, 0.3);
           let type = Ionicons;
           if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-            color = focused ? '#8B9781' : Color.veryLightGray;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
-          } else if (route.name === 'Search') {
-            iconName = focused ? 'search' : 'search';
+            iconName = focused ? require("./Assets/Images/home.png") : require("./Assets/Images/home.png");
+            color = focused ? Color.themeBrand500 : Color.white;
+            size = focused ? scale(20) : scale(18);
+          } else if (route.name === 'Messages') {
+            iconName = focused ? require("./Assets/Images/chat.png") : require("./Assets/Images/chat.png");
             type = Ionicons;
-            color = focused ? '#8B9781' : Color.veryLightGray;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
-          } else if (route.name === 'Inbox') {
-            iconName = focused ? 'message-circle' : 'message-circle';
-            color = focused ? '#8B9781' : Color.veryLightGray;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+            color = focused ? Color.themeBrand500 : Color.white;
+            size = focused ? scale(20) : scale(18);
+          } else if (route.name === 'MarketPlace') {
+            iconName = focused ? require("./Assets/Images/bag-filled.png") : require("./Assets/Images/bag.png");
+            color = focused ? Color.themeBrand500 : Color.white;
+            size = focused ? scale(20) : scale(18);
             type = Feather;
-          } else if (route?.name == 'Profile') {
-            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
-            iconName = focused ? 'settings-outline' : 'settings';
-            color = focused ? '#8B9781' : Color.veryLightGray;
+          } else if (route?.name == 'Menu') {
+            size = focused ? scale(20) : scale(18);
+            iconName = focused ? require("./Assets/Images/hamburger.png") : require("./Assets/Images/hamburger.png");
+            color = focused ? Color.themeBrand500 : Color.white;
             type = Ionicons;
           } else {
-            iconName = focused ? 'settings-outline' : 'settings';
-            color = focused ? '#8B9781' : Color.veryLightGray;
-            size = focused ? moderateScale(30, 0.3) : moderateScale(25, 0.3);
+            iconName = focused ? require("./Assets/Images/profile.png") : require("./Assets/Images/profile.png");
+            // iconName = focused ? 'settings-outline' : 'settings';
+            color = focused ? Color.themeBrand500 : Color.white;
+            size = focused ? scale(22) : scale(20);
             type = Ionicons;
           }
-          return route.name == 'MemberPerks' ? (
-            <View
-              style={{
-                top: role == 'user' ? 0 : 15,
-                height:
-                  role == 'user'
-                    ? moderateScale(60, 0.3)
-                    : moderateScale(50, 0.6),
-                width: moderateScale(80, 0.3),
-                borderRadius: moderateScale(30, 0.3),
-                backgroundColor: '#8B9781',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Icon
-                name={'plus'}
-                as={Feather}
-                color={Color.white}
-                size={moderateScale(35, 0.6)}
-              />
-            </View>
-          ) : (
+          return  (
             <View
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
                 // backgroundColor: 'green',
-                width: moderateScale(55, 0.6),
-                height: moderateScale(40, 0.6),
+                width: scale(50),
+                height: scale(50),
                 marginTop: moderateScale(20, 0.6),
+                gap:scale(5)
               }}>
-              <Icon name={iconName} as={type} color={color} size={size} />
+              {/* <Icon name={iconName} as={type} color={color} size={size} />
+               */}
+              <CustomImage
+              source={iconName}
+              
+              style={{tintColor:color, width:size, height:size}}
+              />
               <CustomText
                 style={{
                   // backgroundColor: 'red',
                   fontSize: moderateScale(10, 0.6),
                   width: windowWidth * 0.18,
                   textAlign: 'center',
-                  color: Color.btn_Color,
+                  color: color
                 }}>
                 {route?.name}
               </CustomText>
@@ -283,11 +426,15 @@ export const TabNavigation = () => {
         },
         tabBarShowLabel: false,
         tabBarBackground: () => (
-          <View style={{flex: 1}}>
+          <View style={{flex: 1,                 
+            
+            backgroundColor: Color.themeBluishBlack,
+            borderRadius: moderateScale(15, 0.6),
+            }}>
             <View
               style={{
                 height: windowHeight * 0.4,
-                backgroundColor: Color.white,
+                backgroundColor: Color.themeBluishBlack,
                 borderRadius: moderateScale(15, 0.6),
               }}
             />
@@ -296,18 +443,14 @@ export const TabNavigation = () => {
       })}>
       <Tabs.Screen
         name={'Home'}
-        component={role === 'user' ? AiScreen : Dashboard}
+        component={HomeScreen}
       />
-      <Tabs.Screen
-        name={'Search'}
-        component={role === 'user' ? Directory : SearchScreen}
-      />
-      <Tabs.Screen
-        name={'MemberPerks'}
-        component={role === 'user' ? MemberPerks : PerformanceAndAnalytics}
-      />
-      <Tabs.Screen name={'Inbox'} component={Chat} />
-      <Tabs.Screen name={'setting'} component={Setting} />
+      <Tabs.Screen name='Messages'  component={ChatScreen}/>
+      <Tabs.Screen name='MarketPlace' component={MarketPlaceScreen}/>
+      <Tabs.Screen name='Menu' component={MenuScreen}/>
+      <Tabs.Screen name='Profile' component={ProviderScreen}/>
+      {/* <Tabs.Screen/> */}
+      {/* <Tabs.Screen/> */}
     </Tabs.Navigator>
   );
 };
