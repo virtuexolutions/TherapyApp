@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ScreenBoiler from '../Components/ScreenBoiler';
 import Color from '../Assets/Utilities/Color';
 import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
@@ -21,30 +21,35 @@ import {loginSchema} from '../Constant/schema';
 import {SetUserRole, setUserToken} from '../Store/slices/auth';
 import {setUserData} from '../Store/slices/common';
 import {ToastAndroid} from 'react-native';
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Fontisto from "react-native-vector-icons/Fontisto";
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Post} from '../Axios/AxiosInterceptorFunction';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/core';
 import CustomButton from '../Components/CustomButton';
 import {Divider} from 'native-base';
 
-
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import {width} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 
 const LoginScreen = props => {
   const role = props?.route?.params?.role;
-  console.log('🚀 ~ LoginScreen ~ role:', role);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const token = useSelector(state => state.authReducer.token);
   // const role = useSelector(state => state.authReducer.role);
   const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   // const navigation = useNavigation();
   const login = async values => {
     const url = 'login';
-    setIsLoading(true);
+    setLoading(true);
     const response = await Post(url, values, apiHeader());
-    console.log('🚀 ~ onPressSignUp ~ response:', response?.data);
-    setIsLoading(false);
+    setLoading(false);
     if (response != undefined) {
       Platform.OS == 'android'
         ? ToastAndroid.show('Sign In successfully', ToastAndroid.SHORT)
@@ -55,6 +60,57 @@ const LoginScreen = props => {
     }
   };
 
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '926398445960-6f98tf5ga88hlm4qna4m847eguv4m8vk.apps.googleusercontent.com',
+      offlineAccess: true,
+      // forceCodeForRefreshToken: true,
+    });
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    // return console.log("Google Sign-In Clicked")
+    // if (googleLoading) return; // prevent double tap
+
+    try {
+      // setGoogleLoading(true);
+
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+
+      // (optional) stuck state me helpful
+      // await GoogleSignin.signOut();
+      // await GoogleSignin.revokeAccess();
+
+      const userInfo = await GoogleSignin.signIn();
+      console.log(
+        'userInfo ===> ================== ',
+        JSON.stringify(userInfo, null, 2),
+      );
+
+      // TODO: yahan apni API call
+      await loginWithGoogle(userInfo);
+    } catch (e) {
+      // Friendly error mapping
+      if (e.code === statusCodes.IN_PROGRESS) {
+        // ye wahi error tha
+        Platform.OS === 'android' &&
+          ToastAndroid.show('Sign-in already in progress', ToastAndroid.SHORT);
+      } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+        Platform.OS === 'android' &&
+          ToastAndroid.show('Sign-in cancelled', ToastAndroid.SHORT);
+      } else if (e.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        Platform.OS === 'android' &&
+          ToastAndroid.show('Update Google Play services', ToastAndroid.SHORT);
+      } else {
+        Platform.OS === 'android' &&
+          ToastAndroid.show(String(e.message || e), ToastAndroid.SHORT);
+      }
+      console.log('Google Sign-In Error ==> ', e);
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
   return (
     <ScreenBoiler statusBarBackgroundColor={Color.themeDarkGreen}>
       <ScrollView style={styles.scrollView}>
@@ -92,6 +148,7 @@ const LoginScreen = props => {
                     value={values.email}
                     viewHeight={0.06}
                     viewWidth={0.85}
+                    fontSize={moderateScale(14, 0.6)}
                     inputWidth={0.8}
                     border={2}
                     color={Color.white}
@@ -109,7 +166,10 @@ const LoginScreen = props => {
                       style={{
                         fontSize: moderateScale(10, 0.6),
                         color: Color.red,
-                        alignSelf: 'flex-start',
+                        width: windowWidth * 0.8,
+                        
+                        // alignSelf: 'flex-start',
+                        
                         marginLeft: moderateScale(10, 0.6),
                       }}>
                       {errors.email}
@@ -127,6 +187,7 @@ const LoginScreen = props => {
                     viewHeight={0.06}
                     viewWidth={0.85}
                     inputWidth={0.8}
+                    fontSize={moderateScale(14, 0.6)}
                     border={2}
                     color={Color.white}
                     borderRadius={15}
@@ -143,15 +204,18 @@ const LoginScreen = props => {
                       style={{
                         fontSize: moderateScale(10, 0.6),
                         color: Color.red,
-                        alignSelf: 'flex-start',
-                        marginLeft: moderateScale(10, 0.6),
+
+                        width: windowWidth * 0.8,
+                        // marginLeft : moderateScale(20,.6),
+                        // alignSelf: 'flex-start',
+                        // marginLeft: moderateScale(10, 0.6),
                       }}>
                       {errors.password}
                     </CustomText>
                   )}
                   <CustomText
                     onPress={() => {
-                      // navigation.navigate('VerifyEmail');
+                      navigation.navigate('VerifyEmail');
                     }}
                     style={styles.forgotpassword}>
                     Forgot your password?
@@ -160,7 +224,7 @@ const LoginScreen = props => {
                   <CustomButton
                     isBold
                     text={
-                      isLoading ? (
+                      loading ? (
                         <ActivityIndicator size={'small'} color={Color.white} />
                       ) : (
                         'Login '
@@ -177,14 +241,7 @@ const LoginScreen = props => {
                     textTransform={'capitalize'}
                     marginTop={scale(20)}
                     elevation={true}
-                    // onPress={() => {
-                    //   navigationService.navigate('TabNavigation')
-                    // }}
-
-                    onPress={()=>{
-                      dispatch(setUserToken({token:"JWT-token"}))
-                    }}
-                    // onPress={handleSubmit}
+                    onPress={handleSubmit}
                   />
                   <CustomButton
                     isBold
@@ -206,10 +263,10 @@ const LoginScreen = props => {
                     textTransform={'capitalize'}
                     marginTop={scale(20)}
                     elevation={true}
-                    // onPress={() => {
-                    //   navigationService.navigate('TabNavigation')
-                    // }}
-                    onPress={() =>{}}
+                    onPress={() => {
+                      navigation.navigate('Signup');
+                    }}
+                    // onPress={() =>{}}
                   />
                   <OptionText />
                   <CustomButton
@@ -221,7 +278,7 @@ const LoginScreen = props => {
                         'Continue with Google'
                       )
                     }
-                    iconName={"google"}
+                    iconName={'google'}
                     iconType={AntDesign}
                     fontSize={moderateScale(15, 0.3)}
                     textColor={Color.white}
@@ -230,7 +287,7 @@ const LoginScreen = props => {
                     borderRadius={moderateScale(15, 0.3)}
                     width={windowWidth * 0.85}
                     height={windowHeight * 0.06}
-                    style={{alignItems:"center", gap:scale(5)}}
+                    style={{alignItems: 'center', gap: scale(5)}}
                     bgColor={Color.themeDarkGreen}
                     textTransform={'capitalize'}
                     marginTop={scale(20)}
@@ -238,7 +295,9 @@ const LoginScreen = props => {
                     // onPress={() => {
                     //   navigationService.navigate('TabNavigation')
                     // }}
-                    onPress={() =>{}}
+                    onPress={() => {
+                      // handleGoogleSignIn();
+                    }}
                   />
                   <CustomButton
                     isBold
@@ -249,8 +308,8 @@ const LoginScreen = props => {
                         'Continue with Apple'
                       )
                     }
-                    style={{alignItems:"center", gap:scale(5)}}
-                    iconName={"apple"}
+                    style={{alignItems: 'center', gap: scale(5)}}
+                    iconName={'apple'}
                     iconType={Fontisto}
                     fontSize={moderateScale(15, 0.3)}
                     textColor={Color.white}
@@ -266,11 +325,9 @@ const LoginScreen = props => {
                     // onPress={() => {
                     //   navigationService.navigate('TabNavigation')
                     // }}
-                    onPress={() =>{}}
+                    onPress={() => {}}
                   />
-          <View
-          style={{height:windowHeight * 0.2}}
-          />
+                  <View style={{height: windowHeight * 0.2}} />
                 </>
               );
             }}
@@ -304,7 +361,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: windowWidth * 0.3,
     height: windowWidth * 0.3,
-    marginTop: windowHeight * 0.15
+    marginTop: windowHeight * 0.15,
   },
   image: {
     width: '100%',
@@ -336,7 +393,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export default LoginScreen;
 // import { useNavigation } from '@react-navigation/native';
 // import { Formik } from 'formik';
@@ -366,13 +422,11 @@ export default LoginScreen;
 // import { Post } from '../Axios/AxiosInterceptorFunction';
 // import { setUserData } from '../Store/slices/common';
 
-
 // const LoginScreen = props => {
 //   const role = props?.route?.params?.role;
-//   console.log("🚀 ~ LoginScreen ~ role:", role)
 //   const dispatch = useDispatch();
 //   const token = useSelector(state => state.authReducer.token);
-//   // const role = useSelector(state => state.authReducer.role);   
+//   // const role = useSelector(state => state.authReducer.role);
 //   const [isLoading, setIsLoading] = useState(false);
 //   const navigation = useNavigation();
 //   const [device_token, setDeviceToken] = useState(null);
@@ -381,7 +435,6 @@ export default LoginScreen;
 //     const url = 'login';
 //     setIsLoading(true);
 //     const response = await Post(url, values, apiHeader());
-//     console.log("🚀 ~ onPressSignUp ~ response:", response?.data)
 //     setIsLoading(false);
 //     if (response != undefined) {
 //       Platform.OS == 'android'

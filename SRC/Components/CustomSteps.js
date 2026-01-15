@@ -30,7 +30,7 @@ const CustomSteps = () => {
     <View style={styles.mainContainer}>
       <LinearGradient colors={['#5DAB97', '#1D6A58']} style={styles.gradient} />
       <View style={styles.stepsContainer}>
-        {setps.map((step, index) => (
+        {setps?.map((step, index) => (
           <StepComponent
             key={index}
             number={step.id}

@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
   ImageBackground,
   Platform,
+  ScrollView,
   ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { moderateScale, ScaledSheet } from 'react-native-size-matters';
-import { useDispatch } from 'react-redux';
-import { Formik } from 'formik';
+import {moderateScale, scale, ScaledSheet} from 'react-native-size-matters';
+import {useDispatch} from 'react-redux';
+import {Formik} from 'formik';
 import Color from '../Assets/Utilities/Color';
 import CustomButton from '../Components/CustomButton';
 import CustomImage from '../Components/CustomImage';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
-import { apiHeader, windowHeight, windowWidth } from '../Utillity/utils';
-import { SignupSchema } from '../Constant/schema';
-import { setUserData } from '../Store/slices/common';
-import { SetUserRole, setUserToken } from '../Store/slices/auth';
-import { Post } from '../Axios/AxiosInterceptorFunction';
+import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
+import {SignupSchema} from '../Constant/schema';
+import {setUserData} from '../Store/slices/common';
+import {SetUserRole, setUserToken} from '../Store/slices/auth';
+import {Post} from '../Axios/AxiosInterceptorFunction';
+import ScreenBoiler from '../Components/ScreenBoiler';
 
 const Signup = props => {
   const role = props?.route?.params?.role || 'user';
@@ -52,7 +54,7 @@ const Signup = props => {
           : Alert.alert('Sign up successfully');
 
         dispatch(setUserData(response.data.user_info));
-        dispatch(setUserToken({ token: response.data.token }));
+        dispatch(setUserToken({token: response.data.token}));
         dispatch(SetUserRole(response.data.role));
       }
     } catch (error) {
@@ -64,206 +66,242 @@ const Signup = props => {
   };
 
   return (
-    <ImageBackground
-      style={styles.main_con}
-      source={require('../Assets/Images/loginbg.jpg')}>
-      <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
+    <ScreenBoiler statusBarBackgroundColor={Color.themeDarkGreen}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollView}
+        contentContainerStyle={
+          {
+            // paddingBottom : moderateScale(20,.6)
+          }
+        }>
+        <ImageBackground
+          style={styles.bg}
+          imageStyle={styles.image}
+          resizeMode="cover"
+          source={require('../Assets/Images/backgroundGradient.jpg')}>
+          <View style={styles.imageContainer}>
+            <CustomImage
+              resizeMode="contain"
+              source={require('../Assets/Images/headerlogo.png')}
+              style={styles.image}
+            />
+          </View>
+          <CustomText
+            children={'Welcome to Vitality Access'}
+            style={styles.text}
+          />
+          <Formik
+            initialValues={{
+              first_name: '',
+              last_name: '',
+              email: '',
+              password: '',
+              confirmPassword: '',
+            }}
+            validationSchema={SignupSchema}
+            onSubmit={onPressSignUp}>
+            {({handleChange, handleSubmit, values, errors, touched}) => (
+              <>
+                <View style={styles.input_container}>
+                  <CustomText
+                    isBold
+                    style={{
+                      fontSize: moderateScale(20, 0.6),
+                      color: Color.white,
+                    }}>
+                    Create your account
+                  </CustomText>
+                  <CustomText style={styles.txt}>
+                    Please enter your information below to sign up.
+                  </CustomText>
 
-      <View style={styles.image_con}>
-        <CustomImage
-          resizeMode="contain"
-          source={require('../Assets/Images/logo.png')}
-          style={{ width: '100%', height: '100%' }}
-        />
-      </View>
+                  {/* FIRST + LAST NAME */}
 
-      <Formik
-        initialValues={{
-          first_name: '',
-          last_name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={onPressSignUp}>
-        {({ handleChange, handleSubmit, values, errors, touched }) => (
-          <>
-            <View style={styles.input_container}>
-              <CustomText
-                isBold
-                style={{
-                  fontSize: moderateScale(20, 0.6),
-                  color: Color.white,
-                }}>
-                Create your account
-              </CustomText>
-              <CustomText style={styles.txt}>
-                Please enter your information below to sign up.
-              </CustomText>
-
-              {/* FIRST + LAST NAME */}
-              <View style={styles.row}>
-                <View>
                   <TextInputWithTitle
-                    titleText={'First Name'}
-                    placeholder={'Enter first name'}
+                    title={'First Name'}
+                    titleColor={Color.gray50}
+                    placeholder={'Enter your first name'}
                     setText={handleChange('first_name')}
                     value={values.first_name}
-                    viewHeight={0.05}
-                    viewWidth={0.42}
-                    inputWidth={0.4}
-                    border={1}
-                    fontSize={moderateScale(9, 0.6)}
-                    borderRadius={30}
-                    borderColor={Color.white}
-                    marginTop={moderateScale(10, 0.3)}
-                    placeholderColor={Color.btntextColor}
-                    titleStlye={{ right: 10 }}
-                    inputColor={Color.white}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    inputWidth={0.8}
+                    fontSize={moderateScale(14, 0.6)}
+                    border={2}
+                    color={Color.white}
+                    borderRadius={15}
+                    borderColor={Color.themeLightGreen}
+                    marginTop={moderateScale(5, 0.3)}
+                    placeholderColor={Color.gray50}
+                    titleStlye={{right: 10}}
+                    backgroundColor={Color.themeDarkGreen}
                   />
                   {touched.first_name && errors.first_name && (
                     <CustomText style={styles.errorText}>
                       {errors.first_name}
                     </CustomText>
                   )}
-                </View>
 
-                <View>
                   <TextInputWithTitle
-                    titleText={'Last Name'}
-                    placeholder={'Enter last name'}
+                    title={'Last name'}
+                    titleColor={Color.gray50}
+                    placeholder={'Enter your last name'}
                     setText={handleChange('last_name')}
                     value={values.last_name}
-                    viewHeight={0.05}
-                    viewWidth={0.42}
-                    inputWidth={0.4}
-                    border={1}
-                    fontSize={moderateScale(9, 0.6)}
-                    borderRadius={30}
-                    borderColor={Color.white}
-                    marginTop={moderateScale(10, 0.3)}
-                    placeholderColor={Color.btntextColor}
-                    titleStlye={{ right: 10 }}
-                    inputColor={Color.white}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    inputWidth={0.8}
+                    border={2}
+                    color={Color.white}
+                    borderRadius={15}
+                    fontSize={moderateScale(14, 0.6)}
+                    borderColor={Color.themeLightGreen}
+                    marginTop={moderateScale(5, 0.3)}
+                    placeholderColor={Color.gray50}
+                    titleStlye={{right: 10}}
+                    backgroundColor={Color.themeDarkGreen}
                   />
+
                   {touched.last_name && errors.last_name && (
                     <CustomText style={styles.errorText}>
                       {errors.last_name}
                     </CustomText>
                   )}
+
+                  <TextInputWithTitle
+                    title={'Email'}
+                    titleColor={Color.gray50}
+                    placeholder={'Enter your email'}
+                    setText={handleChange('email')}
+                    value={values.email}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    inputWidth={0.8}
+                    border={2}
+                    color={Color.white}
+                    fontSize={moderateScale(14, 0.6)}
+                    borderRadius={15}
+                    borderColor={Color.themeLightGreen}
+                    marginTop={moderateScale(5, 0.3)}
+                    placeholderColor={Color.gray50}
+                    titleStlye={{right: 10}}
+                    backgroundColor={Color.themeDarkGreen}
+                  />
+                  {touched.email && errors.email && (
+                    <CustomText style={styles.errorText}>
+                      {errors.email}
+                    </CustomText>
+                  )}
+
+                  <TextInputWithTitle
+                    title={'Passsword'}
+                    titleColor={Color.gray50}
+                    iconColor={Color.gray50}
+                    secureText={true}
+                    placeholder={'Enter your password'}
+                    setText={handleChange('password')}
+                    value={values.password}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    inputWidth={0.8}
+                    border={2}
+                    fontSize={moderateScale(14, 0.6)}
+                    color={Color.white}
+                    borderRadius={15}
+                    borderColor={Color.themeLightGreen}
+                    marginTop={moderateScale(5, 0.3)}
+                    placeholderColor={Color.gray50}
+                    titleStlye={{right: 10}}
+                    backgroundColor={Color.themeDarkGreen}
+                  />
+                  {touched.password && errors.password && (
+                    <CustomText style={styles.errorText}>
+                      {errors.password}
+                    </CustomText>
+                  )}
+
+                  <TextInputWithTitle
+                    title={'Confirm Passsword'}
+                    titleColor={Color.gray50}
+                    iconColor={Color.gray50}
+                    secureText={true}
+                    placeholder={'Enter your password'}
+                    setText={handleChange('confirmPassword')}
+                    value={values.confirmPassword}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    inputWidth={0.8}
+                    border={2}
+                    fontSize={moderateScale(14, 0.6)}
+                    color={Color.white}
+                    borderRadius={15}
+                    borderColor={Color.themeLightGreen}
+                    marginTop={moderateScale(5, 0.3)}
+                    placeholderColor={Color.gray50}
+                    // fontSize :
+                    titleStlye={{right: 10}}
+                    backgroundColor={Color.themeDarkGreen}
+                  />
+                  {touched.confirmPassword && errors.confirmPassword && (
+                    <CustomText style={styles.errorText}>
+                      {errors.confirmPassword}
+                    </CustomText>
+                  )}
                 </View>
-              </View>
 
-              {/* EMAIL */}
-              <TextInputWithTitle
-                placeholder={'Enter your email'}
-                setText={handleChange('email')}
-                value={values.email}
-                viewHeight={0.06}
-                viewWidth={0.85}
-                inputWidth={0.8}
-                border={1}
-                borderRadius={30}
-                borderColor={Color.white}
-                marginTop={moderateScale(10, 0.3)}
-                placeholderColor={Color.btntextColor}
-                inputColor={Color.white}
+                <CustomButton
+                  isBold
+                  text={
+                    isLoading ? (
+                      <ActivityIndicator size={'small'} color={Color.white} />
+                    ) : (
+                      'sign up '
+                    )
+                  }
+                  fontSize={moderateScale(15, 0.3)}
+                  textColor={Color.white}
+                  borderWidth={1.5}
+                  borderColor={Color.themeDarkGreen}
+                  borderRadius={moderateScale(15, 0.3)}
+                  width={windowWidth * 0.85}
+                  height={windowHeight * 0.06}
+                  bgColor={Color.themeBrand600}
+                  textTransform={'capitalize'}
+                  marginTop={scale(20)}
+                  elevation={true}
+                  marginBottom={moderateScale(60, 0.6)}
+                  onPress={handleSubmit}
+                />
+              </>
+            )}
+          </Formik>
+
+          {/* <View style={styles.button_container}>
+            <View style={styles.line}></View>
+            <CustomText style={styles.soc_text}>
+              you can connect with
+            </CustomText>
+            <View style={styles.line}></View>
+          </View> */}
+
+          {/* <View style={styles.btn_con}>
+            <TouchableOpacity style={styles.btn_icon}>
+              <CustomImage
+                style={{height: '100%', width: '100%'}}
+                source={require('../Assets/Images/google.png')}
               />
-              {touched.email && errors.email && (
-                <CustomText style={styles.errorText}>{errors.email}</CustomText>
-              )}
-
-              {/* PASSWORD */}
-              <TextInputWithTitle
-                secureText={true}
-                placeholder={'Enter password'}
-                setText={handleChange('password')}
-                value={values.password}
-                viewHeight={0.06}
-                viewWidth={0.85}
-                inputWidth={0.8}
-                border={1}
-                borderRadius={30}
-                borderColor={Color.white}
-                marginTop={moderateScale(10, 0.3)}
-                placeholderColor={Color.btntextColor}
-                inputColor={Color.white}
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn_icon}>
+              <CustomImage
+                style={{height: '100%', width: '100%'}}
+                source={require('../Assets/Images/mac.png')}
               />
-              {touched.password && errors.password && (
-                <CustomText style={styles.errorText}>{errors.password}</CustomText>
-              )}
-
-              {/* CONFIRM PASSWORD */}
-              <TextInputWithTitle
-                secureText={true}
-                placeholder={'Confirm password'}
-                setText={handleChange('confirmPassword')}
-                value={values.confirmPassword}
-                viewHeight={0.06}
-                viewWidth={0.85}
-                inputWidth={0.8}
-                border={1}
-                borderRadius={30}
-                borderColor={Color.white}
-                marginTop={moderateScale(10, 0.3)}
-                placeholderColor={Color.btntextColor}
-                inputColor={Color.white}
-              />
-              {touched.confirmPassword && errors.confirmPassword && (
-                <CustomText style={styles.errorText}>
-                  {errors.confirmPassword}
-                </CustomText>
-              )}
-            </View>
-
-            <CustomButton
-              isBold
-              text={
-                isLoading ? (
-                  <ActivityIndicator size={'small'} color={Color.white} />
-                ) : (
-                  'Sign Up'
-                )
-              }
-              fontSize={moderateScale(15, 0.3)}
-              textColor={Color.btntextColor}
-              borderWidth={1.5}
-              borderColor={Color.themtxtColor}
-              borderRadius={moderateScale(30, 0.3)}
-              width={windowWidth * 0.9}
-              height={windowHeight * 0.065}
-              bgColor={Color.btn_Color}
-              textTransform={'capitalize'}
-              marginTop={windowHeight * 0.02}
-              elevation={false}
-              onPress={handleSubmit}
-            />
-          </>
-        )}
-      </Formik>
-
-      <View style={styles.button_container}>
-        <View style={styles.line}></View>
-        <CustomText style={styles.soc_text}>you can connect with</CustomText>
-        <View style={styles.line}></View>
-      </View>
-
-      <View style={styles.btn_con}>
-        <TouchableOpacity style={styles.btn_icon}>
-          <CustomImage
-            style={{ height: '100%', width: '100%' }}
-            source={require('../Assets/Images/google.png')}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn_icon}>
-          <CustomImage
-            style={{ height: '100%', width: '100%' }}
-            source={require('../Assets/Images/mac.png')}
-          />
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+            </TouchableOpacity>
+          </View> */}
+        </ImageBackground>
+      </ScrollView>
+    </ScreenBoiler>
   );
 };
 
@@ -275,21 +313,35 @@ const styles = ScaledSheet.create({
     paddingTop: windowHeight * 0.09,
     alignItems: 'center',
   },
+  bg: {
+    width: windowWidth,
+    height: windowHeight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: Color.gray50,
+    fontSize: moderateScale(32, 0.2),
+    textAlign: 'center',
+    width: windowWidth * 0.7,
+  },
   input_container: {
-    borderWidth: 1,
-    borderColor: Color.white,
     borderRadius: 20,
     width: windowWidth * 0.92,
     paddingVertical: moderateScale(10, 0.6),
     alignItems: 'center',
     paddingTop: moderateScale(15, 0.6),
     paddingHorizontal: moderateScale(10, 0.6),
-    backgroundColor: 'rgba(127,138,115,255)',
+    // paddingBottom : moderateScale(20,.6)
   },
   row: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
+  },
+  scrollView: {
+    width: windowWidth,
+    height: windowHeight,
   },
   txt: {
     fontSize: moderateScale(9, 0.6),
@@ -336,6 +388,15 @@ const styles = ScaledSheet.create({
     color: Color.red,
     alignSelf: 'flex-start',
     marginLeft: moderateScale(10, 0.6),
+  },
+  imageContainer: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.3,
+    marginTop: windowHeight * 0.15,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });
 

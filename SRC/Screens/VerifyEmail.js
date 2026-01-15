@@ -1,9 +1,9 @@
 // import messaging from '@react-native-firebase/messaging';
 // import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import { useNavigation } from '@react-navigation/native';
-import { Formik } from 'formik';
-import { Icon } from 'native-base';
-import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
+import {Icon} from 'native-base';
+import React, {useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -11,20 +11,20 @@ import {
   StyleSheet,
   ToastAndroid,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { moderateScale } from 'react-native-size-matters';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {moderateScale} from 'react-native-size-matters';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Color from '../Assets/Utilities/Color';
 import CustomButton from '../Components/CustomButton';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
-import { forgotpasswordSchema } from '../Constant/schema';
-import { apiHeader, windowHeight, windowWidth } from '../Utillity/utils';
-import { Post } from '../Axios/AxiosInterceptorFunction';
+import {forgotpasswordSchema} from '../Constant/schema';
+import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
+import {Post} from '../Axios/AxiosInterceptorFunction';
 
 const VerifyEmail = props => {
   const role = props?.route?.params?.role;
@@ -52,7 +52,10 @@ const VerifyEmail = props => {
       Platform.OS == 'android'
         ? ToastAndroid.show(`OTP sent to ${values.email}`, ToastAndroid.SHORT)
         : Alert.alert(`OTP sent to ${values.email}`);
-      navigationN.navigate('VerifyNumber', { email: values.email, otp: response?.data?.data[0]?.code });
+      navigationN.navigate('VerifyNumber', {
+        email: values.email,
+        otp: response?.data?.data[0]?.code,
+      });
     }
   };
 
@@ -63,14 +66,17 @@ const VerifyEmail = props => {
         height: '100%',
       }}
       resizeMode="stretch"
-      source={require('../Assets/Images/bg.jpg')}
+      source={require('../Assets/Images/backgroundGradient.jpg')}
       style={{
         height: windowHeight,
         width: windowWidth,
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
+      <CustomStatusBar
+        backgroundColor={'transparent'}
+        barStyle={'dark-light'}
+      />
       <View style={styles.main_container}>
         {/* <TouchableOpacity
           onPress={() => {
@@ -104,10 +110,30 @@ const VerifyEmail = props => {
             }}
             validationSchema={forgotpasswordSchema}
             onSubmit={onPressSubmit}>
-            {({ values, handleChange, handleSubmit, touched, errors }) => {
+            {({values, handleChange, handleSubmit, touched, errors}) => {
               return (
                 <View style={styles.text_input}>
                   <TextInputWithTitle
+                    title={'Email  *'}
+                    titleColor={Color.gray50}
+                    placeholder={'Email'}
+                    setText={handleChange('email')}
+                    value={values.email}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    fontSize={moderateScale(14, 0.6)}
+                    inputWidth={0.8}
+                    border={2}
+                    color={Color.white}
+                    borderRadius={15}
+                    borderColor={Color.themeLightGreene}
+                    marginTop={moderateScale(10, 0.3)}
+                    placeholderColor={Color.gray50}
+                    titleStlye={{right: 10}}
+                    backgroundColor={Color.themeDarkGreen}
+                    // titleStlye={{ right: 10, color: Color.white }}
+                  />
+                  {/* <TextInputWithTitle
                     title={'Email  *'}
                     placeholder={'Email'}
                     setText={handleChange('email')}
@@ -125,7 +151,7 @@ const VerifyEmail = props => {
                     titleStlye={{
                       color: Color.white,
                     }}
-                  />
+                  /> */}
                   {touched.email && errors.email && (
                     <CustomText
                       style={{
@@ -136,24 +162,32 @@ const VerifyEmail = props => {
                     </CustomText>
                   )}
                   <CustomButton
-                    onPress={handleSubmit} isBold
+                    isBold
                     text={
                       isLoading ? (
-                        <ActivityIndicator color={Color.white} size={'small'} />
+                        <ActivityIndicator size={'small'} color={Color.white} />
                       ) : (
-                        'Submit'
+                        'submit '
                       )
                     }
-                    fontSize={moderateScale(14, 0.3)}
-                    textColor={Color.btntextColor}
+                    fontSize={moderateScale(15, 0.3)}
+                    textColor={Color.white}
                     borderWidth={1.5}
-                    borderColor={Color.btn_Color}
-                    borderRadius={moderateScale(30, 0.3)}
-                    width={windowWidth * 0.8}
-                    marginTop={moderateScale(20, 0.3)}
-                    height={windowHeight * 0.065}
-                    bgColor={Color.btn_Color}
+                    borderColor={Color.btntextColor}
+                    borderRadius={moderateScale(15, 0.3)}
+                    width={windowWidth * 0.85}
+                    height={windowHeight * 0.06}
+                    bgColor={Color.themeBrand600}
                     textTransform={'capitalize'}
+                    marginTop={moderateScale(20, 0.6)}
+                    elevation={true}
+                    // onPress={() => {
+                    //   navigationService.navigate('TabNavigation')
+                    // }}
+
+                    onPress={handleSubmit}
+
+                    // onPress={handleSubmit}
                   />
                 </View>
               );
@@ -206,14 +240,14 @@ const styles = StyleSheet.create({
   },
   text_input: {
     alignItems: 'center',
-    borderWidth: 1,
+    // borderWidth: 1,
     width: windowWidth * 0.9,
-    borderColor: Color.white,
+    // borderColor: Color.white,
     height: windowHeight * 0.24,
     borderRadius: 20,
     paddingTop: windowHeight * 0.01,
     paddingHorizontal: moderateScale(30, 0.6),
-    backgroundColor: Color.themtxtColor
+    // backgroundColor: Color.themtxtColor,
   },
   forgotpassword: {
     fontSize: moderateScale(10, 0.6),

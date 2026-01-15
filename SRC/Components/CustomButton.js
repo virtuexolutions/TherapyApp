@@ -86,7 +86,6 @@ const CustomButton = ({
   //   fontcase,
   //   style,
   // } = props;
-  console.log('🚀 ~ CustomButton ~ fontSize:', fontSize);
   return (
     <TouchableOpacity
       activeOpacity={activeOpacity ? activeOpacity : 0.9}

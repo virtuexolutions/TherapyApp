@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -10,13 +10,13 @@ import {
   Image,
 } from 'react-native';
 
-import { Icon } from 'native-base';
+import {Icon} from 'native-base';
 import Color from '../Assets/Utilities/Color';
-import { useState } from 'react';
-import { moderateScale, scale, ScaledSheet } from 'react-native-size-matters';
+import {useState} from 'react';
+import {moderateScale, scale, ScaledSheet} from 'react-native-size-matters';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Foundation from 'react-native-vector-icons/Foundation';
-import { windowHeight, windowWidth } from '../Utillity/utils';
+import {windowHeight, windowWidth} from '../Utillity/utils';
 import CustomText from './CustomText';
 
 const TextInputWithTitle = props => {
@@ -25,12 +25,13 @@ const TextInputWithTitle = props => {
   return (
     <>
       {props?.title && (
-        <CustomText isBold
+        <CustomText
+          isBold
           style={[
             {
               color: props.titleColor ? props?.titleColor : Color.black,
               fontSize: moderateScale(16, 0.3),
-              top:5,
+              top: 5,
               // left:1,
               // marginBottom: moderateScale(5, 0.3),
               width: windowWidth * props.viewWidth,
@@ -50,9 +51,13 @@ const TextInputWithTitle = props => {
           {
             width: windowWidth * props.viewWidth,
             borderWidth: props.border,
-            backgroundColor: props.backgroundColor ? props?.backgroundColor : Color.themtxtColor,
+            backgroundColor: props.backgroundColor
+              ? props?.backgroundColor
+              : Color.themtxtColor,
             borderBottomWidth: props.borderBottomWidth,
-            borderColor: props.borderColor ? props.borderColor : Color.themtxtColor,
+            borderColor: props.borderColor
+              ? props.borderColor
+              : Color.themtxtColor,
           },
           props.elevation && {
             shadowColor: Color.darkGray,
@@ -88,9 +93,9 @@ const TextInputWithTitle = props => {
             alignItems: props.alignItems,
           },
           props.iconName &&
-          !props.rightIcon && {
-            paddingLeft: moderateScale(15, 0.3),
-          },
+            !props.rightIcon && {
+              paddingLeft: moderateScale(15, 0.3),
+            },
         ]}>
         {props.foundation && (
           <Foundation
@@ -101,14 +106,14 @@ const TextInputWithTitle = props => {
         )}
         {props?.leftIcon && props.iconIsImage && (
           <Image
-          resizeMode='cover' 
-          source={props.iamgeSrc}
-          style={{
-            // width:scale(30),
-            // height:scale(30),
-            // position:"absolute",
-            left:scale(10),
-          }}
+            resizeMode="cover"
+            source={props.iamgeSrc}
+            style={{
+              // width:scale(30),
+              // height:scale(30),
+              // position:"absolute",
+              left: scale(10),
+            }}
           />
         )}
         {props.iconName && !props.foundation && (
@@ -146,7 +151,7 @@ const TextInputWithTitle = props => {
             ]}
             size={moderateScale(17, 0.3)}
             onPress={props.onPressLeft}
-          // color={props.iconColor ? props.iconColor :'black'}
+            // color={props.iconColor ? props.iconColor :'black'}
           />
         )}
 
@@ -156,29 +161,31 @@ const TextInputWithTitle = props => {
               style={[
                 {
                   width: windowWidth * props.inputWidth,
+                  paddingHorizontal : moderateScale(10,.6)
+                  // backgroundColor :"red"
                 },
                 props.inputColor && {
                   color: props.inputColor,
                 },
                 Platform.OS === 'android'
                   ? [
-                    styles.inputBox,
-                    {
-                      paddingBottom: 10,
-                      fontSize: props?.fontSize
-                        ? props?.fontSize
-                        : moderateScale(12, 0.6),
-                      fontWeight: '400',
-                      color: Color.white
-                    },
-                  ]
+                      styles.inputBox,
+                      {
+                        paddingBottom: 10,
+                        fontSize: props?.fontSize
+                          ? props?.fontSize
+                          : moderateScale(12, 0.6),
+                        fontWeight: '400',
+                        color: Color.white,
+                      },
+                    ]
                   : [
-                    styles.inputBox,
-                    {paddingLeft:scale(10)},
-                    {
-                      paddingBottom: 0,
-                    },
-                  ],
+                      styles.inputBox,
+                      {paddingLeft: scale(10)},
+                      {
+                        paddingBottom: 0,
+                      },
+                    ],
               ]}
               onChangeText={text => props.setText(text)}
               value={props.value}
@@ -227,12 +234,12 @@ const TextInputWithTitle = props => {
                 },
                 Platform.OS === 'android'
                   ? styles.inputBox
-                  : [styles.inputBox, { paddingBottom: 0 }],
+                  : [styles.inputBox, {paddingBottom: 0}],
                 props.numberOfLines > 1 && {
                   textAlignVertical: 'top',
                 },
-                 {
-                  paddingLeft:props.leftIcon ? scale(20) : scale(10)
+                {
+                  paddingLeft: props.leftIcon ? scale(20) : scale(10),
                 },
                 props.inputHeight && {
                   height: windowHeight * props.inputHeight,
@@ -251,6 +258,13 @@ const TextInputWithTitle = props => {
                 props.inputColor && {
                   color: props.inputColor,
                 },
+
+                props?.fontSize && {
+                  fontSize: props?.fontSize
+                    ? props?.fontSize
+                    : moderateScale(12, 0.6),
+                },
+                // backgroundColor :'red',
               ]}
               onChangeText={text => props.setText(text)}
               value={props.value}
@@ -263,8 +277,8 @@ const TextInputWithTitle = props => {
               numberOfLines={props.numberOfLines || 1}
               editable={props.disable ? false : true}
               autoCapitalize="none"
-            // onPressIn={()=>{console.log('fdadsas');}}
-            // textAlignVertical={props.textAlignVertical}
+              // onPressIn={()=>{console.log('fdadsas');}}
+              // textAlignVertical={props.textAlignVertical}
             />
           </TouchableOpacity>
         )}

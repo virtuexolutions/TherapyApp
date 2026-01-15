@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   ImageBackground,
@@ -14,14 +14,14 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-import { ScaledSheet, moderateScale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
+import {ScaledSheet, moderateScale, scale} from 'react-native-size-matters';
+import {useSelector} from 'react-redux';
 import Color from '../Assets/Utilities/Color';
-import { Post } from '../Axios/AxiosInterceptorFunction';
+import {Post} from '../Axios/AxiosInterceptorFunction';
 import CustomButton from '../Components/CustomButton';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import CustomText from '../Components/CustomText';
-import { apiHeader, windowHeight, windowWidth } from '../Utillity/utils';
+import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
 
 const VerifyNumber = props => {
   const SelecteduserRole = useSelector(
@@ -31,12 +31,12 @@ const VerifyNumber = props => {
 
   const email = props?.route?.params?.email;
   const verify_code = props?.route?.params?.otp;
-  console.log(verify_code, email, '============>')
+  console.log(verify_code, email, '============>');
 
   const [code, setCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const CELL_COUNT = 4;
-  const ref = useBlurOnFulfill({ code, cellCount: CELL_COUNT });
+  const ref = useBlurOnFulfill({code, cellCount: CELL_COUNT});
   const [abcd, getCellOnLayoutHandler] = useClearByFocusCell({
     code,
     setCode,
@@ -57,18 +57,17 @@ const VerifyNumber = props => {
     label();
   }, [time]);
 
-
   const VerifyOTP = async () => {
     const url = 'password/code/check';
     setIsLoading(true);
     console.log(code);
-    const response = await Post(url, { code: code }, apiHeader());
+    const response = await Post(url, {code: code}, apiHeader());
     setIsLoading(false);
     if (response != undefined) {
       Platform.OS == 'android'
         ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
         : alert(`otp verified`);
-      navigationN.navigate('ResetPassword', { email: email })
+      navigationN.navigate('ResetPassword', {email: email});
     }
   };
 
@@ -85,7 +84,7 @@ const VerifyNumber = props => {
   return (
     <ImageBackground
       resizeMode="stretch"
-      source={require('../Assets/Images/bg.jpg')}
+      source={require('../Assets/Images/backgroundGradient.jpg')}
       style={{
         height: windowHeight,
         width: windowWidth,
@@ -97,7 +96,10 @@ const VerifyNumber = props => {
         width: '100%',
         height: '100%',
       }}>
-      <CustomStatusBar backgroundColor={'transparent'} barStyle={'dark-light'} />
+      <CustomStatusBar
+        backgroundColor={'transparent'}
+        barStyle={'dark-light'}
+      />
       {/* <CustomText
         isBold
         style={{
@@ -112,12 +114,13 @@ const VerifyNumber = props => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque
         turpis iaculis{' '}
       </CustomText>
-      <CustomText style={{
-        fontSize: moderateScale(13, 0.6),
-        color: Color.white,
-        marginTop: moderateScale(20, 0.6)
-      }}>
-        {"Here is the code  " + verify_code}
+      <CustomText
+        style={{
+          fontSize: moderateScale(13, 0.6),
+          color: Color.white,
+          marginTop: moderateScale(20, 0.6),
+        }}>
+        {'Here is the code  ' + verify_code}
       </CustomText>
       <CodeField
         placeholder={'0'}
@@ -128,20 +131,49 @@ const VerifyNumber = props => {
         rootStyle={styles.codeFieldRoot}
         keyboardType="number-pad"
         textContentType="oneTimeCode"
-        renderCell={({ index, symbol, isFocused }) => (
+        renderCell={({index, symbol, isFocused}) => (
           <View
             onLayout={getCellOnLayoutHandler(index)}
             key={index}
             style={[styles.cellRoot, isFocused && styles.focusCell]}>
             <CustomText
-              style={[styles.cellText, isFocused && { color: Color.btn_Color }]}>
+              style={[styles.cellText, isFocused && {color: Color.btn_Color}]}>
               {symbol || (isFocused ? <Cursor /> : null)}
             </CustomText>
           </View>
         )}
       />
-
       <CustomButton
+        isBold
+        text={
+          isLoading ? (
+            <ActivityIndicator size={'small'} color={Color.white} />
+          ) : (
+            'Verify'
+          )
+        }
+        fontSize={moderateScale(15, 0.3)}
+        textColor={Color.white}
+        borderWidth={1.5}
+        borderColor={Color.btntextColor}
+        borderRadius={moderateScale(15, 0.3)}
+        width={windowWidth * 0.85}
+        height={windowHeight * 0.06}
+        bgColor={Color.themeBrand600}
+        textTransform={'capitalize'}
+        marginTop={scale(20)}
+        elevation={true}
+        // onPress={() => {
+        //   navigationService.navigate('TabNavigation')
+        // }}
+
+        onPress={() => {
+          VerifyOTP();
+        }}
+        // onPress={handleSubmit}
+      />
+
+      {/* <CustomButton
         text={
           isLoading ? (
             <ActivityIndicator size={'small'} color={Color.white} />
@@ -159,14 +191,22 @@ const VerifyNumber = props => {
           VerifyOTP();
         }}
         bgColor={Color.btn_Color}
-      />
-      <CustomText style={[styles.txt3, { width: windowWidth * 0.66, alignItems: 'center', justifyContent: 'center' }]}>
+      /> */}
+      <CustomText
+        style={[
+          styles.txt3,
+          {
+            width: windowWidth * 0.66,
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        ]}>
         Don’t receive the OTP ?
         {
           <TouchableOpacity
             style={{
               paddingTop: moderateScale(8, 0.6),
-              marginLeft: moderateScale(12, 0.6)
+              marginLeft: moderateScale(12, 0.6),
             }}
             disabled={timerLabel == 'Resend otp ' ? false : true}
             onPress={() => {
@@ -189,7 +229,7 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
     width: '95%',
     alignItems: 'center',
-    justifyContent: "center"
+    justifyContent: 'center',
     // marginTop: moderateScale(10, 0.3),
     // lineHeight: moderateScale(20, 0.3),
   },

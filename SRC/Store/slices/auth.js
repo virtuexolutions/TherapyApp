@@ -39,6 +39,7 @@ const AuthSlice = createSlice({
     },
     setOnBoarding (state, action){
       state.onBoarding= action.payload;
+      console.log("🚀 ~ action.payload:", action.payload)
     }
   },
 });
